@@ -1,0 +1,74 @@
+/* ============================================
+   CafThé - Dark mode : surcharges spécifiques
+   La majorité du dark mode est gérée par les variables CSS
+   définies dans base.css (html[data-theme="dark"]).
+   Ce fichier ne contient QUE les cas particuliers qui
+   ne peuvent pas être exprimés avec de simples variables :
+   - Backgrounds avec rgba/opacity spécifiques
+   - Dégradés
+   - Footer (déjà sombre en light mode)
+   - Scrollbar personnalisée
+   ============================================ */
+
+/* --- Cart summary : fond du total avec opacité sombre --- */
+[data-theme="dark"] .cart-summary .summary-total {
+  background: rgba(26, 18, 16, 0.4);
+}
+
+/* --- Checkout : opacités spécifiques pour les sélections --- */
+[data-theme="dark"] .delivery-option.selected,
+[data-theme="dark"] .payment-option.selected {
+  background-color: rgba(212, 165, 116, 0.08);
+}
+
+[data-theme="dark"] .carrier-option.selected {
+  background-color: rgba(46, 125, 50, 0.08);
+}
+
+/* --- QuickView : fond semi-transparent des dots --- */
+[data-theme="dark"] .quickview-dots {
+  background: rgba(26, 18, 16, 0.8);
+}
+
+[data-theme="dark"] .quickview-close:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* --- QuickView bouton : texte inversé en dark mode --- */
+[data-theme="dark"] .btn-quickview {
+  background: rgba(240, 232, 224, 0.85);
+  color: var(--bg-body);
+}
+
+/* --- Footer : déjà sombre en light, on assombrit encore plus --- */
+[data-theme="dark"] .footer {
+  border-top: 1px solid var(--border-warm);
+}
+
+/* --- Formulaire focus : ajustement ombre en dark mode --- */
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group select:focus {
+  box-shadow: 0 0 0 2px rgba(212, 165, 116, 0.15);
+}
+
+/* --- Scrollbar personnalisée (Chrome/Edge uniquement) ---
+   En dark mode, on stylise la scrollbar pour qu'elle
+   s'intègre au thème sombre.
+   ============================================ */
+
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-body);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-brown);
+}

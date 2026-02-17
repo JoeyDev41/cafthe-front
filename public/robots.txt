@@ -1,0 +1,22 @@
+# robots.txt - Fichier qui donne des instructions aux robots des moteurs de recherche
+# Il indique quelles pages ils peuvent explorer (crawl) et lesquelles ils doivent ignorer
+
+# User-agent: * = s'applique à tous les robots (Google, Bing, Yahoo, etc.)
+User-agent: *
+
+# Allow: / = autorise l'accès à toutes les pages du site
+Allow: /
+
+# Disallow: les pages qu'on ne veut pas voir apparaître dans les résultats Google
+# On bloque les pages de compte utilisateur (données privées)
+Disallow: /compte
+# On bloque la page de checkout (pas utile dans les résultats de recherche)
+Disallow: /checkout
+# On bloque la page de confirmation de commande
+Disallow: /confirmation
+# On bloque le panier
+Disallow: /panier
+
+# Sitemap : indique où se trouve le plan du site pour faciliter l'indexation
+# Les moteurs de recherche lisent ce fichier pour découvrir toutes les pages
+Sitemap: https://cafthe.fr/sitemap.xml

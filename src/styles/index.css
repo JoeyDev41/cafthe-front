@@ -1,0 +1,27 @@
+/* ============================================
+   CafThé - Point d'entrée CSS
+   Ce fichier importe tous les fichiers CSS dans le bon ordre.
+   L'ordre est important car le CSS cascade :
+   1. base = variables + reset + typo + boutons (fondations)
+   2. composants = navbar, pages, etc. (styles principaux)
+   3. responsive = media queries (adaptations mobile)
+   4. dark-mode = surcharges spécifiques au thème sombre
+   ============================================ */
+
+/* Fondations : variables CSS, reset, typographie, boutons */
+@import "./base.css";
+
+/* Composants et pages */
+@import "./navbar.css";
+@import "./home.css";
+@import "./products.css";
+@import "./product-details.css";
+@import "./cart.css";
+@import "./auth.css";
+@import "./pages.css";
+
+/* Responsive : adaptations tablette et mobile */
+@import "./responsive.css";
+
+/* Dark mode : surcharges qui ne peuvent pas être gérées par les variables */
+@import "./dark-mode.css";

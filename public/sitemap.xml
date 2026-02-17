@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml - Plan du site pour les moteurs de recherche
+  Ce fichier liste toutes les pages publiques du site avec leur priorité
+  Google et Bing lisent ce fichier pour savoir quelles pages indexer
+
+  Balises utilisées :
+  - <loc> : URL de la page
+  - <lastmod> : date de dernière modification (format YYYY-MM-DD)
+  - <changefreq> : fréquence de mise à jour (daily, weekly, monthly)
+  - <priority> : importance de la page de 0.0 à 1.0 (1.0 = la plus importante)
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Page d'accueil : la plus importante, mise à jour souvent -->
+  <url>
+    <loc>https://cafthe.fr/</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Page catégorie Thés -->
+  <url>
+    <loc>https://cafthe.fr/the</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Page catégorie Cafés -->
+  <url>
+    <loc>https://cafthe.fr/cafe</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Page catégorie Accessoires -->
+  <url>
+    <loc>https://cafthe.fr/accessoires</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Page tous les produits -->
+  <url>
+    <loc>https://cafthe.fr/produits</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Page vrac -->
+  <url>
+    <loc>https://cafthe.fr/vrac</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Page À propos -->
+  <url>
+    <loc>https://cafthe.fr/a-propos</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Connexion -->
+  <url>
+    <loc>https://cafthe.fr/login</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Inscription -->
+  <url>
+    <loc>https://cafthe.fr/inscription</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- CGV -->
+  <url>
+    <loc>https://cafthe.fr/cgv</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Politique de confidentialité -->
+  <url>
+    <loc>https://cafthe.fr/politique-confidentialite</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

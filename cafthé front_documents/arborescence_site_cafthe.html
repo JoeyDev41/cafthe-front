@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arborescence - E-commerce Café & Thé</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #F5F0E8 0%, #E8DCC8 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+            overflow-x: auto;
+        }
+        
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #6B5A3E;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            color: #7A9B5C;
+        }
+        
+        .tree-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+        }
+        
+        /* Nœud racine (Accueil) */
+        .root-node {
+            background: linear-gradient(135deg, #6B5A3E 0%, #8B7355 100%);
+            color: white;
+            padding: 25px 40px;
+            border-radius: 15px;
+            font-size: 20px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(107, 90, 62, 0.3);
+            margin: 0 auto 80px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Lignes de connexion */
+        .connections {
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1600px;
+        }
+        
+        /* Nœuds principaux (niveau 1) */
+        .main-node {
+            background: white;
+            border: 3px solid #C4A875;
+            border-radius: 12px;
+            padding: 20px 30px;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .main-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(107, 90, 62, 0.2);
+            border-color: #7A9B5C;
+        }
+        
+        .main-node .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .main-node .title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #6B5A3E;
+            margin-bottom: 5px;
+        }
+        
+        .main-node .subtitle {
+            font-size: 12px;
+            color: #8B7D6B;
+        }
+        
+        /* Sous-nœuds (niveau 2) */
+        .sub-nodes {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-left: 15px;
+            border-left: 2px dashed #C4A875;
+        }
+        
+        .sub-node {
+            background: #FEFDFB;
+            border: 2px solid #E8DCC8;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 14px;
+            color: #4A3C2E;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .sub-node:before {
+            content: '';
+            position: absolute;
+            left: -17px;
+            top: 50%;
+            width: 15px;
+            height: 2px;
+            background: #C4A875;
+        }
+        
+        .sub-node:hover {
+            background: #E8DCC8;
+            border-color: #7A9B5C;
+            transform: translateX(5px);
+        }
+        
+        /* Colonnes pour organiser les nœuds */
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-block;
+            background: #7A9B5C;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        
+        .badge.secondary {
+            background: #C4A875;
+        }
+        
+        .badge.info {
+            background: #8B7D6B;
+        }
+        
+        /* Légende */
+        .legend {
+            margin-top: 60px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .legend h3 {
+            font-family: 'Playfair Display', serif;
+            color: #6B5A3E;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        
+        .legend-color.main {
+            background: linear-gradient(135deg, #6B5A3E 0%, #8B7355 100%);
+        }
+        
+        .legend-color.node {
+            background: white;
+            border: 3px solid #C4A875;
+        }
+        
+        .legend-color.sub {
+            background: #FEFDFB;
+            border: 2px solid #E8DCC8;
+        }
+        
+        /* Animation d'entrée */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .main-node, .sub-node {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+        
+        .column:nth-child(1) .main-node { animation-delay: 0.1s; }
+        .column:nth-child(2) .main-node { animation-delay: 0.2s; }
+        .column:nth-child(3) .main-node { animation-delay: 0.3s; }
+        .column:nth-child(4) .main-node { animation-delay: 0.4s; }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .connections {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .column {
+                max-width: 600px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Arborescence du Site</h1>
+            <p>E-commerce Café & Thé - Structure Complète</p>
+        </div>
+        
+        <div class="tree-container">
+            <div style="width: 100%;">
+                <!-- Nœud racine -->
+                <div class="root-node">
+                    🏠 ACCUEIL
+                </div>
+                
+                <!-- Colonnes de nœuds principaux -->
+                <div class="connections">
+                    <!-- Colonne 1 : Catalogue -->
+                    <div class="column">
+                        <div class="main-node">
+                            <div class="icon">🍵</div>
+                            <div class="title">THÉS</div>
+                            <div class="subtitle">Catalogue complet</div>
+                            <span class="badge">Catalogue</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">Filtres (Type, Origine, Prix)</div>
+                                <div class="sub-node">Liste des produits (Grille)</div>
+                                <div class="sub-node">Tri (Prix, Popularité, Nouveautés)</div>
+                                <div class="sub-node">Fiche produit détaillée</div>
+                                <div class="sub-node">Produits similaires</div>
+                            </div>
+                        </div>
+                        
+                        <div class="main-node">
+                            <div class="icon">☕</div>
+                            <div class="title">CAFÉS</div>
+                            <div class="subtitle">Catalogue complet</div>
+                            <span class="badge">Catalogue</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">Filtres (Type, Torréfaction)</div>
+                                <div class="sub-node">Liste des produits (Grille)</div>
+                                <div class="sub-node">Tri et pagination</div>
+                                <div class="sub-node">Fiche produit détaillée</div>
+                                <div class="sub-node">Ajout rapide au panier</div>
+                            </div>
+                        </div>
+                        
+                        <div class="main-node">
+                            <div class="icon">🔧</div>
+                            <div class="title">ACCESSOIRES</div>
+                            <div class="subtitle">Théières, tasses...</div>
+                            <span class="badge">Catalogue</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">Filtres par catégorie</div>
+                                <div class="sub-node">Liste des produits</div>
+                                <div class="sub-node">Fiche produit</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Colonne 2 : Achat -->
+                    <div class="column">
+                        <div class="main-node">
+                            <div class="icon">🛒</div>
+                            <div class="title">PANIER</div>
+                            <div class="subtitle">Gestion des achats</div>
+                            <span class="badge secondary">Achat</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">Liste produits ajoutés</div>
+                                <div class="sub-node">Modification quantité</div>
+                                <div class="sub-node">Supprimer article</div>
+                                <div class="sub-node">Récapitulatif (Total, Promo)</div>
+                                <div class="sub-node">Code promo</div>
+                            </div>
+                        </div>
+                        
+                        <div class="main-node">
+                            <div class="icon">💳</div>
+                            <div class="title">COMMANDE</div>
+                            <div class="subtitle">Tunnel d'achat</div>
+                            <span class="badge secondary">Achat</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">1. Identification</div>
+                                <div class="sub-node">2. Adresse de livraison</div>
+                                <div class="sub-node">3. Mode de livraison</div>
+                                <div class="sub-node">4. Paiement sécurisé</div>
+                                <div class="sub-node">5. Confirmation</div>
+                            </div>
+                        </div>
+                        
+                        <div class="main-node">
+                            <div class="icon">🔍</div>
+                            <div class="title">RECHERCHE</div>
+                            <div class="subtitle">Trouver un produit</div>
+                            <span class="badge info">Utilitaire</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">Barre de recherche</div>
+                                <div class="sub-node">Résultats produits</div>
+                                <div class="sub-node">Filtres de recherche</div>
+                                <div class="sub-node">Suggestions</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Colonne 3 : Compte -->
+                    <div class="column">
+                        <div class="main-node">
+                            <div class="icon">👤</div>
+                            <div class="title">MON COMPTE</div>
+                            <div class="subtitle">Espace client</div>
+                            <span class="badge secondary">Compte</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">Connexion / Inscription</div>
+                                <div class="sub-node">Mon Profil</div>
+                                <div class="sub-node">Mes Commandes</div>
+                                <div class="sub-node">Suivi de livraison</div>
+                                <div class="sub-node">Mes Adresses</div>
+                                <div class="sub-node">Mes Favoris</div>
+                                <div class="sub-node">Paramètres compte</div>
+                            </div>
+                        </div>
+                        
+                        <div class="main-node">
+                            <div class="icon">❤️</div>
+                            <div class="title">FAVORIS</div>
+                            <div class="subtitle">Produits sauvegardés</div>
+                            <span class="badge info">Utilitaire</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">Liste des favoris</div>
+                                <div class="sub-node">Ajouter au panier</div>
+                                <div class="sub-node">Supprimer favoris</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Colonne 4 : Informations -->
+                    <div class="column">
+                        <div class="main-node">
+                            <div class="icon">ℹ️</div>
+                            <div class="title">À PROPOS</div>
+                            <div class="subtitle">Notre histoire</div>
+                            <span class="badge info">Information</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">Histoire de la marque</div>
+                                <div class="sub-node">Nos valeurs</div>
+                                <div class="sub-node">Nos engagements</div>
+                            </div>
+                        </div>
+                        
+                        <div class="main-node">
+                            <div class="icon">📧</div>
+                            <div class="title">CONTACT</div>
+                            <div class="subtitle">Nous joindre</div>
+                            <span class="badge info">Information</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">Formulaire de contact</div>
+                                <div class="sub-node">Email / Téléphone</div>
+                                <div class="sub-node">FAQ</div>
+                            </div>
+                        </div>
+                        
+                        <div class="main-node">
+                            <div class="icon">📄</div>
+                            <div class="title">MENTIONS LÉGALES</div>
+                            <div class="subtitle">Infos légales</div>
+                            <span class="badge info">Information</span>
+                            <div class="sub-nodes">
+                                <div class="sub-node">CGV</div>
+                                <div class="sub-node">Mentions légales</div>
+                                <div class="sub-node">Politique de confidentialité</div>
+                                <div class="sub-node">Cookies</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Légende -->
+        <div class="legend">
+            <h3>Légende</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color main"></div>
+                    <div>
+                        <strong>Page d'accueil</strong><br>
+                        <small>Point d'entrée principal du site</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color node"></div>
+                    <div>
+                        <strong>Pages principales</strong><br>
+                        <small>Sections majeures du site</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color sub"></div>
+                    <div>
+                        <strong>Sous-pages & fonctionnalités</strong><br>
+                        <small>Détail des fonctionnalités de chaque section</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

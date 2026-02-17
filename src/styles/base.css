@@ -1,0 +1,410 @@
+/* ============================================
+   CafThé - Base : variables, reset, typographie, boutons
+   Ce fichier contient les fondations du site :
+   - Variables CSS pour le thème clair et sombre
+   - Reset (supprime les styles navigateur par défaut)
+   - Hiérarchie typographique (tailles/graisses des textes)
+   - Boutons réutilisables partout sur le site
+   - Bouton toggle de thème (clair/sombre)
+   ============================================ */
+
+/* === CSS CUSTOM PROPERTIES (Variables CSS) ===
+   Les variables CSS permettent de centraliser les couleurs du site.
+   Pour le dark mode, on redéfinit ces mêmes variables avec des valeurs sombres.
+   Avantage : on change les variables une seule fois et tout le site s'adapte.
+   :root = sélecteur qui cible la balise <html>, donc tout le document.
+   ============================================ */
+
+:root {
+  /* --- Fonds --- */
+  --bg-body: #FDF8F0;           /* Fond principal du site (crème) */
+  --bg-section: #f7f1e7;        /* Fond des sections (beige clair) */
+  --bg-card: #FFFFFF;            /* Fond des cartes produit (blanc) */
+  --bg-card-warm: #fff9f1;       /* Fond des cartes alternatives (crème chaud) */
+  --bg-panel: #fdf6ec;           /* Fond des panneaux (crème léger) */
+  --bg-input: #fff;              /* Fond des champs de formulaire */
+  --bg-navbar: #f7f1e7;          /* Fond de la barre de navigation */
+  --bg-hover: #faf5ed;           /* Fond au survol */
+  --bg-element: #e6d7c5;         /* Fond des éléments décoratifs */
+  --bg-promo: #e9dfd2;           /* Fond section promotions */
+
+  /* --- Textes --- */
+  --text-primary: #1A1A1A;       /* Texte principal (quasi-noir) */
+  --text-heading: #2C1810;       /* Couleur des titres (brun foncé) */
+  --text-secondary: #666;        /* Texte secondaire (gris) */
+  --text-muted: #5a4a3a;         /* Texte discret (brun clair) */
+  --text-subtle: #6b5a46;        /* Texte très discret */
+  --text-label: #555;            /* Labels de formulaire */
+  --text-on-dark: #FDF8F0;       /* Texte sur fond sombre (boutons, hero) */
+
+  /* --- Bordures --- */
+  --border-light: #eee;          /* Bordures très légères */
+  --border-medium: #ddd;         /* Bordures moyennes */
+  --border-warm: #d7c7b0;        /* Bordures chaudes */
+  --border-accent: #c9b59a;      /* Bordures accentuées */
+  --border-strong: #bfa98a;      /* Bordures marquées */
+  --border-card: #e8dccb;        /* Bordures des cartes */
+  --border-separator: #f0ebe3;   /* Séparateurs légers */
+
+  /* --- Ombres --- */
+  --shadow-color: rgba(44, 24, 16, 0.08);
+  --shadow-medium: rgba(44, 24, 16, 0.12);
+  --shadow-strong: rgba(44, 24, 16, 0.15);
+
+  /* --- Accents (couleurs de marque) --- */
+  --accent-caramel: #D4A574;
+  --accent-brown: #8B6F47;
+  --accent-gold: #c4a375;
+  --accent-warm: #b99874;
+  --accent-dark-brown: #8B7355;
+
+  /* --- Boutons --- */
+  --btn-primary-bg: #2C1810;
+  --btn-primary-text: #FDF8F0;
+  --btn-primary-hover-bg: #8B6F47;
+
+  /* --- Footer (déjà sombre en light mode) --- */
+  --bg-footer: #2C1810;
+  --footer-border: rgba(212, 165, 116, 0.2);
+
+  /* --- Erreurs / Succès --- */
+  --color-error: #c0392b;
+  --color-error-bg: #fdf0f0;
+  --color-success: #4a7c59;
+  --color-success-bg: #f0fdf4;
+  --color-success-notice-bg: #edf7f0;
+  --color-success-notice-text: #2d5a3a;
+}
+
+/* === DARK MODE ===
+   Quand l'utilisateur clique sur le bouton toggle, on ajoute data-theme="dark"
+   sur la balise <html>. Ce sélecteur redéfinit toutes les variables avec des
+   couleurs sombres. Le CSS cascade fait le reste automatiquement.
+   On utilise des bruns très foncés (pas du noir pur) pour garder l'ambiance premium.
+   ================== */
+
+html[data-theme="dark"] {
+  /* --- Fonds sombres (bruns très foncés, pas noir pur) --- */
+  --bg-body: #1A1210;
+  --bg-section: #221A14;
+  --bg-card: #2C2018;
+  --bg-card-warm: #2A201A;
+  --bg-panel: #261E16;
+  --bg-input: #2C2018;
+  --bg-navbar: #1E1610;
+  --bg-hover: #332A22;
+  --bg-element: #3A2E24;
+  --bg-promo: #2E2420;
+
+  /* --- Textes clairs --- */
+  --text-primary: #E8E0D8;
+  --text-heading: #F0E8E0;
+  --text-secondary: #A09888;
+  --text-muted: #C0B8AE;
+  --text-subtle: #B0A898;
+  --text-label: #C0B8AE;
+  --text-on-dark: #F0E8E0;
+
+  /* --- Bordures sombres --- */
+  --border-light: #3A302A;
+  --border-medium: #443A32;
+  --border-warm: #4A3E34;
+  --border-accent: #5A4E42;
+  --border-strong: #6A5E52;
+  --border-card: #4A3E34;
+  --border-separator: #3A302A;
+
+  /* --- Ombres plus fortes en dark mode --- */
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.35);
+  --shadow-strong: rgba(0, 0, 0, 0.4);
+
+  /* --- Boutons --- */
+  --btn-primary-bg: #8B6F47;
+  --btn-primary-text: #F0E8E0;
+  --btn-primary-hover-bg: #D4A574;
+
+  /* --- Footer --- */
+  --bg-footer: #121010;
+  --footer-border: rgba(212, 165, 116, 0.15);
+
+  /* --- Erreurs / Succès (versions claires pour dark mode) --- */
+  --color-error: #e57373;
+  --color-error-bg: rgba(192, 57, 43, 0.1);
+  --color-success: #7ab88e;
+  --color-success-bg: rgba(74, 124, 89, 0.1);
+  --color-success-notice-bg: rgba(74, 124, 89, 0.1);
+  --color-success-notice-text: #7ab88e;
+}
+
+/* === SKIP TO CONTENT (Accessibilité) ===
+   Lien caché qui apparaît quand on navigue au clavier (Tab).
+   Permet aux utilisateurs de sauter directement au contenu principal.
+   ============================================ */
+
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-heading);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 8px 8px;
+  font-weight: 700;
+  z-index: 10000;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* === LOADER (Lazy loading) ===
+   Spinner affiché pendant le chargement des pages (React.lazy + Suspense).
+   ============================================ */
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-separator);
+  border-top-color: var(--accent-caramel);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* === RESET & BASE ===
+   Supprime les marges/paddings par défaut du navigateur.
+   box-sizing: border-box fait que les paddings sont inclus dans la largeur.
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Montserrat en police principale, poids 400 (normal) pour le texte courant */
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: var(--text-primary);
+  background-color: var(--bg-body);
+  line-height: 1.7;
+  min-height: 100vh;
+  /* Taille de base du texte : 15px, tout le site se base là-dessus pour les rem */
+  font-size: 15px;
+  letter-spacing: 0.01em;
+}
+
+/* === HIÉRARCHIE TYPOGRAPHIQUE ===
+   On utilise uniquement Montserrat partout.
+   Pour différencier les niveaux de titres, on joue sur :
+   - font-size : plus c'est gros = plus c'est important
+   - font-weight : plus c'est gras = plus ça attire l'oeil
+   - letter-spacing : espacement entre les lettres pour l'élégance
+   =================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-heading);
+  line-height: 1.25;
+}
+
+/* h1 = titre principal de la page, le plus gros et le plus gras */
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* h2 = sous-titre principal, un peu plus petit que h1 */
+h2 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* h3 = titre de section, semibold pour rester lisible sans être trop lourd */
+h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* h4 = sous-section, poids medium (500) pour être plus discret que h3 */
+h4 {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+/* h5 = petit titre, souvent utilisé pour les labels/catégories */
+h5 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* h6 = le plus petit titre, discret mais distinct du texte courant */
+h6 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Paragraphes : interligne confortable pour la lecture */
+p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+}
+
+/* Les listes héritent du style paragraphe pour une cohérence visuelle */
+li {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* Texte en gras : on utilise semibold (600) plutôt que bold (700) pour être plus fin */
+strong, b {
+  font-weight: 600;
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* Texte secondaire : plus petit et grisé pour les infos moins importantes */
+small {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* Labels de formulaire : poids medium (500) pour qu'ils se démarquent des inputs */
+label {
+  font-weight: 500;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+}
+
+a {
+  color: var(--accent-brown);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--text-heading);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+/* === BOUTONS ===
+   Deux styles principaux : primary (fond plein) et secondary (contour).
+   On utilise des variables CSS pour que le dark mode change les couleurs auto.
+   ============================================ */
+
+.btn-primary {
+  display: inline-block;
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover-bg);
+  color: var(--btn-primary-text);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--text-heading);
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--text-heading);
+  border-radius: 4px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.btn-secondary:hover {
+  background-color: var(--text-heading);
+  color: var(--bg-body);
+}
+
+/* === BOUTON THEME TOGGLE (clair/sombre) ===
+   Style du bouton qui permet de basculer le thème.
+   On utilise un cercle avec une icône soleil/lune.
+   ============================================ */
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border-warm);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--accent-caramel);
+}

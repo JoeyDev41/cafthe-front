@@ -1,0 +1,189 @@
+/* ============================================
+   CafThé - Navbar (barre de navigation)
+   Contient : logo, liens catégories, recherche, panier, connexion, menu burger
+   La navbar est sticky (reste en haut de la page au scroll).
+   ============================================ */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  background-color: var(--bg-navbar);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-warm);
+  box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+  background-color: transparent;
+}
+
+/* Zone centrale : liens catégories + barre de recherche */
+.navbar-center {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Liens de navigation (Produits, Thés, Cafés, Accessoires) */
+.navbar-cat-link {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-family: "Montserrat", sans-serif;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.navbar-cat-link:hover {
+  color: var(--text-heading);
+  border-bottom-color: var(--accent-warm);
+}
+
+/* Barre de recherche dans la navbar */
+.navbar-search {
+  display: flex;
+  align-items: center;
+  background: var(--bg-input);
+  border: 1px solid var(--border-warm);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  color: var(--text-heading);
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  width: 160px;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-subtle);
+  cursor: pointer;
+  padding: 0.4rem 0.5rem;
+  font-size: 1rem;
+}
+
+/* Zone droite : thème, panier, connexion, burger */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Bouton panier avec icône SVG */
+.navbar-cart-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  color: var(--text-subtle);
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+
+.navbar-cart-btn:hover {
+  color: var(--text-heading);
+}
+
+/* Badge du nombre d'articles dans le panier (petit cercle) */
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: var(--accent-warm);
+  color: var(--bg-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Lien "Prénom" vers la page Mon compte */
+.navbar-user-link {
+  color: var(--text-subtle);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.navbar-user-link:hover {
+  color: var(--text-heading);
+}
+
+/* Bouton "Se connecter" */
+.navbar-link {
+  color: var(--text-heading);
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--accent-brown);
+  background-color: var(--accent-gold);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.navbar-link:hover {
+  background-color: var(--accent-caramel);
+  color: var(--text-heading);
+}
+
+/* Bouton "Déconnexion" */
+.navbar-logout-button {
+  background: transparent;
+  border: 1px solid var(--accent-brown);
+  color: var(--text-heading);
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.navbar-logout-button:hover {
+  background-color: var(--bg-element);
+}
+
+/* Menu burger (visible uniquement sur mobile) */
+.navbar-burger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.navbar-burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--text-subtle);
+  transition: transform 0.2s;
+}

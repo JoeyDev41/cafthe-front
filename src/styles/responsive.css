@@ -1,0 +1,367 @@
+/* ============================================
+   CafThé - Responsive (media queries)
+   Adapte le site aux différentes tailles d'écran :
+   - 1024px : tablettes paysage
+   - 768px : tablettes portrait / mobiles grands
+   - 480px : petits mobiles
+   ============================================ */
+
+/* === TABLETTES PAYSAGE (max 1024px) === */
+
+@media (max-width: 1024px) {
+  .cart-content {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-summary {
+    position: static;
+  }
+
+  .product-details-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .home .hero-content {
+    gap: 2rem;
+  }
+
+  .home .hero-image {
+    width: 340px;
+  }
+
+  .home .categories-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-products .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .category-page {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .category-page .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Page produits : passage en 1 colonne (filtres au-dessus) */
+  .products-page .product-list-section {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "filters"
+      "list"
+      "pagination";
+  }
+
+  .products-page .filters-bar {
+    position: static;
+  }
+
+  .products-page .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* === TABLETTES PORTRAIT / MOBILES GRANDS (max 768px) === */
+
+@media (max-width: 768px) {
+  /* Navbar : menu burger activé */
+  .navbar {
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-center {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 0;
+    gap: 0.75rem;
+  }
+
+  .navbar-center.open {
+    display: flex;
+  }
+
+  .navbar-search {
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .navbar-burger {
+    display: flex;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .home .hero-content {
+    text-align: center;
+  }
+
+  .home .hero-text {
+    max-width: none;
+  }
+
+  .home .hero-image {
+    width: 260px;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .hero-image {
+    width: 180px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  /* Grilles en 1 colonne */
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-products .product-list,
+  .promotions-grid,
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Category page : sidebar en dessous */
+  .category-page {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+  }
+
+  .category-sidebar {
+    order: 2;
+  }
+
+  .sidebar-card {
+    position: static;
+  }
+
+  .category-page .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products-page {
+    padding: 2rem 1.5rem 3rem;
+  }
+
+  .products-page .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Info cards adresses : passage en 1 colonne */
+  .info-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Onglets compte */
+  .account-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+    font-size: 0.85rem;
+    padding: 0.6rem 0.5rem;
+  }
+
+  .engagements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-history {
+    grid-template-columns: 1fr;
+  }
+
+  .about-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Vue liste : cartes en colonne */
+  .product-card--list {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .product-card--list .product-card-image-zone {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .cart-item {
+    flex-wrap: wrap;
+  }
+
+  .checkout-steps {
+    flex-direction: column;
+  }
+
+  .checkout-nav {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .confirmation-actions {
+    flex-direction: column;
+  }
+
+  .order-info {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  /* Quickview modal en 1 colonne */
+  .quickview-content {
+    grid-template-columns: 1fr;
+  }
+
+  .quickview-image {
+    border-radius: 10px 10px 0 0;
+    max-height: 280px;
+  }
+
+  .quickview-gallery {
+    min-height: 200px;
+  }
+
+  .quickview-gallery .gallery-arrow {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+
+  .quickview-info {
+    padding: 1.5rem;
+  }
+
+  /* Pages légales */
+  .legal-page {
+    padding: 2rem 1.5rem 3rem;
+  }
+
+  .legal-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .legal-table {
+    font-size: 0.85rem;
+  }
+
+  .legal-table th,
+  .legal-table td {
+    padding: 0.5rem;
+  }
+}
+
+/* === PETITS MOBILES (max 480px) === */
+
+@media (max-width: 480px) {
+  .hero-image {
+    width: 150px;
+  }
+
+  .home .hero-image {
+    width: 210px;
+  }
+
+  .category-frame {
+    width: 100px;
+    height: 100px;
+  }
+
+  .category-page .product-list {
+    grid-template-columns: 1fr;
+  }
+
+  .products-page .product-list {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .product-list {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar-right {
+    gap: 0.5rem;
+  }
+
+  /* On cache le prénom sur très petit écran */
+  .navbar-user-link {
+    display: none;
+  }
+
+  .about-title {
+    font-size: 1.6rem;
+  }
+
+  .products-page .section-title {
+    font-size: 1.6rem;
+  }
+}
