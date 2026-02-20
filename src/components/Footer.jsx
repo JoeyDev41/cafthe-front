@@ -3,13 +3,16 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/monLogo.png";
 
 const Footer = () => {
     return (
         <footer className="footer">
             <div className="footer-content">
                 <div className="footer-section">
-                    <h4>CafThé</h4>
+                    <Link to="/">
+                        <img src={logo} alt="CafThé - Retour à l'accueil" className="footer-logo" />
+                    </Link>
                     <p>
                         Spécialiste des thés et cafés haut de gamme,
                         sélectionnés avec soin depuis les meilleurs terroirs mondiaux.
