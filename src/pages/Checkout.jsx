@@ -6,7 +6,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "../context/CartContext.jsx";
 import { AuthContext } from "../context/AuthContex.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { createOrder, getProfile } from "../services/api.js";
 // Helmet : permet de modifier le <head> du HTML depuis un composant React
@@ -136,13 +136,13 @@ const Checkout = () => {
                 <title>Passer commande | CafThé</title>
                 <meta name="description" content="Finalisez votre commande CafThé : livraison, paiement et confirmation." />
             </Helmet>
-            <h2>Finaliser ma commande</h2>
+            <h1>Finaliser ma commande</h1>
 
-            {/* Indicateur d'étapes */}
-            <div className="checkout-steps">
-                <div className={`step ${step >= 1 ? "active" : ""}`}>1. Livraison</div>
-                <div className={`step ${step >= 2 ? "active" : ""}`}>2. Paiement</div>
-                <div className={`step ${step >= 3 ? "active" : ""}`}>3. Confirmation</div>
+            {/* Indicateur d'étapes — aria-current="step" sur l'étape active (RGAA 9.1) */}
+            <div className="checkout-steps" role="list" aria-label="Étapes de la commande">
+                <div className={`step ${step >= 1 ? "active" : ""}`} role="listitem" aria-current={step === 1 ? "step" : undefined}>1. Livraison</div>
+                <div className={`step ${step >= 2 ? "active" : ""}`} role="listitem" aria-current={step === 2 ? "step" : undefined}>2. Paiement</div>
+                <div className={`step ${step >= 3 ? "active" : ""}`} role="listitem" aria-current={step === 3 ? "step" : undefined}>3. Confirmation</div>
             </div>
 
             {/* Étape 1 : Livraison */}
@@ -213,8 +213,10 @@ const Checkout = () => {
                         <div className="address-form">
                             <h3>Adresse de livraison</h3>
                             <div className="form-group">
-                                <label>Adresse :</label>
+                                <label htmlFor="adresse-rue">Adresse <span className="required-star" aria-hidden="true">*</span></label>
                                 <input
+                                    id="adresse-rue"
+                                    autoComplete="street-address"
                                     value={adresse.adresse}
                                     onChange={(e) => setAdresse({ ...adresse, adresse: e.target.value })}
                                     required
@@ -222,8 +224,10 @@ const Checkout = () => {
                             </div>
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label>Code postal :</label>
+                                    <label htmlFor="adresse-cp">Code postal <span className="required-star" aria-hidden="true">*</span></label>
                                     <input
+                                        id="adresse-cp"
+                                        autoComplete="postal-code"
                                         value={adresse.cp}
                                         onChange={(e) => setAdresse({ ...adresse, cp: e.target.value })}
                                         maxLength="5"
@@ -231,14 +235,21 @@ const Checkout = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label>Ville :</label>
+                                    <label htmlFor="adresse-ville">Ville <span className="required-star" aria-hidden="true">*</span></label>
                                     <input
+                                        id="adresse-ville"
+                                        autoComplete="address-level2"
                                         value={adresse.ville}
                                         onChange={(e) => setAdresse({ ...adresse, ville: e.target.value })}
                                         required
                                     />
                                 </div>
                             </div>
+                            {/* Notice RGPD art. 13 : traitement de l'adresse de livraison */}
+                            <p className="rgpd-notice">
+                                Votre adresse est utilisée uniquement pour la livraison de cette commande.
+                                En savoir plus : <Link to="/politique-confidentialite">politique de confidentialité</Link>.
+                            </p>
                         </div>
                     )}
 

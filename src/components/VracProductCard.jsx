@@ -67,6 +67,7 @@ const VracProductCard = ({ produit }) => {
                         className="vrac-select"
                         value={poids}
                         onChange={(e) => setPoids(Number(e.target.value))}
+                        aria-label={`Quantité pour ${produit.nom_produit}`}
                     >
                         {POIDS_OPTIONS.map((opt) => (
                             <option key={opt.value} value={opt.value}>

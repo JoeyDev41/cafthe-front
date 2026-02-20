@@ -47,6 +47,7 @@ const Footer = () => {
                 <div className="footer-section">
                     <h4>Informations légales</h4>
                     <ul>
+                        <li><Link to="/mentions-legales">Mentions légales</Link></li>
                         <li><Link to="/cgv">Conditions générales de vente</Link></li>
                         <li><Link to="/politique-confidentialite">Politique de confidentialité</Link></li>
                     </ul>

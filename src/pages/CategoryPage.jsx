@@ -31,6 +31,7 @@ const CategoryPage = ({ title, subtitle, category }) => {
                                 onChange={(e) => setPriceMin(e.target.value)}
                                 className="sidebar-price-input"
                                 min="0"
+                                aria-label="Prix minimum"
                             />
                             <input
                                 type="number"
@@ -39,11 +40,12 @@ const CategoryPage = ({ title, subtitle, category }) => {
                                 onChange={(e) => setPriceMax(e.target.value)}
                                 className="sidebar-price-input"
                                 min="0"
+                                aria-label="Prix maximum"
                             />
                         </div>
                     </div>
 
-                    <button className="sidebar-reset" type="button" onClick={handleReset}>
+                    <button className="sidebar-reset" type="button" onClick={handleReset} aria-label="Réinitialiser les filtres de prix">
                         Réinitialiser
                     </button>
                 </div>

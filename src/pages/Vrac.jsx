@@ -68,16 +68,16 @@ const Vrac = () => {
                 {/* Barre de filtres */}
                 <div className="filters-bar">
                     <div className="filter-group">
-                        <label>Catégorie :</label>
-                        <select value={categorie} onChange={(e) => setCategorie(e.target.value)}>
+                        <label htmlFor="vrac-filter-categorie">Catégorie :</label>
+                        <select id="vrac-filter-categorie" value={categorie} onChange={(e) => setCategorie(e.target.value)}>
                             <option value="">Toutes</option>
                             <option value="the">Thés</option>
                             <option value="cafe">Cafés</option>
                         </select>
                     </div>
                     <div className="filter-group">
-                        <label>Trier par :</label>
-                        <select value={tri} onChange={(e) => setTri(e.target.value)}>
+                        <label htmlFor="vrac-filter-tri">Trier par :</label>
+                        <select id="vrac-filter-tri" value={tri} onChange={(e) => setTri(e.target.value)}>
                             <option value="">Par défaut</option>
                             <option value="prix_ttc">Prix</option>
                             <option value="nom_produit">Nom</option>
@@ -86,6 +86,7 @@ const Vrac = () => {
                             <button
                                 className="order-toggle"
                                 onClick={() => setOrdre(ordre === "asc" ? "desc" : "asc")}
+                                aria-label={ordre === "asc" ? "Ordre croissant, cliquer pour décroissant" : "Ordre décroissant, cliquer pour croissant"}
                                 title={ordre === "asc" ? "Croissant" : "Décroissant"}
                             >
                                 {ordre === "asc" ? "↑" : "↓"}
@@ -93,16 +94,18 @@ const Vrac = () => {
                         )}
                     </div>
                     <div className="filter-group">
-                        <label>Prix /kg :</label>
+                        <label htmlFor="vrac-prix-min">Prix /kg :</label>
                         <input
+                            id="vrac-prix-min"
                             type="number"
                             placeholder="Min"
                             value={prixMin}
                             onChange={(e) => setPrixMin(e.target.value)}
                             className="filter-input"
                             min="0"
+                            aria-label="Prix minimum par kg"
                         />
-                        <span>-</span>
+                        <span aria-hidden="true">-</span>
                         <input
                             type="number"
                             placeholder="Max"
@@ -110,6 +113,7 @@ const Vrac = () => {
                             onChange={(e) => setPrixMax(e.target.value)}
                             className="filter-input"
                             min="0"
+                            aria-label="Prix maximum par kg"
                         />
                     </div>
                 </div>

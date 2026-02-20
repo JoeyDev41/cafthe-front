@@ -3,7 +3,7 @@
 // Permet d'ajouter au panier sans quitter la page de listing
 // Inclut un mini-carrousel si le produit a plusieurs images
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext.jsx";
 import { PromotionContext } from "../context/PromotionContext.jsx";
@@ -16,6 +16,17 @@ const QuickViewModal = ({ produit, onClose }) => {
     const finalPrice = getDiscountedPrice(produit.ID_Article, originalPrice);
     const [quantity, setQuantity] = useState(1);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const closeButtonRef = useRef(null);
+
+    // Focus sur le bouton fermer à l'ouverture + fermeture par Escape (RGAA 7.3)
+    useEffect(() => {
+        closeButtonRef.current?.focus();
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape") onClose();
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [onClose]);
 
     // Je récupère toutes les images du produit (séparées par des virgules en BDD)
     const imagesList = produit.images
@@ -39,10 +50,17 @@ const QuickViewModal = ({ produit, onClose }) => {
 
     return (
         // Clic sur l'overlay (fond sombre) ferme la modale
-        <div className="quickview-overlay" onClick={onClose}>
+        <div className="quickview-overlay" onClick={onClose} role="presentation">
             {/* stopPropagation empêche le clic sur la modale de la fermer */}
-            <div className="quickview-modal" onClick={(e) => e.stopPropagation()}>
-                <button className="quickview-close" onClick={onClose} aria-label="Fermer l'aperçu rapide">&times;</button>
+            {/* role=dialog + aria-modal + aria-labelledby : RGAA 7.1 — composant ARIA requis */}
+            <div
+                className="quickview-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="quickview-title"
+                onClick={(e) => e.stopPropagation()}
+            >
+                <button ref={closeButtonRef} className="quickview-close" onClick={onClose} aria-label="Fermer l'aperçu rapide">&times;</button>
 
                 <div className="quickview-content">
                     {/* Zone image avec carrousel si plusieurs images */}
@@ -73,7 +91,7 @@ const QuickViewModal = ({ produit, onClose }) => {
 
                     <div className="quickview-info">
                         <span className="product-card-category">{produit.categorie}</span>
-                        <h3 className="quickview-title">{produit.nom_produit}</h3>
+                        <h3 id="quickview-title" className="quickview-title">{produit.nom_produit}</h3>
 
                         {produit.description && (
                             <p className="quickview-desc">{produit.description}</p>

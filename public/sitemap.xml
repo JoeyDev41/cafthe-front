@@ -95,9 +95,17 @@
   <!-- Politique de confidentialité -->
   <url>
     <loc>https://cafthe.fr/politique-confidentialite</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-02-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+
+  <!-- Mentions légales -->
+  <url>
+    <loc>https://cafthe.fr/mentions-legales</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 
 </urlset>

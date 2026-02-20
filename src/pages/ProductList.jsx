@@ -111,7 +111,7 @@ const ProductList = ({
     if (isLoading) {
         return (
             <div className="product-list-section">
-                {showTitle && <h2 className="section-title">{getCategoryTitle()}</h2>}
+                {showTitle && <h1 className="section-title">{getCategoryTitle()}</h1>}
                 <div className="product-list">
                     {Array.from({ length: 6 }).map((_, i) => (
                         <div key={i} className="product-skeleton">
@@ -146,15 +146,15 @@ const ProductList = ({
 
     return (
         <div className="product-list-section">
-            {showTitle && <h2 className="section-title">{getCategoryTitle()}</h2>}
+            {showTitle && <h1 className="section-title">{getCategoryTitle()}</h1>}
 
             {/* Barre de filtres */}
             {showFilters && (
                 <div className="filters-bar">
                     {!forcedCategory && (
                         <div className="filter-group">
-                            <label>Catégorie :</label>
-                            <select value={effectiveCategory} onChange={handleCategoryChange}>
+                            <label htmlFor="filter-categorie">Catégorie :</label>
+                            <select id="filter-categorie" value={effectiveCategory} onChange={handleCategoryChange}>
                                 <option value="">Toutes</option>
                                 <option value="the">Thés</option>
                                 <option value="cafe">Cafés</option>
@@ -163,8 +163,8 @@ const ProductList = ({
                         </div>
                     )}
                     <div className="filter-group">
-                        <label>Trier par :</label>
-                        <select value={tri} onChange={(e) => setTri(e.target.value)}>
+                        <label htmlFor="filter-tri">Trier par :</label>
+                        <select id="filter-tri" value={tri} onChange={(e) => setTri(e.target.value)}>
                             <option value="">Par défaut</option>
                             <option value="prix_ttc">Prix</option>
                             <option value="nom_produit">Nom</option>
@@ -173,6 +173,7 @@ const ProductList = ({
                             <button
                                 className="order-toggle"
                                 onClick={() => setOrdre(ordre === "asc" ? "desc" : "asc")}
+                                aria-label={ordre === "asc" ? "Ordre croissant, cliquer pour décroissant" : "Ordre décroissant, cliquer pour croissant"}
                                 title={ordre === "asc" ? "Croissant" : "Décroissant"}
                             >
                                 {ordre === "asc" ? "↑" : "↓"}
@@ -181,16 +182,18 @@ const ProductList = ({
                     </div>
 
                     <div className="filter-group">
-                        <label>Prix :</label>
+                        <label htmlFor="filter-prix-min">Prix :</label>
                         <input
+                            id="filter-prix-min"
                             type="number"
                             placeholder="Min"
                             value={effectivePrixMin ?? ""}
                             onChange={(e) => setPrixMin(e.target.value)}
                             className="filter-input"
                             min="0"
+                            aria-label="Prix minimum"
                         />
-                        <span>-</span>
+                        <span aria-hidden="true">-</span>
                         <input
                             type="number"
                             placeholder="Max"
@@ -198,6 +201,7 @@ const ProductList = ({
                             onChange={(e) => setPrixMax(e.target.value)}
                             className="filter-input"
                             min="0"
+                            aria-label="Prix maximum"
                         />
                     </div>
                 </div>
@@ -209,16 +213,20 @@ const ProductList = ({
                     <button
                         className={`view-toggle-btn${viewMode === "grid" ? " active" : ""}`}
                         onClick={() => setViewMode("grid")}
+                        aria-label="Affichage en grille"
+                        aria-pressed={viewMode === "grid"}
                         title="Affichage grille"
                     >
-                        &#9638; Grille
+                        <span aria-hidden="true">&#9638;</span> Grille
                     </button>
                     <button
                         className={`view-toggle-btn${viewMode === "list" ? " active" : ""}`}
                         onClick={() => setViewMode("list")}
+                        aria-label="Affichage en liste"
+                        aria-pressed={viewMode === "list"}
                         title="Affichage liste"
                     >
-                        &#9776; Liste
+                        <span aria-hidden="true">&#9776;</span> Liste
                     </button>
                 </div>
             )}

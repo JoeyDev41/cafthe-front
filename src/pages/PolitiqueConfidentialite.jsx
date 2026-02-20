@@ -16,7 +16,7 @@ const PolitiqueConfidentialite = () => {
             </Helmet>
             <div className="legal-container">
                 <h1>Politique de Confidentialité</h1>
-                <p className="legal-updated">Dernière mise à jour : février 2025</p>
+                <p className="legal-updated">Dernière mise à jour : février 2026</p>
 
                 <section className="legal-section">
                     <h2>1. Responsable du traitement</h2>
@@ -60,8 +60,8 @@ const PolitiqueConfidentialite = () => {
                     <table className="legal-table">
                         <thead>
                             <tr>
-                                <th>Finalité</th>
-                                <th>Base légale</th>
+                                <th scope="col">Finalité</th>
+                                <th scope="col">Base légale</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -133,11 +133,12 @@ const PolitiqueConfidentialite = () => {
                     <h2>6. Cookies</h2>
                     <p>Notre site utilise des cookies pour :</p>
                     <ul>
-                        <li><strong>Cookies essentiels</strong> — fonctionnement du site, authentification, panier (localStorage)</li>
+                        <li><strong>Cookies essentiels</strong> — fonctionnement du site, authentification sécurisée (JWT en cookie HttpOnly)</li>
+                        <li><strong>Stockage local (localStorage)</strong> — votre panier d'achat est conservé dans le stockage local de votre navigateur. Ces données restent sur votre appareil, ne sont pas transmises à nos serveurs et peuvent être supprimées à tout moment via les paramètres de votre navigateur. Elles sont automatiquement effacées à la suppression de votre compte.</li>
                         <li><strong>Cookies analytiques</strong> — mesure d'audience et amélioration du service (soumis à consentement)</li>
                     </ul>
                     <p>
-                        Vous pouvez gérer vos préférences de cookies à tout moment via les paramètres
+                        Vous pouvez gérer vos préférences de cookies et supprimer le stockage local à tout moment via les paramètres
                         de votre navigateur.
                     </p>
                 </section>

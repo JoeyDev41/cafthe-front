@@ -183,31 +183,51 @@ const Account = () => {
                 <title>Mon compte | CafThé</title>
                 <meta name="description" content="Gérez votre profil, vos adresses et consultez vos commandes sur votre espace CafThé." />
             </Helmet>
-            <h2>Mon espace</h2>
+            <h1>Mon espace</h1>
 
-            {/* Navigation par onglets */}
-            <div className="account-tabs">
+            {/* Navigation par onglets — RGAA 7.1 : rôles ARIA tablist/tab/tabpanel */}
+            <div className="account-tabs" role="tablist" aria-label="Navigation du compte">
                 <button
+                    role="tab"
+                    id="tab-profil"
+                    aria-selected={activeTab === "profil"}
+                    aria-controls="panel-profil"
                     className={`tab-btn ${activeTab === "profil" ? "active" : ""}`}
                     onClick={() => setActiveTab("profil")}
+                    tabIndex={activeTab === "profil" ? 0 : -1}
                 >
                     Mon profil
                 </button>
                 <button
+                    role="tab"
+                    id="tab-adresses"
+                    aria-selected={activeTab === "adresses"}
+                    aria-controls="panel-adresses"
                     className={`tab-btn ${activeTab === "adresses" ? "active" : ""}`}
                     onClick={() => setActiveTab("adresses")}
+                    tabIndex={activeTab === "adresses" ? 0 : -1}
                 >
                     Mes adresses
                 </button>
                 <button
+                    role="tab"
+                    id="tab-commandes"
+                    aria-selected={activeTab === "commandes"}
+                    aria-controls="panel-commandes"
                     className={`tab-btn ${activeTab === "commandes" ? "active" : ""}`}
                     onClick={() => setActiveTab("commandes")}
+                    tabIndex={activeTab === "commandes" ? 0 : -1}
                 >
                     Mes commandes
                 </button>
                 <button
+                    role="tab"
+                    id="tab-mdp"
+                    aria-selected={activeTab === "mdp"}
+                    aria-controls="panel-mdp"
                     className={`tab-btn ${activeTab === "mdp" ? "active" : ""}`}
                     onClick={() => setActiveTab("mdp")}
+                    tabIndex={activeTab === "mdp" ? 0 : -1}
                 >
                     Mot de passe
                 </button>
@@ -215,7 +235,7 @@ const Account = () => {
 
             {/* Onglet Profil : bloc d'affichage + formulaire de modification */}
             {activeTab === "profil" && (
-                <>
+                <div role="tabpanel" id="panel-profil" aria-labelledby="tab-profil" tabIndex={0}>
                     <div className="info-card">
                         <div className="info-card-header">
                             <h3>Mes informations</h3>
@@ -249,31 +269,31 @@ const Account = () => {
                             <h3>Modifier mes informations</h3>
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label>Prénom :</label>
-                                    <input name="prenom" value={formProfile.prenom} onChange={handleProfileChange} />
+                                    <label htmlFor="profile-prenom">Prénom :</label>
+                                    <input id="profile-prenom" name="prenom" autoComplete="given-name" value={formProfile.prenom} onChange={handleProfileChange} />
                                 </div>
                                 <div className="form-group">
-                                    <label>Nom :</label>
-                                    <input name="nom" value={formProfile.nom} onChange={handleProfileChange} />
+                                    <label htmlFor="profile-nom">Nom :</label>
+                                    <input id="profile-nom" name="nom" autoComplete="family-name" value={formProfile.nom} onChange={handleProfileChange} />
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label>Email :</label>
-                                <input value={profile?.email_client || ""} disabled />
+                                <label htmlFor="profile-email">Email :</label>
+                                <input id="profile-email" value={profile?.email_client || ""} disabled />
                             </div>
                             <div className="form-group">
-                                <label>Téléphone :</label>
-                                <input name="telephone" value={formProfile.telephone} onChange={handleProfileChange} placeholder="0612345678" />
+                                <label htmlFor="profile-telephone">Téléphone :</label>
+                                <input id="profile-telephone" name="telephone" autoComplete="tel" value={formProfile.telephone} onChange={handleProfileChange} placeholder="0612345678" />
                             </div>
                             <button type="submit" className="btn-primary">Enregistrer</button>
                         </form>
                     )}
-                </>
+                </div>
             )}
 
             {/* Onglet Adresses : blocs d'affichage + formulaire de modification */}
             {activeTab === "adresses" && (
-                <>
+                <div role="tabpanel" id="panel-adresses" aria-labelledby="tab-adresses" tabIndex={0}>
                     <div className="info-cards-grid">
                         <div className="info-card">
                             <div className="info-card-header">
@@ -336,44 +356,44 @@ const Account = () => {
                         <form onSubmit={handleProfileSubmit} className="account-form">
                             <h3>Adresse de facturation</h3>
                             <div className="form-group">
-                                <label>Adresse :</label>
-                                <input name="adresse_facturation" value={formProfile.adresse_facturation} onChange={handleProfileChange} />
+                                <label htmlFor="fact-adresse">Adresse :</label>
+                                <input id="fact-adresse" name="adresse_facturation" autoComplete="billing street-address" value={formProfile.adresse_facturation} onChange={handleProfileChange} />
                             </div>
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label>Code postal :</label>
-                                    <input name="cp_facturation" value={formProfile.cp_facturation} onChange={handleProfileChange} maxLength="5" />
+                                    <label htmlFor="fact-cp">Code postal :</label>
+                                    <input id="fact-cp" name="cp_facturation" autoComplete="billing postal-code" value={formProfile.cp_facturation} onChange={handleProfileChange} maxLength="5" />
                                 </div>
                                 <div className="form-group">
-                                    <label>Ville :</label>
-                                    <input name="ville_facturation" value={formProfile.ville_facturation} onChange={handleProfileChange} />
+                                    <label htmlFor="fact-ville">Ville :</label>
+                                    <input id="fact-ville" name="ville_facturation" autoComplete="billing address-level2" value={formProfile.ville_facturation} onChange={handleProfileChange} />
                                 </div>
                             </div>
 
                             <h3>Adresse de livraison</h3>
                             <div className="form-group">
-                                <label>Adresse :</label>
-                                <input name="adresse_livraison" value={formProfile.adresse_livraison} onChange={handleProfileChange} />
+                                <label htmlFor="liv-adresse">Adresse :</label>
+                                <input id="liv-adresse" name="adresse_livraison" autoComplete="shipping street-address" value={formProfile.adresse_livraison} onChange={handleProfileChange} />
                             </div>
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label>Code postal :</label>
-                                    <input name="cp_livraison" value={formProfile.cp_livraison} onChange={handleProfileChange} maxLength="5" />
+                                    <label htmlFor="liv-cp">Code postal :</label>
+                                    <input id="liv-cp" name="cp_livraison" autoComplete="shipping postal-code" value={formProfile.cp_livraison} onChange={handleProfileChange} maxLength="5" />
                                 </div>
                                 <div className="form-group">
-                                    <label>Ville :</label>
-                                    <input name="ville_livraison" value={formProfile.ville_livraison} onChange={handleProfileChange} />
+                                    <label htmlFor="liv-ville">Ville :</label>
+                                    <input id="liv-ville" name="ville_livraison" autoComplete="shipping address-level2" value={formProfile.ville_livraison} onChange={handleProfileChange} />
                                 </div>
                             </div>
                             <button type="submit" className="btn-primary">Enregistrer</button>
                         </form>
                     )}
-                </>
+                </div>
             )}
 
             {/* Onglet Commandes : historique avec possibilité de recommander */}
             {activeTab === "commandes" && (
-                <div className="orders-list">
+                <div role="tabpanel" id="panel-commandes" aria-labelledby="tab-commandes" tabIndex={0} className="orders-list">
                     {orders.length === 0 ? (
                         <p className="empty-state">Aucune commande pour le moment.</p>
                     ) : (
@@ -418,21 +438,23 @@ const Account = () => {
 
             {/* Onglet Mot de passe : ancien mdp + nouveau + confirmation */}
             {activeTab === "mdp" && (
-                <form onSubmit={handlePasswordSubmit} className="account-form">
-                    <div className="form-group">
-                        <label>Ancien mot de passe :</label>
-                        <input name="ancien_mdp" type="password" value={formPassword.ancien_mdp} onChange={handlePasswordChange} required />
-                    </div>
-                    <div className="form-group">
-                        <label>Nouveau mot de passe :</label>
-                        <input name="nouveau_mdp" type="password" value={formPassword.nouveau_mdp} onChange={handlePasswordChange} required />
-                    </div>
-                    <div className="form-group">
-                        <label>Confirmer :</label>
-                        <input name="confirm_mdp" type="password" value={formPassword.confirm_mdp} onChange={handlePasswordChange} required />
-                    </div>
-                    <button type="submit" className="btn-primary">Modifier le mot de passe</button>
-                </form>
+                <div role="tabpanel" id="panel-mdp" aria-labelledby="tab-mdp" tabIndex={0}>
+                    <form onSubmit={handlePasswordSubmit} className="account-form">
+                        <div className="form-group">
+                            <label htmlFor="ancien-mdp">Ancien mot de passe :</label>
+                            <input id="ancien-mdp" name="ancien_mdp" type="password" autoComplete="current-password" value={formPassword.ancien_mdp} onChange={handlePasswordChange} required />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="nouveau-mdp">Nouveau mot de passe :</label>
+                            <input id="nouveau-mdp" name="nouveau_mdp" type="password" autoComplete="new-password" value={formPassword.nouveau_mdp} onChange={handlePasswordChange} required />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="confirm-mdp">Confirmer le nouveau mot de passe :</label>
+                            <input id="confirm-mdp" name="confirm_mdp" type="password" autoComplete="new-password" value={formPassword.confirm_mdp} onChange={handlePasswordChange} required />
+                        </div>
+                        <button type="submit" className="btn-primary">Modifier le mot de passe</button>
+                    </form>
+                </div>
             )}
 
             {/* Boutons déconnexion et suppression de compte */}

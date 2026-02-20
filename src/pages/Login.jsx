@@ -71,28 +71,30 @@ const Login = () => {
                 <title>Connexion | CafThé</title>
                 <meta name="description" content="Connectez-vous à votre compte CafThé pour accéder à vos commandes et votre espace personnel." />
             </Helmet>
-            <h2>Connexion</h2>
+            <h1>Connexion</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} noValidate>
                 <div className="form-group">
-                    <label htmlFor="email">Email :</label>
+                    <label htmlFor="email">Adresse e-mail</label>
                     <input
                         id="email"
                         type="email"
                         value={email}
                         required
+                        autoComplete="email"
                         placeholder="votre@email.fr"
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="password">Mot de passe :</label>
+                    <label htmlFor="password">Mot de passe</label>
                     <input
                         id="password"
                         type="password"
                         value={motDePasse}
                         required
+                        autoComplete="current-password"
                         placeholder="Votre mot de passe"
                         onChange={(e) => setMotDePasse(e.target.value)}
                     />
@@ -100,8 +102,14 @@ const Login = () => {
 
                 {/* Le bouton est désactivé pendant le chargement pour éviter les double-clics */}
                 <button type="submit" className="btn-primary" disabled={isLoading}>
-                    {isLoading ? "Connexion..." : "Se Connecter"}
+                    {isLoading ? "Connexion..." : "Se connecter"}
                 </button>
+
+                {/* Notice RGPD art. 13 : informer du traitement des données */}
+                <p className="rgpd-notice">
+                    Votre adresse e-mail est utilisée uniquement pour identifier votre compte.
+                    Consultez notre <Link to="/politique-confidentialite">politique de confidentialité</Link>.
+                </p>
             </form>
 
             {/* Lien vers la page d'inscription, je passe aussi l'URL de redirection */}

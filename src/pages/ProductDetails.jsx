@@ -147,7 +147,7 @@ const ProductDetails = () => {
                 {/* Informations du produit */}
                 <div className="product-details-info">
                     <span className="product-category-badge">{produit.categorie}</span>
-                    <h2>{produit.nom_produit}</h2>
+                    <h1>{produit.nom_produit}</h1>
 
                     {produit.origine && (
                         <p className="product-origin">Origine : {produit.origine}</p>
@@ -209,6 +209,7 @@ const ProductDetails = () => {
                                         setQuantity(Math.min(val, produit.stock));
                                     }}
                                     className="qty-input"
+                                    aria-label="Quantité"
                                 />
                                 <button
                                     onClick={() => setQuantity(Math.min(quantity + 1, produit.stock))}
@@ -219,8 +220,8 @@ const ProductDetails = () => {
                                 </button>
                             </div>
 
-                            {/* Prix total dynamique qui se met à jour avec la quantité */}
-                            <div className="dynamic-price">
+                            {/* Prix total dynamique — aria-live annonce la mise à jour aux lecteurs d'écran */}
+                            <div className="dynamic-price" aria-live="polite" aria-atomic="true">
                                 Total : {(getDiscountedPrice(produit.ID_Article, parseFloat(produit.prix_ttc)) * quantity).toFixed(2)} €
                             </div>
 

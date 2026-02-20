@@ -34,7 +34,7 @@ const Cart = () => {
     if (items.length === 0) {
         return (
             <div className="cart-container">
-                <h2>Mon panier</h2>
+                <h1>Mon panier</h1>
                 <div className="empty-cart">
                     <p>Votre panier est vide.</p>
                     <Link to="/" className="btn-primary">Continuer mes achats</Link>
@@ -50,7 +50,7 @@ const Cart = () => {
                 <title>Mon panier | CafThé</title>
                 <meta name="description" content="Consultez et modifiez votre panier CafThé avant de passer commande." />
             </Helmet>
-            <h2>Mon panier</h2>
+            <h1>Mon panier</h1>
 
             <div className="cart-content">
                 {/* Liste des articles */}

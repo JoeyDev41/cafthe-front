@@ -72,7 +72,7 @@ const CGV = () => {
                     <h2>Article 4 — Livraison</h2>
                     <p>Les livraisons sont effectuées en France métropolitaine.</p>
                     <ul>
-                        <li>Frais de livraison : 4,90 EUR pour toute commande inférieure à 49 EUR TTC</li>
+                        <li>Frais de livraison : 5,90 EUR pour toute commande inférieure à 49 EUR TTC</li>
                         <li>Livraison gratuite dès 49 EUR d'achat</li>
                         <li>Retrait gratuit en boutique disponible</li>
                     </ul>

@@ -76,7 +76,7 @@ const Navbar = () => {
                 </Link>
 
                 {/* Liens de navigation (catégories + recherche) */}
-                <div className={`navbar-center ${menuOpen ? "open" : ""}`}>
+                <div id="navbar-menu" className={`navbar-center ${menuOpen ? "open" : ""}`}>
                     <Link to="/produits" className="navbar-cat-link" onClick={() => setMenuOpen(false)}>
                         Produits
                     </Link>
@@ -142,7 +142,7 @@ const Navbar = () => {
                     )}
 
                     {/* Menu burger pour mobile */}
-                    <button className="navbar-burger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Ouvrir le menu" aria-expanded={menuOpen}>
+                    <button className="navbar-burger" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={menuOpen} aria-controls="navbar-menu">
                         <span></span>
                         <span></span>
                         <span></span>

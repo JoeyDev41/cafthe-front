@@ -18,7 +18,7 @@ const OrderConfirmation = () => {
     if (!commande) {
         return (
             <div className="confirmation-container">
-                <h2>Aucune commande</h2>
+                <h1>Aucune commande</h1>
                 <p>Aucune information de commande disponible.</p>
                 <Link to="/" className="btn-primary">Retour à l'accueil</Link>
             </div>
@@ -34,8 +34,8 @@ const OrderConfirmation = () => {
             </Helmet>
             {/* Message de succès avec le numéro de commande */}
             <div className="confirmation-success">
-                <div className="confirmation-icon">&#10003;</div>
-                <h2>Commande confirmée !</h2>
+                <div className="confirmation-icon" aria-hidden="true">&#10003;</div>
+                <h1>Commande confirmée !</h1>
                 <p className="order-number">N° {commande.numero_commande}</p>
                 <p>Merci pour votre commande.</p>
                 <p className="confirmation-email-notice">

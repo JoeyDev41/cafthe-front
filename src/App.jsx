@@ -37,6 +37,7 @@ const Checkout = lazy(() => import("./pages/Checkout.jsx"));
 const OrderConfirmation = lazy(() => import("./pages/OrderConfirmation.jsx"));
 const CGV = lazy(() => import("./pages/CGV.jsx"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite.jsx"));
+const MentionsLegales = lazy(() => import("./pages/MentionsLegales.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
                                 <Route path="confirmation" element={<OrderConfirmation />} />
                                 <Route path="cgv" element={<CGV />} />
                                 <Route path="politique-confidentialite" element={<PolitiqueConfidentialite />} />
+                                <Route path="mentions-legales" element={<MentionsLegales />} />
                                 <Route path="*" element={<NotFound />} />
                             </Route>
                         </Routes>

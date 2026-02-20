@@ -87,7 +87,7 @@ const Home = () => {
                     <h2 className="section-title">Produits Phares</h2>
                     <Link to="/produits" className="section-link">Voir tout</Link>
                 </div>
-                <ProductList />
+                <ProductList showTitle={false} />
             </section>
 
             {/* Promotions : affichées uniquement s'il y en a des actives en BDD */}
