@@ -60,6 +60,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Page Contact -->
+  <url>
+    <loc>https://cafthe.fr/contact</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Page À propos -->
   <url>
     <loc>https://cafthe.fr/a-propos</loc>

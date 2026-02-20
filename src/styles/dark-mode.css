@@ -51,6 +51,12 @@
   box-shadow: 0 0 0 2px rgba(212, 165, 116, 0.15);
 }
 
+/* --- Placeholders : gris clair pour bien se distinguer du texte saisi --- */
+[data-theme="dark"] ::placeholder {
+  color: #888888;
+  opacity: 1;
+}
+
 /* --- Scrollbar personnalisée (Chrome/Edge uniquement) ---
    En dark mode, on stylise la scrollbar pour qu'elle
    s'intègre au thème sombre.

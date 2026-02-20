@@ -96,14 +96,14 @@ html[data-theme="dark"] {
   --bg-element: #3A2E24;
   --bg-promo: #2E2420;
 
-  /* --- Textes clairs --- */
-  --text-primary: #E8E0D8;
-  --text-heading: #F0E8E0;
-  --text-secondary: #A09888;
-  --text-muted: #C0B8AE;
-  --text-subtle: #B0A898;
-  --text-label: #C0B8AE;
-  --text-on-dark: #F0E8E0;
+  /* --- Textes blancs/gris neutres (contraste RGAA AAA sur fonds sombres) --- */
+  --text-primary: #F0F0F0;
+  --text-heading: #FFFFFF;
+  --text-secondary: #C0C0C0;
+  --text-muted: #D4D4D4;
+  --text-subtle: #C8C8C8;
+  --text-label: #D4D4D4;
+  --text-on-dark: #F0F0F0;
 
   /* --- Bordures sombres --- */
   --border-light: #3A302A;

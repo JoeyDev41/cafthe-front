@@ -4,6 +4,8 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import boutique from "../assets/boutique.webp";
+import logo from "../assets/monLogo.png";
 // Helmet : permet de modifier le <head> du HTML depuis un composant React
 // On l'utilise pour changer le titre de l'onglet et la meta description sur chaque page
 import { Helmet } from "react-helmet-async";
@@ -14,7 +16,7 @@ const About = () => {
             {/* Helmet : titre et description pour la page À propos */}
             <Helmet>
                 <title>À propos | CafThé</title>
-                <meta name="description" content="Découvrez l'histoire de CafThé, nos valeurs et notre équipe passionnée. Depuis 1892, nous sélectionnons les meilleurs thés et cafés." />
+                <meta name="description" content="Découvrez CafThé, votre boutique parisienne spécialisée dans les thés et cafés premium. Sélection rigoureuse, commerce équitable et conseils personnalisés." />
             </Helmet>
             <div className="about-container">
                 <header className="about-header">
@@ -23,11 +25,8 @@ const About = () => {
 
                 {/* Section d'accroche avec icônes thé et café */}
                 <section className="about-hero-card">
-                    <div className="about-hero-icons" aria-hidden="true">
-                        <span className="about-hero-icon">&#9749;</span>
-                        <span className="about-hero-icon">&#127861;</span>
-                    </div>
-                    <p className="about-quote">"Depuis 1892, nous cultivons la passion du thé et du café d'exception"</p>
+                    <img src={logo} alt="" aria-hidden="true" className="about-hero-logo" />
+                    <p className="about-quote">"Sélectionnés avec soin, dégustés avec plaisir — bienvenue chez CafThé."</p>
                 </section>
 
                 {/* Section Histoire */}
@@ -36,21 +35,23 @@ const About = () => {
                     <div className="about-panel-body about-history">
                         <div className="about-history-text">
                             <p>
-                                Fondée en 1892 par un ancêtre de Joey Ferreira, passionné de botanique et d'arômes,
-                                CAFTHÉ est née d'une quête simple : offrir des thés et cafés d'une qualité rare.
+                                CafThé est née d'une passion simple : réunir sous un même toit les meilleurs thés
+                                et cafés du monde. Notre boutique parisienne, au cœur du 1er arrondissement,
+                                est un espace pensé pour les amateurs d'arômes authentiques.
                             </p>
                             <p>
-                                Dans notre atelier parisien, niché au cœur du Marais, la famille Ferreira perpétue depuis plus
-                                d'un siècle l'art de la torréfaction et du mélange. Chaque grain, chaque feuille est sélectionné
-                                avec exigence auprès de plantations partenaires à travers le monde.
+                                Chaque référence est sélectionnée avec soin auprès de producteurs engagés,
+                                privilégiant le commerce équitable et l'agriculture durable. Thés d'origine,
+                                cafés de spécialité, accessoires de dégustation : tout est réuni pour sublimer
+                                votre tasse quotidienne.
                             </p>
                             <p>
-                                Aujourd'hui, Joey Ferreira fait vivre cet héritage en gardant la même exigence artisanale,
-                                tout en embrassant les valeurs contemporaines du commerce équitable et de la durabilité.
+                                Commandez en ligne ou venez nous rendre visite en boutique — nos conseils
+                                sont toujours gratuits, et le retrait de vos commandes se fait sans frais.
                             </p>
                         </div>
                         <div className="about-history-media">
-                            <img src="/images/cafe.webp" alt="Torréfaction artisanale" />
+                            <img src={boutique} alt="Intérieur de la boutique CafThé" />
                         </div>
                     </div>
                 </section>
@@ -99,8 +100,13 @@ const About = () => {
                         <div className="about-team-grid">
                             <div className="about-team-card">
                                 <div className="about-avatar" aria-hidden="true">&#128100;</div>
+                                <h3>Joey Ferreira</h3>
+                                <p>Directeur & PDG</p>
+                            </div>
+                            <div className="about-team-card">
+                                <div className="about-avatar" aria-hidden="true">&#128100;</div>
                                 <h3>Marie Delacroix</h3>
-                                <p>Maître Torréfacteur</p>
+                                <p>Responsable Boutique</p>
                             </div>
                             <div className="about-team-card">
                                 <div className="about-avatar" aria-hidden="true">&#128100;</div>
@@ -111,6 +117,16 @@ const About = () => {
                                 <div className="about-avatar" aria-hidden="true">&#128100;</div>
                                 <h3>Sophie Laurent</h3>
                                 <p>Responsable Achats</p>
+                            </div>
+                            <div className="about-team-card">
+                                <div className="about-avatar" aria-hidden="true">&#128100;</div>
+                                <h3>Lucas Martin</h3>
+                                <p>Vendeur</p>
+                            </div>
+                            <div className="about-team-card">
+                                <div className="about-avatar" aria-hidden="true">&#128100;</div>
+                                <h3>Camille Durand</h3>
+                                <p>Vendeur</p>
                             </div>
                         </div>
                     </div>
