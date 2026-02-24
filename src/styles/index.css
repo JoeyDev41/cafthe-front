@@ -19,6 +19,7 @@
 @import "./cart.css";
 @import "./auth.css";
 @import "./pages.css";
+@import "./plan-du-site.css";
 
 /* Responsive : adaptations tablette et mobile */
 @import "./responsive.css";

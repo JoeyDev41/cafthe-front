@@ -41,6 +41,7 @@ const MentionsLegales = lazy(() => import("./pages/MentionsLegales.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
+const PlanDuSite = lazy(() => import("./pages/PlanDuSite.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
                                 <Route path="contact" element={<Contact />} />
                                 <Route path="mot-de-passe-oublie" element={<ForgotPassword />} />
                                 <Route path="reinitialisation-mdp" element={<ResetPassword />} />
+                                <Route path="plan-du-site" element={<PlanDuSite />} />
                                 <Route path="*" element={<NotFound />} />
                             </Route>
                         </Routes>

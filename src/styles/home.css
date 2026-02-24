@@ -391,6 +391,32 @@
   line-height: 1.6;
 }
 
+/* Bloc promo mis en avant (accessoires -30%) */
+.promo-card--highlight {
+  text-decoration: none;
+  border-color: var(--accent-brown);
+  background: linear-gradient(135deg, var(--bg-card-warm) 60%, #f5e9d8);
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.promo-card--highlight:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+.promo-card--highlight .promo-tag {
+  color: #c0392b;
+}
+
+.promo-card--highlight h3 {
+  color: var(--text-heading);
+}
+
+.promo-card--highlight p strong {
+  color: var(--accent-brown);
+  font-weight: 700;
+}
+
 /* === VALEURS (Qualité, Bio, Livraison) === */
 
 .values-section {

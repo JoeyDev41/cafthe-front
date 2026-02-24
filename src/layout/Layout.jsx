@@ -2,12 +2,18 @@
 // Contient la Navbar en haut, le contenu de la page au milieu (Outlet), et le Footer en bas
 // Outlet est un composant de React Router qui affiche la page correspondant à l'URL
 
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 
 const Layout = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
     return (
         <>
             {/* Lien d'accessibilité : permet aux utilisateurs clavier/lecteur d'écran

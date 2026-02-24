@@ -1,0 +1,372 @@
+/* ============================================
+   Plan du site / Arborescence
+   ============================================ */
+
+.sitemap-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    overflow-x: auto;
+}
+
+/* En-tête */
+.sitemap-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.sitemap-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: #6B5A3E;
+    margin-bottom: 10px;
+}
+
+.sitemap-header p {
+    font-size: 18px;
+    color: #7A9B5C;
+}
+
+/* Arbre */
+.sitemap-tree {
+    position: relative;
+    padding: 40px 0;
+}
+
+/* Nœud racine */
+a.sitemap-root,
+a.sitemap-main-node {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.sitemap-root {
+    background: linear-gradient(135deg, #6B5A3E 0%, #8B7355 100%);
+    color: white;
+    padding: 25px 40px;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(107, 90, 62, 0.3);
+    margin: 0 auto 80px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    width: fit-content;
+    min-width: 200px;
+}
+
+.sitemap-root::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -40px;
+    width: 2px;
+    height: 40px;
+    background: #C4A875;
+    transform: translateX(-50%);
+}
+
+/* Ligne horizontale reliant Accueil aux colonnes */
+.sitemap-connections {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.sitemap-connections::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 4%;
+    right: 4%;
+    height: 2px;
+    background: #C4A875;
+}
+
+/* Colonnes */
+.sitemap-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1;
+    min-width: 220px;
+    max-width: 300px;
+    padding-left: 24px;
+    position: relative;
+}
+
+/* Tronc vertical de chaque colonne */
+.sitemap-column::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    bottom: 0;
+    left: 12px;
+    width: 2px;
+    background: #C4A875;
+}
+
+/* Nœuds principaux (niveau 1) */
+.sitemap-main-node {
+    background: white;
+    border: 3px solid #C4A875;
+    border-radius: 12px;
+    padding: 20px 30px;
+    min-width: 200px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: default;
+    animation: sitemapFadeInUp 0.6s ease-out backwards;
+}
+
+/* Branche horizontale vers chaque nœud principal */
+.sitemap-column .sitemap-main-node::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 50%;
+    width: 24px;
+    height: 2px;
+    background: #C4A875;
+    transform: translateY(-50%);
+}
+
+.sitemap-main-node:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(107, 90, 62, 0.2);
+    border-color: #7A9B5C;
+}
+
+.sitemap-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.sitemap-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #6B5A3E;
+    margin-bottom: 5px;
+}
+
+.sitemap-subtitle {
+    font-size: 12px;
+    color: #8B7D6B;
+}
+
+/* Sous-nœuds (niveau 2) */
+.sitemap-sub-nodes {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 15px;
+    border-left: 2px dashed #C4A875;
+    text-align: left;
+}
+
+.sitemap-sub-node {
+    background: #FEFDFB;
+    border: 2px solid #E8DCC8;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #4A3C2E;
+    transition: all 0.2s ease;
+    position: relative;
+    animation: sitemapFadeInUp 0.6s ease-out backwards;
+}
+
+.sitemap-sub-node::before {
+    content: '';
+    position: absolute;
+    left: -17px;
+    top: 50%;
+    width: 15px;
+    height: 2px;
+    background: #C4A875;
+}
+
+.sitemap-sub-node:hover {
+    background: #E8DCC8;
+    border-color: #7A9B5C;
+    transform: translateX(5px);
+}
+
+/* Badges */
+.sitemap-badge {
+    display: inline-block;
+    background: #7A9B5C;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.sitemap-badge--secondary {
+    background: #C4A875;
+}
+
+.sitemap-badge--info {
+    background: #8B7D6B;
+}
+
+/* Légende */
+.sitemap-legend {
+    margin-top: 60px;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.sitemap-legend h3 {
+    font-family: 'Playfair Display', serif;
+    color: #6B5A3E;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.sitemap-legend-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.sitemap-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sitemap-legend-color {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.sitemap-legend-color--main {
+    background: linear-gradient(135deg, #6B5A3E 0%, #8B7355 100%);
+}
+
+.sitemap-legend-color--node {
+    background: white;
+    border: 3px solid #C4A875;
+}
+
+.sitemap-legend-color--sub {
+    background: #FEFDFB;
+    border: 2px solid #E8DCC8;
+}
+
+/* Animations */
+@keyframes sitemapFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sitemap-column:nth-child(1) .sitemap-main-node { animation-delay: 0.1s; }
+.sitemap-column:nth-child(2) .sitemap-main-node { animation-delay: 0.2s; }
+.sitemap-column:nth-child(3) .sitemap-main-node { animation-delay: 0.3s; }
+.sitemap-column:nth-child(4) .sitemap-main-node { animation-delay: 0.4s; }
+
+/* Dark mode */
+[data-theme="dark"] .sitemap-header h1 {
+    color: #D4A574;
+}
+
+[data-theme="dark"] .sitemap-main-node {
+    background: #2a2a2a;
+    border-color: #8B6F47;
+    color: #FDF8F0;
+}
+
+[data-theme="dark"] .sitemap-main-node:hover {
+    border-color: #D4A574;
+}
+
+[data-theme="dark"] .sitemap-title {
+    color: #D4A574;
+}
+
+[data-theme="dark"] .sitemap-subtitle {
+    color: #b0a090;
+}
+
+[data-theme="dark"] .sitemap-sub-node {
+    background: #222;
+    border-color: #4a3c2e;
+    color: #e0d0c0;
+}
+
+[data-theme="dark"] .sitemap-sub-node:hover {
+    background: #3a2e20;
+    border-color: #D4A574;
+}
+
+[data-theme="dark"] .sitemap-legend {
+    background: #2a2a2a;
+    color: #FDF8F0;
+}
+
+[data-theme="dark"] .sitemap-legend h3 {
+    color: #D4A574;
+}
+
+[data-theme="dark"] .sitemap-legend-color--node {
+    background: #2a2a2a;
+    border-color: #8B6F47;
+}
+
+[data-theme="dark"] .sitemap-legend-color--sub {
+    background: #222;
+    border-color: #4a3c2e;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .sitemap-connections {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sitemap-column {
+        max-width: 600px;
+        width: 100%;
+    }
+
+    .sitemap-connections::before,
+    .sitemap-column::before,
+    .sitemap-root::after,
+    .sitemap-column .sitemap-main-node::before {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .sitemap-header h1 {
+        font-size: 32px;
+    }
+
+    .sitemap-root {
+        padding: 18px 24px;
+        font-size: 16px;
+    }
+}
