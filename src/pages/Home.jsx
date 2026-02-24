@@ -80,7 +80,7 @@ const Home = () => {
                     </Link>
                     <Link to="/accessoires" className="category-card">
                         <div className="category-frame"> 
-                            <img src="src\assets\accessoires.webp" alt="accessoires" />
+                            <img src="src\assets\accessoires.webp" alt="accessoires  " />
                             </div>
                         <h3>Accessoires</h3>
                     </Link>
