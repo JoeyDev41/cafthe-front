@@ -12,7 +12,7 @@
 
 /* --- Cart summary : fond du total avec opacité sombre --- */
 [data-theme="dark"] .cart-summary .summary-total {
-  background: rgba(26, 18, 16, 0.4);
+  background: rgba(18, 16, 16, 0.4);
 }
 
 /* --- Checkout : opacités spécifiques pour les sélections --- */
@@ -27,7 +27,7 @@
 
 /* --- QuickView : fond semi-transparent des dots --- */
 [data-theme="dark"] .quickview-dots {
-  background: rgba(26, 18, 16, 0.8);
+  background: rgba(18, 16, 16, 0.8);
 }
 
 [data-theme="dark"] .quickview-close:hover {
@@ -45,10 +45,117 @@
   border-top: 1px solid var(--border-warm);
 }
 
+/* --- Footer : textes en blanc, titres et hover en vert --- */
+[data-theme="dark"] .footer,
+[data-theme="dark"] .footer-section li,
+[data-theme="dark"] .footer-section a,
+[data-theme="dark"] .footer-bottom {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .footer-section h4 {
+  color: var(--accent-brown);
+}
+
+[data-theme="dark"] .footer-section a:hover {
+  color: var(--accent-brown);
+}
+
+[data-theme="dark"] .footer-rgaa {
+  color: #cccccc;
+}
+
 /* --- Formulaire focus : ajustement ombre en dark mode --- */
 [data-theme="dark"] .form-group input:focus,
 [data-theme="dark"] .form-group select:focus {
   box-shadow: 0 0 0 2px rgba(212, 165, 116, 0.15);
+}
+
+/* --- Bloc CTA "À propos" : fond vert subtil en dark mode --- */
+[data-theme="dark"] .about-cta {
+  background: rgba(76, 175, 80, 0.12);
+  border-color: var(--accent-brown);
+}
+
+/* --- Bouton réinitialiser filtres et pagination : vert en dark mode --- */
+[data-theme="dark"] .sidebar-reset {
+  background: var(--accent-dark-brown);
+  border-color: var(--accent-brown);
+  color: #000000;
+}
+
+[data-theme="dark"] .sidebar-reset:hover {
+  background: var(--accent-brown);
+}
+
+[data-theme="dark"] .products-page .pagination-btn:hover:not(:disabled) {
+  background: var(--accent-dark-brown);
+  color: #000000;
+}
+
+/* --- Trait décoratif sous les titres de section (home) : vert en dark mode --- */
+[data-theme="dark"] .home .section-title::after {
+  background-color: var(--accent-brown);
+}
+
+/* --- Trait de soulignement navbar (hover liens catégories) : vert en dark mode --- */
+[data-theme="dark"] .navbar-cat-link:hover {
+  border-bottom-color: var(--accent-brown);
+}
+
+/* --- Bouton "Se connecter" : fond vert en dark mode ---
+   --accent-gold n'est pas surchargé globalement (utilisé aussi pour badges) */
+[data-theme="dark"] .navbar-link {
+  background-color: var(--accent-dark-brown);
+  border-color: var(--accent-brown);
+  color: #000000;
+}
+
+[data-theme="dark"] .navbar-link:hover {
+  background-color: var(--accent-brown);
+  color: #000000;
+}
+
+/* --- Bouton theme toggle : bordure visible en dark mode --- */
+[data-theme="dark"] .theme-toggle {
+  border-color: var(--accent-brown);
+  color: var(--text-heading);
+}
+
+/* --- Boutons toggle grille/liste : vert en dark mode --- */
+[data-theme="dark"] .view-toggle-btn {
+  border-color: var(--accent-brown);
+}
+
+[data-theme="dark"] .view-toggle-btn.active {
+  background-color: var(--accent-dark-brown);
+  border-color: var(--accent-dark-brown);
+  color: #000000;
+}
+
+/* --- Contraste : texte noir sur fonds accent-brown (vert en dark) ---
+   #5CB85C avec color:#fff → 2.32:1 (FAIL). Avec #000 → 7.2:1 (AAA). */
+[data-theme="dark"] .product-category-badge,
+[data-theme="dark"] .qty-btn:hover,
+[data-theme="dark"] .btn-add-cart:hover,
+[data-theme="dark"] .btn-edit:hover,
+[data-theme="dark"] .notfound-actions .btn-secondary:hover {
+  color: #000000;
+}
+
+/* --- Contraste : texte noir sur fonds error/success (rouge/vert clair en dark) ---
+   #e57373 avec color:#fff → 4.41:1 (FAIL). Avec #000 → 4.75:1 (AA).
+   #7ab88e avec color:#fff → 4.23:1 (FAIL). Avec #000 → 4.96:1 (AA). */
+[data-theme="dark"] .btn-logout:hover,
+[data-theme="dark"] .btn-delete-account,
+[data-theme="dark"] .confirmation-icon {
+  color: #000000;
+}
+
+/* --- Skip-to-content : fond blanc en dark (#fff heading sur #fff) → 1:1 FAIL */
+[data-theme="dark"] .skip-to-content {
+  background: var(--accent-dark-brown);
+  color: #000000;
 }
 
 /* --- Placeholders : gris clair pour bien se distinguer du texte saisi --- */

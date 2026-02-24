@@ -127,8 +127,8 @@
 /* Badge catégorie (ex: "THÉ", "CAFÉ") */
 .product-category-badge {
   display: inline-block;
-  background-color: var(--accent-caramel);
-  color: var(--text-heading);
+  background-color: var(--accent-brown);
+  color: #fff;
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -192,9 +192,15 @@
 
 .product-add-to-cart {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 1rem;
 }
+
+/* Quantité + bouton sur la même ligne, prix total en dessous */
+.product-add-to-cart .quantity-selector { order: 1; }
+.product-add-to-cart .btn-add-cart-detail { order: 2; }
+.product-add-to-cart .dynamic-price { order: 3; flex-basis: 100%; }
 
 /* Sélecteur de quantité (+/-) */
 .quantity-selector {
@@ -219,8 +225,8 @@
 }
 
 .qty-btn:hover {
-  background: var(--accent-caramel);
-  color: var(--bg-body);
+  background: var(--accent-brown);
+  color: #fff;
 }
 
 .qty-input {
@@ -254,15 +260,15 @@
 .btn-add-cart-detail {
   width: fit-content;
   padding: 0.85rem 2rem;
-  background: var(--accent-dark-brown);
-  color: #fff;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   border: none;
   font-size: 1rem;
 }
 
 .btn-add-cart-detail:hover {
-  background: #6b573f;
-  color: #fff;
+  background: var(--btn-primary-hover-bg);
+  color: var(--btn-primary-text);
 }
 
 /* Message "Ajouté !" après clic */

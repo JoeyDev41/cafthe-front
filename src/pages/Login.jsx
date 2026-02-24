@@ -88,7 +88,12 @@ const Login = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="password">Mot de passe</label>
+                    <div className="form-group-header">
+                        <label htmlFor="password">Mot de passe</label>
+                        <Link to="/mot-de-passe-oublie" className="forgot-password-link">
+                            Mot de passe oublié ?
+                        </Link>
+                    </div>
                     <input
                         id="password"
                         type="password"

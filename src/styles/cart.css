@@ -387,7 +387,7 @@
 .step.active {
   background-color: var(--bg-card);
   color: var(--text-heading);
-  border-bottom-color: var(--accent-caramel);
+  border-bottom-color: var(--accent-brown);
 }
 
 /* Contenu de chaque étape */
@@ -425,14 +425,14 @@
 
 .delivery-option.selected,
 .payment-option.selected {
-  border-color: var(--accent-caramel);
-  background-color: rgba(212, 165, 116, 0.05);
+  border-color: var(--accent-brown);
+  background-color: rgba(139, 111, 71, 0.05);
 }
 
 .delivery-option input,
 .payment-option input {
   margin-top: 0.2rem;
-  accent-color: var(--accent-caramel);
+  accent-color: var(--accent-brown);
 }
 
 /* PayPal (style spécifique) */

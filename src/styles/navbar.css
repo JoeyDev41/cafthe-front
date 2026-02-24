@@ -138,19 +138,20 @@
 
 /* Bouton "Se connecter" */
 .navbar-link {
-  color: var(--text-heading);
+  color: var(--btn-primary-text);
   font-weight: 600;
   padding: 0.4rem 1rem;
-  border: 1px solid var(--accent-brown);
-  background-color: var(--accent-gold);
+  border: 1px solid var(--btn-primary-bg);
+  background-color: var(--btn-primary-bg);
   border-radius: 4px;
   font-size: 0.9rem;
   transition: all 0.2s;
 }
 
 .navbar-link:hover {
-  background-color: var(--accent-caramel);
-  color: var(--text-heading);
+  background-color: var(--btn-primary-hover-bg);
+  border-color: var(--btn-primary-hover-bg);
+  color: var(--btn-primary-text);
 }
 
 /* Bouton "Déconnexion" */

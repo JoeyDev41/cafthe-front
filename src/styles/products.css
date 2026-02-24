@@ -59,6 +59,26 @@
   font-size: 0.9rem;
 }
 
+/* Tri dans la sidebar (select + bouton ordre) */
+.sidebar-tri {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.sidebar-tri-select {
+  flex: 1;
+  min-width: 0;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border-accent);
+  border-radius: 4px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  background: var(--bg-card-warm);
+  color: var(--text-heading);
+  cursor: pointer;
+}
+
 /* Filtres de prix (min/max) */
 .sidebar-price {
   display: grid;
@@ -107,9 +127,9 @@
 /* Bouton "Réinitialiser les filtres" */
 .sidebar-reset {
   width: 100%;
-  background: var(--accent-gold);
-  border: 1px solid var(--accent-brown);
-  color: var(--text-heading);
+  background: var(--btn-primary-bg);
+  border: 1px solid var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   border-radius: 4px;
   padding: 0.5rem 0.75rem;
   font-weight: 600;
@@ -118,7 +138,8 @@
 }
 
 .sidebar-reset:hover {
-  background: var(--accent-caramel);
+  background: var(--btn-primary-hover-bg);
+  border-color: var(--btn-primary-hover-bg);
 }
 
 /* Zone principale (à droite de la sidebar) */
@@ -172,8 +193,8 @@
 }
 
 .category-page .order-toggle {
-  background: var(--accent-gold);
-  color: var(--text-heading);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
 }
 
 .category-page .product-list {
@@ -297,8 +318,8 @@
 }
 
 .products-page .pagination-btn:hover:not(:disabled) {
-  background: var(--accent-gold);
-  color: var(--text-heading);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
 }
 
 /* === PRODUCT LIST (grille de produits) === */
@@ -363,19 +384,24 @@
 }
 
 /* Boutons grille / liste */
-.view-toggle {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+.product-cards-wrapper {
+  position: relative;
   max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  padding-top: 3.25rem;
+}
+
+.view-toggle {
+  position: absolute;
+  top: 0.5rem;
+  right: 0;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .view-toggle-btn {
   padding: 0.4rem 0.9rem;
-  border: 1px solid var(--accent-caramel);
+  border: 1px solid var(--accent-brown);
   border-radius: 4px;
   background: var(--bg-card);
   color: var(--text-heading);
@@ -468,7 +494,7 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--accent-dark-brown);
+  border: 1px solid var(--border-card);
   border-top: none;
   border-radius: 8px;
   overflow: hidden;
@@ -509,7 +535,7 @@
   width: 24px;
   height: 24px;
   border: 3px solid var(--border-warm);
-  border-top-color: var(--accent-dark-brown);
+  border-top-color: var(--accent-brown);
   border-radius: 50%;
   animation: card-spin 0.7s linear infinite;
 }
@@ -553,8 +579,8 @@
   top: 10px;
   left: 50%;
   transform: translateX(-50%) rotate(-3deg);
-  background: var(--accent-dark-brown);
-  color: #fff;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -573,14 +599,14 @@
 /* Prix barré (original avant réduction) */
 .price-original {
   text-decoration: line-through;
-  color: #999;
+  color: var(--text-secondary);
   font-size: 0.85em;
   margin-right: 0.4rem;
 }
 
 /* Prix après réduction */
 .price-promo {
-  color: #e53935;
+  color: var(--text-heading);
   font-weight: 700;
 }
 
@@ -588,7 +614,7 @@
 .cart-discount-tag {
   display: inline-block;
   background: #e53935;
-  color: #fff;
+  color: #000000;
   font-size: 0.7rem;
   font-weight: 700;
   padding: 0.1rem 0.4rem;
@@ -600,7 +626,7 @@
 .product-promo-tag {
   display: inline-block;
   background: #e53935;
-  color: #fff;
+  color: #000000;
   font-size: 0.85rem;
   font-weight: 700;
   padding: 0.3rem 0.8rem;
@@ -612,7 +638,7 @@
 .promo-badge-inline {
   display: inline-block;
   background: #e53935;
-  color: #fff;
+  color: #000000;
   font-size: 0.85rem;
   font-weight: 700;
   padding: 0.2rem 0.6rem;
@@ -692,8 +718,8 @@
 /* Bouton "Voir" sur la carte */
 .btn-voir {
   display: inline-block;
-  background: var(--accent-dark-brown);
-  color: #fff;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   padding: 0.3rem 0.7rem;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -704,16 +730,16 @@
 }
 
 .btn-voir:hover {
-  background: #6b573f;
-  color: #fff;
+  background: var(--btn-primary-hover-bg);
+  color: var(--btn-primary-text);
 }
 
 /* Bouton "Ajouter au panier" sur la carte */
 .btn-add-cart {
   padding: 0.3rem 0.55rem;
   background: transparent;
-  color: var(--accent-dark-brown);
-  border: 1px solid var(--accent-dark-brown);
+  color: var(--accent-brown);
+  border: 1px solid var(--accent-brown);
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 700;
@@ -723,7 +749,7 @@
 }
 
 .btn-add-cart:hover {
-  background: var(--accent-dark-brown);
+  background: var(--accent-brown);
   color: #fff;
 }
 

@@ -37,6 +37,39 @@
   color: var(--text-label);
 }
 
+/* En-tête de groupe : label à gauche + lien "oublié ?" à droite */
+.form-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.3rem;
+  
+}
+
+.form-group-header label {
+  margin-bottom: 0;
+}
+
+/* Lien "Mot de passe oublié ?" */
+.forgot-password-link {
+  font-size: 0.8rem;
+  color: var(--accent-brown);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+/* Texte d'introduction sur la page mot de passe oublié */
+.forgot-intro {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -54,7 +87,7 @@
 /* Focus : bordure dorée + légère ombre */
 .form-group input:focus,
 .form-group select:focus {
-  border-color: var(--accent-caramel);
+  border-color: var(--accent-brown);
   outline: none;
   box-shadow: 0 0 0 2px rgba(212, 165, 116, 0.2);
 }
@@ -122,7 +155,7 @@
   width: 1.1rem;
   height: 1.1rem;
   margin-top: 0.15rem;
-  accent-color: var(--accent-caramel);
+  accent-color: var(--accent-brown);
   cursor: pointer;
 }
 
@@ -135,7 +168,7 @@
 }
 
 .consent-group label a {
-  color: var(--accent-caramel);
+  color: var(--accent-brown);
   font-weight: 600;
   text-decoration: underline;
 }
@@ -150,7 +183,7 @@
 }
 
 .rgpd-notice a {
-  color: var(--accent-caramel);
+  color: var(--accent-brown);
   font-weight: 600;
   text-decoration: underline;
 }
@@ -226,7 +259,7 @@
 
 .tab-btn.active {
   color: var(--text-heading);
-  border-bottom-color: var(--accent-caramel);
+  border-bottom-color: var(--accent-brown);
 }
 
 /* Formulaire du compte */
@@ -314,8 +347,8 @@
   margin: 0 auto 1rem;
   padding: 0.55rem 1.5rem;
   background: transparent;
-  border: 1px solid var(--accent-caramel);
-  color: var(--accent-caramel);
+  border: 1px solid var(--accent-brown);
+  color: var(--accent-brown);
   border-radius: 4px;
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
@@ -325,7 +358,7 @@
 }
 
 .btn-edit:hover {
-  background: var(--accent-caramel);
+  background: var(--accent-brown);
   color: #fff;
 }
 
@@ -428,8 +461,8 @@
 .btn-reorder {
   margin-top: 0.75rem;
   padding: 0.5rem 1.25rem;
-  background: var(--accent-caramel);
-  color: #fff;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   border: none;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -439,7 +472,7 @@
 }
 
 .btn-reorder:hover {
-  background: var(--accent-brown);
+  background: var(--btn-primary-hover-bg);
 }
 
 /* Conteneur des boutons déconnexion + suppression */

@@ -67,15 +67,21 @@ const Home = () => {
                 </div>
                 <div className="categories-grid">
                     <Link to="/the" className="category-card">
-                        <div className="category-frame">[Th]</div>
+                        <div className="category-frame">
+                            <img src="src\assets\le-the-une-infusion-sante.jpeg" alt="tasse de thé" />
+                        </div>
                         <h3>Thés</h3>
                     </Link>
                     <Link to="/cafe" className="category-card">
-                        <div className="category-frame">[Ca]</div>
+                        <div className="category-frame">
+                            <img src="src\assets\cafe.webp" alt="tasse de café" />
+                        </div>
                         <h3>Cafés</h3>
                     </Link>
                     <Link to="/accessoires" className="category-card">
-                        <div className="category-frame">[Ac]</div>
+                        <div className="category-frame"> 
+                            <img src="src\assets\accessoires.webp" alt="accessoires" />
+                            </div>
                         <h3>Accessoires</h3>
                     </Link>
                 </div>

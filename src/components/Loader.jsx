@@ -1,4 +1,4 @@
-// Loader : spinner affiché pendant le chargement des pages (Suspense / lazy loading)
+// Spinner affiché par <Suspense> dans App.jsx pendant le chargement lazy d'une page.
 
 import React from "react";
 

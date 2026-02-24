@@ -39,6 +39,8 @@ const CGV = lazy(() => import("./pages/CGV.jsx"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite.jsx"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 
 function App() {
@@ -77,6 +79,8 @@ function App() {
                                 <Route path="politique-confidentialite" element={<PolitiqueConfidentialite />} />
                                 <Route path="mentions-legales" element={<MentionsLegales />} />
                                 <Route path="contact" element={<Contact />} />
+                                <Route path="mot-de-passe-oublie" element={<ForgotPassword />} />
+                                <Route path="reinitialisation-mdp" element={<ResetPassword />} />
                                 <Route path="*" element={<NotFound />} />
                             </Route>
                         </Routes>

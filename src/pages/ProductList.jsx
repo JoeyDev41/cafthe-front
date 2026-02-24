@@ -14,6 +14,8 @@ const ProductList = ({
     forcedSearch,
     forcedPrixMin,
     forcedPrixMax,
+    forcedTri,
+    forcedOrdre,
     showTitle = true,
     showFilters = true,
     showPagination = true,
@@ -29,7 +31,7 @@ const ProductList = ({
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
 
-    // États des filtres locaux
+    // États des filtres locaux (utilisés seulement si pas de forced)
     const [tri, setTri] = useState("");
     const [ordre, setOrdre] = useState("asc");
     const [prixMin, setPrixMin] = useState("");
@@ -42,6 +44,8 @@ const ProductList = ({
     const effectiveSearch = forcedSearch !== undefined ? forcedSearch : searchFromUrl;
     const effectivePrixMin = forcedPrixMin !== undefined ? forcedPrixMin : prixMin;
     const effectivePrixMax = forcedPrixMax !== undefined ? forcedPrixMax : prixMax;
+    const effectiveTri = forcedTri !== undefined ? forcedTri : tri;
+    const effectiveOrdre = forcedOrdre !== undefined ? forcedOrdre : ordre;
 
     // Quand on change de catégorie via le select, on met à jour les paramètres URL
     const handleCategoryChange = (event) => {
@@ -60,7 +64,7 @@ const ProductList = ({
     // Retour à la page 1 quand les filtres changent
     useEffect(() => {
         setPage(1);
-    }, [effectiveCategory, effectiveSearch, tri, ordre, effectivePrixMin, effectivePrixMax]);
+    }, [effectiveCategory, effectiveSearch, effectiveTri, effectiveOrdre, effectivePrixMin, effectivePrixMax]);
 
     // Appel API pour récupérer les produits filtrés
     useEffect(() => {
@@ -72,8 +76,8 @@ const ProductList = ({
                 const params = { page, limite: pageSize };
                 if (effectiveCategory) params.categorie = effectiveCategory;
                 if (effectiveSearch) params.search = effectiveSearch;
-                if (tri) params.tri = tri;
-                if (tri) params.ordre = ordre;
+                if (effectiveTri) params.tri = effectiveTri;
+                if (effectiveTri) params.ordre = effectiveOrdre;
                 if (effectivePrixMin !== "" && effectivePrixMin !== null && effectivePrixMin !== undefined) {
                     params.prixMin = effectivePrixMin;
                 }
@@ -93,7 +97,7 @@ const ProductList = ({
         };
 
         void fetchProduits();
-    }, [effectiveCategory, effectiveSearch, tri, ordre, effectivePrixMin, effectivePrixMax, page, pageSize]);
+    }, [effectiveCategory, effectiveSearch, effectiveTri, effectiveOrdre, effectivePrixMin, effectivePrixMax, page, pageSize]);
 
     // Génère le titre dynamiquement selon la catégorie ou la recherche
     const getCategoryTitle = () => {
@@ -207,38 +211,40 @@ const ProductList = ({
                 </div>
             )}
 
-            {/* Toggle grille / liste */}
-            {showViewToggle && (
-                <div className="view-toggle">
-                    <button
-                        className={`view-toggle-btn${viewMode === "grid" ? " active" : ""}`}
-                        onClick={() => setViewMode("grid")}
-                        aria-label="Affichage en grille"
-                        aria-pressed={viewMode === "grid"}
-                        title="Affichage grille"
-                    >
-                        <span aria-hidden="true">&#9638;</span> Grille
-                    </button>
-                    <button
-                        className={`view-toggle-btn${viewMode === "list" ? " active" : ""}`}
-                        onClick={() => setViewMode("list")}
-                        aria-label="Affichage en liste"
-                        aria-pressed={viewMode === "list"}
-                        title="Affichage liste"
-                    >
-                        <span aria-hidden="true">&#9776;</span> Liste
-                    </button>
-                </div>
-            )}
-
             {produits.length === 0 ? (
                 <p className="empty-state">Aucun produit trouvé.</p>
             ) : (
                 <>
-                    <div className={`product-list${viewMode === "list" ? " product-list--list" : ""}`}>
-                        {produits.map((produit) => (
-                            <ProductCard key={produit.ID_Article} produit={produit} viewMode={viewMode} />
-                        ))}
+                    <div className="product-cards-wrapper">
+                        {/* Toggle grille / liste — positionné en haut à droite des cards */}
+                        {showViewToggle && (
+                            <div className="view-toggle">
+                                <button
+                                    className={`view-toggle-btn${viewMode === "grid" ? " active" : ""}`}
+                                    onClick={() => setViewMode("grid")}
+                                    aria-label="Affichage en grille"
+                                    aria-pressed={viewMode === "grid"}
+                                    title="Affichage grille"
+                                >
+                                    <span aria-hidden="true">&#9638;</span> Grille
+                                </button>
+                                <button
+                                    className={`view-toggle-btn${viewMode === "list" ? " active" : ""}`}
+                                    onClick={() => setViewMode("list")}
+                                    aria-label="Affichage en liste"
+                                    aria-pressed={viewMode === "list"}
+                                    title="Affichage liste"
+                                >
+                                    <span aria-hidden="true">&#9776;</span> Liste
+                                </button>
+                            </div>
+                        )}
+
+                        <div className={`product-list${viewMode === "list" ? " product-list--list" : ""}`}>
+                            {produits.map((produit) => (
+                                <ProductCard key={produit.ID_Article} produit={produit} viewMode={viewMode} />
+                            ))}
+                        </div>
                     </div>
 
                     {/* Pagination */}

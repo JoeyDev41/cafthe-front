@@ -216,8 +216,8 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--accent-gold);
-  border: 2px solid var(--accent-brown);
+  background: var(--accent-brown);
+  border: 2px solid var(--btn-primary-bg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -285,7 +285,7 @@
 
 .vrac-select {
   padding: 0.35rem 0.5rem;
-  border: 1px solid var(--accent-dark-brown);
+  border: 1px solid var(--border-medium);
   border-radius: 4px;
   background: var(--bg-card);
   font-family: "Montserrat", sans-serif;
@@ -686,7 +686,7 @@
   font-family: "Montserrat", sans-serif;
   font-size: 6rem;
   font-weight: 700;
-  color: var(--accent-caramel);
+  color: var(--accent-brown);
   line-height: 1;
   margin-bottom: 0.25rem;
 }
@@ -719,13 +719,13 @@
 
 .notfound-actions .btn-secondary {
   padding: 0.75rem 1.5rem;
-  border: 2px solid var(--accent-caramel);
+  border: 2px solid var(--accent-brown);
   border-radius: 6px;
   font-family: "Montserrat", sans-serif;
 }
 
 .notfound-actions .btn-secondary:hover {
-  background-color: var(--accent-caramel);
+  background-color: var(--accent-brown);
   color: #fff;
 }
 
@@ -762,7 +762,7 @@
   font-size: 1.25rem;
   margin-bottom: 0.75rem;
   padding-bottom: 0.4rem;
-  border-bottom: 2px solid var(--accent-caramel);
+  border-bottom: 2px solid var(--accent-brown);
 }
 
 .legal-section h3 {
@@ -805,7 +805,7 @@
 .legal-table td {
   text-align: left;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--accent-caramel);
+  border: 1px solid var(--border-medium);
 }
 
 .legal-table th {
@@ -1001,7 +1001,7 @@
 .contact-textarea {
   width: 100%;
   padding: 0.6rem 0.85rem;
-  border: 1px solid var(--accent-dark-brown);
+  border: 1px solid var(--border-medium);
   border-radius: 4px;
   background: var(--bg-card);
   font-family: "Montserrat", sans-serif;
@@ -1014,8 +1014,8 @@
 
 .contact-textarea:focus {
   outline: none;
-  border-color: var(--accent-caramel);
-  box-shadow: 0 0 0 2px rgba(212, 165, 116, 0.2);
+  border-color: var(--accent-brown);
+  box-shadow: 0 0 0 2px rgba(139, 111, 71, 0.2);
 }
 
 .contact-submit-btn {

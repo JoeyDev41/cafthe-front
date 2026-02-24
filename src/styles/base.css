@@ -53,7 +53,7 @@
 
   /* --- Accents (couleurs de marque) --- */
   --accent-caramel: #D4A574;
-  --accent-brown: #8B6F47;
+  --accent-brown: #7A5C35;
   --accent-gold: #c4a375;
   --accent-warm: #b99874;
   --accent-dark-brown: #8B7355;
@@ -84,17 +84,17 @@
    ================== */
 
 html[data-theme="dark"] {
-  /* --- Fonds sombres (bruns très foncés, pas noir pur) --- */
-  --bg-body: #1A1210;
-  --bg-section: #221A14;
-  --bg-card: #2C2018;
-  --bg-card-warm: #2A201A;
-  --bg-panel: #261E16;
-  --bg-input: #2C2018;
-  --bg-navbar: #1E1610;
-  --bg-hover: #332A22;
-  --bg-element: #3A2E24;
-  --bg-promo: #2E2420;
+  /* --- Fonds sombres neutres (même ton noir que le footer) --- */
+  --bg-body: #121010;
+  --bg-section: #161414;
+  --bg-card: #1F1D1D;
+  --bg-card-warm: #1C1A1A;
+  --bg-panel: #191717;
+  --bg-input: #1F1D1D;
+  --bg-navbar: #0F0D0D;
+  --bg-hover: #252222;
+  --bg-element: #2A2828;
+  --bg-promo: #1C1A1A;
 
   /* --- Textes blancs/gris neutres (contraste RGAA AAA sur fonds sombres) --- */
   --text-primary: #F0F0F0;
@@ -105,24 +105,29 @@ html[data-theme="dark"] {
   --text-label: #D4D4D4;
   --text-on-dark: #F0F0F0;
 
-  /* --- Bordures sombres --- */
-  --border-light: #3A302A;
-  --border-medium: #443A32;
-  --border-warm: #4A3E34;
-  --border-accent: #5A4E42;
-  --border-strong: #6A5E52;
-  --border-card: #4A3E34;
-  --border-separator: #3A302A;
+  /* --- Bordures sombres neutres --- */
+  --border-light: #252222;
+  --border-medium: #2E2B2B;
+  --border-warm: #333030;
+  --border-accent: #3D3A3A;
+  --border-strong: #474444;
+  --border-card: #2E2B2B;
+  --border-separator: #222020;
 
   /* --- Ombres plus fortes en dark mode --- */
   --shadow-color: rgba(0, 0, 0, 0.3);
   --shadow-medium: rgba(0, 0, 0, 0.35);
   --shadow-strong: rgba(0, 0, 0, 0.4);
 
+  /* --- Accents : vert RGAA AA (≥4.5:1) sur fonds sombres ---
+     #5CB85C → ~7.8:1 sur #1A1210 (AAA) / #4CAF50 → ~6.9:1 (AA+) */
+  --accent-brown: #5CB85C;
+  --accent-dark-brown: #4CAF50;
+
   /* --- Boutons --- */
-  --btn-primary-bg: #8B6F47;
-  --btn-primary-text: #F0E8E0;
-  --btn-primary-hover-bg: #D4A574;
+  --btn-primary-bg: #4CAF50;
+  --btn-primary-text: #000000;
+  --btn-primary-hover-bg: #5CB85C;
 
   /* --- Footer --- */
   --bg-footer: #121010;
@@ -187,7 +192,7 @@ html[data-theme="dark"] {
    ============================================ */
 
 :focus-visible {
-  outline: 2px solid var(--accent-caramel);
+  outline: 2px solid var(--accent-brown);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -207,7 +212,7 @@ html[data-theme="dark"] {
   width: 40px;
   height: 40px;
   border: 4px solid var(--border-separator);
-  border-top-color: var(--accent-caramel);
+  border-top-color: var(--accent-brown);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -432,10 +437,11 @@ ul {
   justify-content: center;
   cursor: pointer;
   font-size: 1.1rem;
-  transition: background-color 0.2s, border-color 0.2s;
+  color: var(--text-subtle);
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .theme-toggle:hover {
   background-color: var(--bg-hover);
-  border-color: var(--accent-caramel);
+  border-color: var(--accent-brown);
 }

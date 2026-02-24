@@ -93,7 +93,7 @@ const Register = () => {
                 <title>Inscription | CafThé</title>
                 <meta name="description" content="Créez votre compte CafThé pour commander en ligne et profiter de nos offres exclusives." />
             </Helmet>
-            <h2>Créer un compte</h2>
+            <h1>Créer un compte</h1>
 
             {/* Légende champs obligatoires — RGAA 11.10 */}
             <p className="required-legend"><span className="required-star" aria-hidden="true">*</span> Champs obligatoires</p>

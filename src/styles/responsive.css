@@ -22,6 +22,10 @@
     gap: 2rem;
   }
 
+  .product-details-gallery {
+    position: static;
+  }
+
   .home .hero-content {
     gap: 2rem;
   }
@@ -187,9 +191,29 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .product-list {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+  /* Toggle grille/liste masqué sur mobile — affichage liste uniquement */
+  .view-toggle {
+    display: none;
+  }
+
+  /* Forcer 1 colonne sur mobile (équivalent vue liste) */
+  .product-list,
+  .category-page .product-list,
+  .products-page .product-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Cartes : étirer sur toute la largeur de la colonne */
+  .product-card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* Image proportionnelle à la largeur sur mobile */
+  .product-card-image-zone {
+    height: auto;
+    aspect-ratio: 4 / 3;
   }
 
   .filters-bar {
