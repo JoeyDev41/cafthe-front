@@ -1,14 +1,10 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const PlanDuSite = () => {
     return (
         <>
-            <Helmet>
-                <title>Plan du site - CafThé</title>
-                <meta name="description" content="Plan du site CafThé - Découvrez la structure complète de notre boutique en ligne de thés et cafés premium." />
-            </Helmet>
-
+            <title>Plan du site - CafThé</title>
+            <meta name="description" content="Plan du site CafThé - Découvrez la structure complète de notre boutique en ligne de thés et cafés premium." />
             <div className="sitemap-container">
                 <div className="sitemap-header">
                     <h1>Plan du site</h1>
@@ -21,7 +17,6 @@ const PlanDuSite = () => {
                     </Link>
 
                     <div className="sitemap-connections">
-                        {/* Colonne 1 : Catalogue */}
                         <div className="sitemap-column">
                             <Link to="/the" className="sitemap-main-node">
                                 <div className="sitemap-icon">🍵</div>
@@ -64,7 +59,6 @@ const PlanDuSite = () => {
                             </Link>
                         </div>
 
-                        {/* Colonne 2 : Achat */}
                         <div className="sitemap-column">
                             <Link to="/panier" className="sitemap-main-node">
                                 <div className="sitemap-icon">🛒</div>
@@ -108,7 +102,6 @@ const PlanDuSite = () => {
                             </Link>
                         </div>
 
-                        {/* Colonne 3 : Compte */}
                         <div className="sitemap-column">
                             <Link to="/compte" className="sitemap-main-node">
                                 <div className="sitemap-icon">👤</div>
@@ -139,7 +132,6 @@ const PlanDuSite = () => {
                             </Link>
                         </div>
 
-                        {/* Colonne 4 : Informations */}
                         <div className="sitemap-column">
                             <Link to="/a-propos" className="sitemap-main-node">
                                 <div className="sitemap-icon">ℹ️</div>
@@ -181,7 +173,6 @@ const PlanDuSite = () => {
                     </div>
                 </div>
 
-                {/* Légende */}
                 <div className="sitemap-legend">
                     <h3>Légende</h3>
                     <div className="sitemap-legend-items">

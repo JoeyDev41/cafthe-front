@@ -1,25 +1,15 @@
-// MentionsLegales.jsx — Page des Mentions Légales
-// Obligatoire en France pour tout site e-commerce (loi LCEN du 21 juin 2004)
-// Doit indiquer : éditeur, directeur de publication, hébergeur
-
 import React from "react";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const MentionsLegales = () => {
     return (
-        <div className="legal-page">
-            {/* Helmet : titre et description pour la page mentions légales */}
-            <Helmet>
+        <>
                 <title>Mentions légales | CafThé</title>
-                <meta name="description" content="Mentions légales de CafThé : informations sur l'éditeur, le directeur de publication et l'hébergeur du site." />
-            </Helmet>
+                <meta name="description" content="Mentions légales de CafThé : informations sur l'éditeur, l'hébergeur et les droits de propriété intellectuelle." />
+        <div className="legal-page">
             <div className="legal-container">
                 <h1>Mentions Légales</h1>
                 <p className="legal-updated">Dernière mise à jour : février 2026</p>
-
-                {/* Article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN) */}
 
                 <section className="legal-section">
                     <h2>1. Éditeur du site</h2>
@@ -97,6 +87,7 @@ const MentionsLegales = () => {
                 </section>
             </div>
         </div>
+        </>
     );
 };
 

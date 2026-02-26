@@ -1,10 +1,4 @@
-// Contact.jsx — Page de contact CafThé
-// Bloc 1 : infos boutique (adresse, horaires, retrait en magasin)
-// Bloc 2 : carte Google Maps (localisation fictive Paris 75001)
-// Bloc 3 : formulaire de contact (nom, prénom, email, message)
-
 import React, { useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import logo from "../assets/monLogo.png";
@@ -35,7 +29,6 @@ const Contact = () => {
             return;
         }
         setSending(true);
-        // Simulation d'envoi (pas d'endpoint API contact pour l'instant)
         setTimeout(() => {
             toast.success("Votre message a bien été envoyé. Nous vous répondrons dans les plus brefs délais.");
             setFormData({ nom: "", prenom: "", email: "", message: "", privacy_consent: false });
@@ -45,13 +38,11 @@ const Contact = () => {
 
     return (
         <div className="contact-page">
-            <Helmet>
                 <title>Contact | CafThé</title>
                 <meta
                     name="description"
-                    content="Contactez la boutique CafThé : adresse, horaires d'ouverture, plan d'accès et formulaire de contact."
+                    content="Contactez l'équipe CafThé pour toute question sur nos thés, cafés ou accessoires. Formulaire de contact, email et téléphone."
                 />
-            </Helmet>
             <div className="contact-container">
                 <div className="contact-header">
                     <h1 className="contact-title">Contactez-nous</h1>
@@ -61,7 +52,6 @@ const Contact = () => {
                 </div>
 
                 <div className="contact-grid">
-                    {/* Bloc 1 — Infos boutique */}
                     <div className="contact-panel contact-info-panel">
                         <div className="contact-panel-title">Notre boutique</div>
                         <div className="contact-panel-body">
@@ -114,7 +104,6 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    {/* Bloc 2 — Carte Google Maps */}
                     <div className="contact-panel contact-map-panel">
                         <div className="contact-panel-title">Nous trouver</div>
                         <div className="contact-map-wrapper">
@@ -132,7 +121,6 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    {/* Bloc 3 — Formulaire de contact */}
                     <div className="contact-panel contact-form-panel">
                         <div className="contact-panel-title">Envoyer un message</div>
                         <div className="contact-panel-body">

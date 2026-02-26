@@ -1,10 +1,5 @@
-// ResetPassword.jsx — Page de réinitialisation du mot de passe
-// Le token reçu par email est dans l'URL (?token=xxx)
-// On vérifie sa validité côté API avant de permettre le changement
-
 import React, { useState } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 
 const ResetPassword = () => {
@@ -58,13 +53,11 @@ const ResetPassword = () => {
         }
     };
 
-    // Si le token est absent de l'URL, on affiche une erreur
     if (!token) {
         return (
+            <>
+                <title>Lien invalide | CafThé</title>
             <div className="login-container">
-                <Helmet>
-                    <title>Lien invalide | CafThé</title>
-                </Helmet>
                 <h1>Lien invalide</h1>
                 <div className="error-message">
                     Ce lien de réinitialisation est invalide ou a expiré.
@@ -73,16 +66,15 @@ const ResetPassword = () => {
                     <Link to="/mot-de-passe-oublie">Demander un nouveau lien</Link>
                 </p>
             </div>
+            </>
         );
     }
 
     return (
-        <div className="login-container">
-            <Helmet>
+        <>
                 <title>Nouveau mot de passe | CafThé</title>
-                <meta name="description" content="Définissez votre nouveau mot de passe CafThé." />
-            </Helmet>
-
+                <meta name="description" content="Définissez votre nouveau mot de passe pour votre compte CafThé." />
+        <div className="login-container">
             <h1>Nouveau mot de passe</h1>
 
             <form onSubmit={handleSubmit} noValidate>
@@ -121,6 +113,7 @@ const ResetPassword = () => {
                 <Link to="/login">Retour à la connexion</Link>
             </p>
         </div>
+        </>
     );
 };
 

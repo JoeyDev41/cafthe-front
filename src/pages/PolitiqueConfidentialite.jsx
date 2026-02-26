@@ -1,19 +1,11 @@
-// PolitiqueConfidentialite.jsx — Page de politique de confidentialité (RGPD)
-// Page légale obligatoire qui explique comment on traite les données personnelles
-// Contenu statique, conforme au RGPD et à la loi Informatique et Libertés
-
 import React from "react";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-import { Helmet } from "react-helmet-async";
 
 const PolitiqueConfidentialite = () => {
     return (
-        <div className="legal-page">
-            {/* Helmet : titre et description pour la page politique de confidentialité (RGPD) */}
-            <Helmet>
-                <title>Politique de confidentialité | CafThé</title>
-                <meta name="description" content="Politique de confidentialité de CafThé : traitement des données personnelles, cookies et droits RGPD." />
-            </Helmet>
+        <>
+            <title>Politique de confidentialité | CafThé</title>
+            <meta name="description" content="Politique de confidentialité de CafThé : traitement des données personnelles, cookies et droits RGPD." />
+            <div className="legal-page">
             <div className="legal-container">
                 <h1>Politique de Confidentialité</h1>
                 <p className="legal-updated">Dernière mise à jour : février 2026</p>
@@ -54,7 +46,6 @@ const PolitiqueConfidentialite = () => {
                     </ul>
                 </section>
 
-                {/* Tableau des finalités et bases légales (exigence RGPD) */}
                 <section className="legal-section">
                     <h2>3. Finalités et bases légales</h2>
                     <table className="legal-table">
@@ -103,7 +94,6 @@ const PolitiqueConfidentialite = () => {
                     </ul>
                 </section>
 
-                {/* Droits des utilisateurs conformément au RGPD */}
                 <section className="legal-section">
                     <h2>5. Vos droits</h2>
                     <p>
@@ -163,6 +153,7 @@ const PolitiqueConfidentialite = () => {
                 </section>
             </div>
         </div>
+        </>
     );
 };
 

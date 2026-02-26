@@ -1,12 +1,8 @@
-// Composant de liste de produits avec filtres, tri, pagination et vue grille/liste
-// Utilisé dans la page Produits et dans CategoryPage
-// Reçoit des props optionnelles pour forcer une catégorie, cacher les filtres, etc.
-// Utilise react-loading-skeleton pour afficher un squelette pendant le chargement
-
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import ProductCard from "../components/ProductCard.jsx";
+import VracProductCard from "../components/VracProductCard.jsx";
 import { searchArticles } from "../services/api.js";
 
 const ProductList = ({
@@ -16,6 +12,7 @@ const ProductList = ({
     forcedPrixMax,
     forcedTri,
     forcedOrdre,
+    forcedTypeVente,
     showTitle = true,
     showFilters = true,
     showPagination = true,
@@ -31,23 +28,30 @@ const ProductList = ({
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
 
-    // États des filtres locaux (utilisés seulement si pas de forced)
     const [tri, setTri] = useState("");
     const [ordre, setOrdre] = useState("asc");
     const [prixMin, setPrixMin] = useState("");
     const [prixMax, setPrixMax] = useState("");
+    const [typeVente, setTypeVente] = useState("all");
 
-    // On peut récupérer la catégorie et la recherche depuis l'URL ou depuis les props
     const categorieFromUrl = searchParams.get("categorie") || "";
     const searchFromUrl = searchParams.get("search") || "";
+    const typeVenteFromUrl = searchParams.get("type_vente") || "";
     const effectiveCategory = forcedCategory || categorieFromUrl;
     const effectiveSearch = forcedSearch !== undefined ? forcedSearch : searchFromUrl;
     const effectivePrixMin = forcedPrixMin !== undefined ? forcedPrixMin : prixMin;
     const effectivePrixMax = forcedPrixMax !== undefined ? forcedPrixMax : prixMax;
     const effectiveTri = forcedTri !== undefined ? forcedTri : tri;
     const effectiveOrdre = forcedOrdre !== undefined ? forcedOrdre : ordre;
+    const effectiveTypeVente = forcedTypeVente !== undefined ? forcedTypeVente : (typeVenteFromUrl || typeVente);
 
-    // Quand on change de catégorie via le select, on met à jour les paramètres URL
+    useEffect(() => {
+        const tvFromUrl = searchParams.get("type_vente");
+        if (tvFromUrl) {
+            setTypeVente(tvFromUrl);
+        }
+    }, [searchParams]);
+
     const handleCategoryChange = (event) => {
         const value = event.target.value;
         const nextParams = new URLSearchParams(searchParams);
@@ -61,12 +65,10 @@ const ProductList = ({
         setSearchParams(nextParams);
     };
 
-    // Retour à la page 1 quand les filtres changent
     useEffect(() => {
         setPage(1);
-    }, [effectiveCategory, effectiveSearch, effectiveTri, effectiveOrdre, effectivePrixMin, effectivePrixMax]);
+    }, [effectiveCategory, effectiveSearch, effectiveTri, effectiveOrdre, effectivePrixMin, effectivePrixMax, effectiveTypeVente]);
 
-    // Appel API pour récupérer les produits filtrés
     useEffect(() => {
         const fetchProduits = async () => {
             try {
@@ -84,6 +86,9 @@ const ProductList = ({
                 if (effectivePrixMax !== "" && effectivePrixMax !== null && effectivePrixMax !== undefined) {
                     params.prixMax = effectivePrixMax;
                 }
+                if (effectiveTypeVente) {
+                    params.type_vente = effectiveTypeVente;
+                }
 
                 const data = await searchArticles(params);
                 setProduits(data.articles);
@@ -97,9 +102,8 @@ const ProductList = ({
         };
 
         void fetchProduits();
-    }, [effectiveCategory, effectiveSearch, effectiveTri, effectiveOrdre, effectivePrixMin, effectivePrixMax, page, pageSize]);
+    }, [effectiveCategory, effectiveSearch, effectiveTri, effectiveOrdre, effectivePrixMin, effectivePrixMax, effectiveTypeVente, page, pageSize]);
 
-    // Génère le titre dynamiquement selon la catégorie ou la recherche
     const getCategoryTitle = () => {
         if (titleOverride) return titleOverride;
         if (effectiveSearch) return `Résultats pour "${effectiveSearch}"`;
@@ -111,7 +115,6 @@ const ProductList = ({
         }
     };
 
-    // Affichage du squelette pendant le chargement
     if (isLoading) {
         return (
             <div className="product-list-section">
@@ -133,7 +136,6 @@ const ProductList = ({
         );
     }
 
-    // Affichage en cas d'erreur
     if (error) {
         return (
             <div className="product-list-error">
@@ -152,7 +154,6 @@ const ProductList = ({
         <div className="product-list-section">
             {showTitle && <h1 className="section-title">{getCategoryTitle()}</h1>}
 
-            {/* Barre de filtres */}
             {showFilters && (
                 <div className="filters-bar">
                     {!forcedCategory && (
@@ -166,6 +167,18 @@ const ProductList = ({
                             </select>
                         </div>
                     )}
+                    <div className="filter-group">
+                        <label htmlFor="filter-type-vente">Type :</label>
+                        <select
+                            id="filter-type-vente"
+                            value={typeVente}
+                            onChange={(e) => setTypeVente(e.target.value)}
+                        >
+                            <option value="all">Tous</option>
+                            <option value="unité">Unité</option>
+                            <option value="poids">Vrac</option>
+                        </select>
+                    </div>
                     <div className="filter-group">
                         <label htmlFor="filter-tri">Trier par :</label>
                         <select id="filter-tri" value={tri} onChange={(e) => setTri(e.target.value)}>
@@ -216,7 +229,6 @@ const ProductList = ({
             ) : (
                 <>
                     <div className="product-cards-wrapper">
-                        {/* Toggle grille / liste — positionné en haut à droite des cards */}
                         {showViewToggle && (
                             <div className="view-toggle">
                                 <button
@@ -242,12 +254,15 @@ const ProductList = ({
 
                         <div className={`product-list${viewMode === "list" ? " product-list--list" : ""}`}>
                             {produits.map((produit) => (
-                                <ProductCard key={produit.ID_Article} produit={produit} viewMode={viewMode} />
+                                produit.type_vente === "poids" ? (
+                                    <VracProductCard key={produit.ID_Article} produit={produit} />
+                                ) : (
+                                    <ProductCard key={produit.ID_Article} produit={produit} viewMode={viewMode} />
+                                )
                             ))}
                         </div>
                     </div>
 
-                    {/* Pagination */}
                     {showPagination && totalPages > 1 && (
                         <div className="pagination">
                             <button

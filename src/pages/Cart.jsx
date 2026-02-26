@@ -1,15 +1,8 @@
-// Page panier
-// Affiche tous les articles ajoutés avec possibilité de modifier les quantités
-// Calcule le sous-total, les frais de livraison et le total TTC
-// Livraison gratuite à partir de 49 euros (Colissimo)
-
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext.jsx";
 import { AuthContext } from "../context/AuthContex.jsx";
 import { PromotionContext } from "../context/PromotionContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-import { Helmet } from "react-helmet-async";
 
 const Cart = () => {
     const { items, updateQuantity, removeFromCart, getTotal, clearCart, getItemKey, getItemPrice, getItemOriginalPrice } = useContext(CartContext);
@@ -17,11 +10,9 @@ const Cart = () => {
     const { isAuthenticated } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    // Frais de livraison : gratuit à partir de 49€, sinon 5.90€
     const fraisLivraison = getTotal() >= 49 ? 0 : 5.90;
     const totalAvecLivraison = getTotal() + fraisLivraison;
 
-    // Si pas connecté, on redirige vers le login avant le checkout
     const handleCheckout = () => {
         if (!isAuthenticated) {
             navigate("/login", { state: { redirect: "/checkout" } });
@@ -30,7 +21,6 @@ const Cart = () => {
         navigate("/checkout");
     };
 
-    // Panier vide
     if (items.length === 0) {
         return (
             <div className="cart-container">
@@ -44,16 +34,13 @@ const Cart = () => {
     }
 
     return (
-        <div className="cart-container">
-            {/* Helmet : titre pour la page panier */}
-            <Helmet>
+        <>
                 <title>Mon panier | CafThé</title>
                 <meta name="description" content="Consultez et modifiez votre panier CafThé avant de passer commande." />
-            </Helmet>
+        <div className="cart-container">
             <h1>Mon panier</h1>
 
             <div className="cart-content">
-                {/* Liste des articles */}
                 <div className="cart-items">
                     {items.map((item) => {
                         const key = getItemKey(item);
@@ -70,11 +57,9 @@ const Cart = () => {
                                 <div className="cart-item-info">
                                     <h3>
                                         {item.nom_produit}
-                                        {/* Afficher le poids pour les articles vrac */}
                                         {item.isVrac && ` — ${item.poids >= 1000 ? `${item.poids / 1000}kg` : `${item.poids}g`}`}
                                     </h3>
                                     <p className="cart-item-price">
-                                        {/* Si promo : prix barré + prix réduit + badge % */}
                                         {discount > 0 && (
                                             <span className="price-original">{originalPrice.toFixed(2)} &euro;</span>
                                         )}
@@ -115,7 +100,6 @@ const Cart = () => {
                     })}
                 </div>
 
-                {/* Récapitulatif */}
                 <div className="cart-summary">
                     <h3>Récapitulatif</h3>
                     <div className="summary-line">
@@ -144,6 +128,7 @@ const Cart = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

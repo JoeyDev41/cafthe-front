@@ -142,6 +142,38 @@
   border-color: var(--btn-primary-hover-bg);
 }
 
+/* Type de vente toggle buttons (Tous / Unité / Vrac) */
+.sidebar-type-vente {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.sidebar-type-btn {
+  flex: 1;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--border-accent);
+  border-radius: 4px;
+  background: var(--bg-card-warm);
+  color: var(--text-heading);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.sidebar-type-btn:hover {
+  border-color: var(--accent-brown);
+  color: var(--accent-brown);
+}
+
+.sidebar-type-btn.active {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-bg);
+}
+
 /* Zone principale (à droite de la sidebar) */
 .category-main {
   min-width: 0;

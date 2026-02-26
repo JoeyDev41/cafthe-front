@@ -1,6 +1,3 @@
-// Mini panier : panneau latéral qui s'affiche au clic sur l'icône panier dans la navbar
-// Affiche un résumé rapide du panier avec possibilité de modifier les quantités
-
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext.jsx";
 import { Link } from "react-router-dom";
@@ -8,11 +5,9 @@ import { Link } from "react-router-dom";
 const MiniCart = ({ isOpen, onClose }) => {
     const { items, updateQuantity, removeFromCart, getTotal, getItemCount, getItemKey, getItemPrice } = useContext(CartContext);
 
-    // Si le mini panier n'est pas ouvert, on ne rend rien
     if (!isOpen) return null;
 
     return (
-        // L'overlay ferme le mini panier au clic
         <div className="minicart-overlay" onClick={onClose}>
             <div className="minicart" onClick={(e) => e.stopPropagation()}>
                 <div className="minicart-header">

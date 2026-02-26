@@ -1,13 +1,6 @@
-// Page de vente en vrac (thés et cafés au poids)
-// Utilise le composant VracProductCard au lieu de ProductCard
-// Filtres : catégorie, tri, fourchette de prix au kg
-
 import React, { useEffect, useState } from "react";
 import { searchArticles } from "../services/api.js";
 import VracProductCard from "../components/VracProductCard.jsx";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-// On l'utilise pour changer le titre de l'onglet et la meta description sur chaque page
-import { Helmet } from "react-helmet-async";
 
 const Vrac = () => {
     const [produits, setProduits] = useState([]);
@@ -16,26 +9,22 @@ const Vrac = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
 
-    // États des filtres
     const [tri, setTri] = useState("");
     const [ordre, setOrdre] = useState("asc");
     const [prixMin, setPrixMin] = useState("");
     const [prixMax, setPrixMax] = useState("");
     const [categorie, setCategorie] = useState("");
 
-    // Quand un filtre change, on revient à la page 1
     useEffect(() => {
         setPage(1);
     }, [tri, ordre, prixMin, prixMax, categorie]);
 
-    // Chargement des produits vrac depuis l'API
     useEffect(() => {
         const fetchVrac = async () => {
             try {
                 setIsLoading(true);
                 setError(null);
 
-                // type_vente: "poids" pour ne récupérer que les produits vendus au poids
                 const params = { type_vente: "poids", page, limite: 12 };
                 if (categorie) params.categorie = categorie;
                 if (tri) params.tri = tri;
@@ -59,13 +48,9 @@ const Vrac = () => {
 
     return (
         <div className="products-page">
-            {/* Helmet : titre et description pour la page Vrac */}
-            <Helmet>
                 <title>Vrac - Thés & Cafés au poids | CafThé</title>
-                <meta name="description" content="Achetez vos thés et cafés en vrac au poids. Choisissez la quantité qui vous convient et profitez de prix avantageux." />
-            </Helmet>
+                <meta name="description" content="Achetez vos thés et cafés en vrac au poids. Choisissez la quantité qui vous convient parmi notre sélection premium." />
             <div className="product-list-section">
-                {/* Barre de filtres */}
                 <div className="filters-bar">
                     <div className="filter-group">
                         <label htmlFor="vrac-filter-categorie">Catégorie :</label>
@@ -145,7 +130,6 @@ const Vrac = () => {
                     </div>
                 )}
 
-                {/* Pagination */}
                 {!isLoading && !error && totalPages > 1 && (
                     <div className="pagination">
                         <button

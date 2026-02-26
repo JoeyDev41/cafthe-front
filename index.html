@@ -1,58 +1,30 @@
 <!doctype html>
 <html lang="fr">
   <head>
-    <!-- === ENCODAGE ET COMPATIBILITÉ === -->
-    <!-- charset UTF-8 : permet d'afficher les accents et caractères spéciaux français -->
     <meta charset="UTF-8" />
-    <!-- viewport : rend le site responsive (adapté aux mobiles et tablettes) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- === SEO : TITRE ET DESCRIPTION === -->
-    <!-- Le titre apparaît dans l'onglet du navigateur et dans les résultats Google -->
     <title>CafThé - Thés & Cafés Premium | Boutique en ligne</title>
-    <!-- La meta description est le texte affiché sous le titre dans les résultats Google -->
-    <!-- Elle doit faire entre 150 et 160 caractères pour ne pas être coupée -->
     <meta name="description" content="CafThé, votre boutique en ligne de thés et cafés premium. Découvrez notre sélection de thés verts, noirs, blancs et cafés torréfiés artisanalement. Livraison en France." />
-    <!-- Mots-clés pour aider les moteurs de recherche à comprendre le sujet du site -->
     <meta name="keywords" content="thé, café, thé premium, café premium, thé vert, thé noir, café torréfié, boutique thé, achat thé en ligne, cafthe" />
-    <!-- Auteur du site -->
     <meta name="author" content="CafThé" />
-    <!-- Indique aux moteurs de recherche qu'ils peuvent indexer la page et suivre les liens -->
     <meta name="robots" content="index, follow" />
 
-    <!-- === SEO : OPEN GRAPH (Facebook, LinkedIn) === -->
-    <!-- Les balises Open Graph contrôlent l'aperçu quand on partage le lien sur les réseaux sociaux -->
-    <!-- og:type = type de contenu (website pour un site, article pour un blog, product pour un produit) -->
     <meta property="og:type" content="website" />
-    <!-- og:title = titre affiché dans l'aperçu de partage -->
     <meta property="og:title" content="CafThé - Thés & Cafés Premium" />
-    <!-- og:description = description affichée dans l'aperçu de partage -->
     <meta property="og:description" content="Découvrez notre sélection de thés et cafés premium, torréfiés artisanalement." />
-    <!-- og:image = image affichée dans l'aperçu (idéalement 1200x630px) -->
     <meta property="og:image" content="/images/cafthe-og.jpg" />
-    <!-- og:url = URL canonique du site -->
     <meta property="og:url" content="https://cafthe.fr" />
-    <!-- og:locale = langue du contenu -->
     <meta property="og:locale" content="fr_FR" />
-    <!-- og:site_name = nom du site affiché dans l'aperçu -->
     <meta property="og:site_name" content="CafThé" />
 
-    <!-- === SEO : TWITTER CARD === -->
-    <!-- Les Twitter Cards contrôlent l'aperçu quand on partage le lien sur Twitter/X -->
-    <!-- summary_large_image = affiche une grande image dans le tweet -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="CafThé - Thés & Cafés Premium" />
     <meta name="twitter:description" content="Thés et cafés premium, sélectionnés et torréfiés artisanalement." />
     <meta name="twitter:image" content="/images/cafthe-og.jpg" />
 
-    <!-- === SEO : URL CANONIQUE === -->
-    <!-- La balise canonical indique à Google quelle est l'URL "officielle" de la page -->
-    <!-- Cela évite le contenu dupliqué si la page est accessible via plusieurs URLs -->
     <link rel="canonical" href="https://cafthe.fr" />
 
-    <!-- === SEO : DONNÉES STRUCTURÉES JSON-LD === -->
-    <!-- JSON-LD = format que Google comprend pour afficher des résultats enrichis (rich snippets) -->
-    <!-- Ici on décrit notre entreprise pour que Google affiche notre logo, adresse, etc. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -80,26 +52,15 @@
     }
     </script>
 
-    <!-- === FAVICON === -->
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
 
-    <!-- === POLICES GOOGLE FONTS === -->
-    <!-- preconnect : on prévient le navigateur qu'on va télécharger depuis ce serveur -->
-    <!-- Cela accélère le chargement des polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- On importe Montserrat depuis Google Fonts avec toutes les graisses dont on a besoin -->
-    <!-- 300=light, 400=normal, 500=medium, 600=semibold, 700=bold -->
-    <!-- display=swap : le texte s'affiche tout de suite avec une police de secours en attendant le chargement -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- === THÈME COULEUR MOBILE === -->
-    <!-- theme-color : change la couleur de la barre d'adresse sur mobile (Android Chrome) -->
     <meta name="theme-color" content="#2C1810" />
   </head>
   <body>
-    <!-- Le div #root est le point de montage de notre application React -->
-    <!-- React va injecter tout le contenu du site à l'intérieur de cette div -->
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

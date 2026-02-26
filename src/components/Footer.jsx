@@ -1,6 +1,3 @@
-// Footer du site
-// Contient les liens de navigation, informations légales et mention RGAA (accessibilité)
-
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/monLogo.png";

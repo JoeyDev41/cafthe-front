@@ -1,43 +1,31 @@
-// Account.jsx — Page "Mon espace" du client connecté
-// Elle est organisée en onglets : Profil, Adresses, Commandes, Mot de passe
-// Chaque onglet a son propre formulaire ou sa propre vue
-// Si le client n'est pas connecté, il est redirigé vers /login
-
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContex.jsx";
 import { CartContext } from "../context/CartContext.jsx";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { getProfile, updateProfile, changePassword, getMyOrders } from "../services/api.js";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-import { Helmet } from "react-helmet-async";
 
 const Account = () => {
     const { user, isAuthenticated, logout, deleteAccount } = useContext(AuthContext);
     const { addToCart } = useContext(CartContext);
     const navigate = useNavigate();
 
-    // Onglet actif par défaut : "profil"
     const [activeTab, setActiveTab] = useState("profil");
     const [profile, setProfile] = useState(null);
     const [orders, setOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Toggle pour afficher/masquer les formulaires de modification
     const [editingProfile, setEditingProfile] = useState(false);
     const [editingAdresses, setEditingAdresses] = useState(false);
 
-    // State pour le formulaire de modification du profil
     const [formProfile, setFormProfile] = useState({});
 
-    // State pour le formulaire de changement de mot de passe
     const [formPassword, setFormPassword] = useState({
         ancien_mdp: "",
         nouveau_mdp: "",
         confirm_mdp: "",
     });
 
-    // Au chargement, je vérifie que le client est connecté puis je charge son profil
     useEffect(() => {
         if (!isAuthenticated) {
             navigate("/login");
@@ -46,14 +34,12 @@ const Account = () => {
         loadProfile();
     }, [isAuthenticated]);
 
-    // Chargement du profil depuis l'API et pré-remplissage du formulaire
     const loadProfile = async () => {
         try {
             setIsLoading(true);
             const data = await getProfile();
             setProfile(data.client);
 
-            // Je pré-remplis le formulaire avec les données existantes du client
             setFormProfile({
                 nom: data.client.nom_client || "",
                 prenom: data.client.prenom_client || "",
@@ -72,7 +58,6 @@ const Account = () => {
         }
     };
 
-    // Chargement des commandes (appelé uniquement quand on clique sur l'onglet "Commandes")
     const loadOrders = async () => {
         try {
             const data = await getMyOrders();
@@ -82,19 +67,16 @@ const Account = () => {
         }
     };
 
-    // Je charge les commandes seulement quand l'onglet "commandes" est actif
     useEffect(() => {
         if (activeTab === "commandes") {
             loadOrders();
         }
     }, [activeTab]);
 
-    // Gestion des changements dans le formulaire profil (clé dynamique avec e.target.name)
     const handleProfileChange = (e) => {
         setFormProfile({ ...formProfile, [e.target.name]: e.target.value });
     };
 
-    // Envoi des modifications du profil à l'API
     const handleProfileSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -108,16 +90,13 @@ const Account = () => {
         }
     };
 
-    // Gestion du formulaire mot de passe
     const handlePasswordChange = (e) => {
         setFormPassword({ ...formPassword, [e.target.name]: e.target.value });
     };
 
-    // Envoi du changement de mot de passe
     const handlePasswordSubmit = async (e) => {
         e.preventDefault();
 
-        // Vérification que les 2 nouveaux mots de passe correspondent
         if (formPassword.nouveau_mdp !== formPassword.confirm_mdp) {
             toast.error("Les mots de passe ne correspondent pas");
             return;
@@ -126,14 +105,12 @@ const Account = () => {
         try {
             await changePassword(formPassword.ancien_mdp, formPassword.nouveau_mdp);
             toast.success("Mot de passe modifié avec succès");
-            // Je vide le formulaire après succès
             setFormPassword({ ancien_mdp: "", nouveau_mdp: "", confirm_mdp: "" });
         } catch (error) {
             toast.error(error.message);
         }
     };
 
-    // Fonction utilitaire pour formater les dates en format français (jj/mm/aaaa)
     const formatDate = (dateStr) => {
         return new Date(dateStr).toLocaleDateString("fr-FR", {
             day: "2-digit",
@@ -142,7 +119,6 @@ const Account = () => {
         });
     };
 
-    // Traduction des statuts de commande en labels lisibles
     const getStatusLabel = (statut) => {
         const labels = {
             en_attente: "En attente",
@@ -153,7 +129,6 @@ const Account = () => {
         return labels[statut] || statut;
     };
 
-    // Fonction "Recommander" : remet tous les articles d'une ancienne commande dans le panier
     const handleReorder = (order) => {
         if (!order.items || order.items.length === 0) return;
 
@@ -171,21 +146,16 @@ const Account = () => {
         setTimeout(() => navigate("/panier"), 1200);
     };
 
-    // Affichage du chargement
     if (isLoading) {
         return <div className="account-container"><p>Chargement...</p></div>;
     }
 
     return (
         <div className="account-container">
-            {/* Helmet : titre pour la page Mon compte */}
-            <Helmet>
                 <title>Mon compte | CafThé</title>
-                <meta name="description" content="Gérez votre profil, vos adresses et consultez vos commandes sur votre espace CafThé." />
-            </Helmet>
+                <meta name="description" content="Gérez votre compte CafThé : informations personnelles, historique de commandes et paramètres." />
             <h1>Mon espace</h1>
 
-            {/* Navigation par onglets — RGAA 7.1 : rôles ARIA tablist/tab/tabpanel */}
             <div className="account-tabs" role="tablist" aria-label="Navigation du compte">
                 <button
                     role="tab"
@@ -233,7 +203,6 @@ const Account = () => {
                 </button>
             </div>
 
-            {/* Onglet Profil : bloc d'affichage + formulaire de modification */}
             {activeTab === "profil" && (
                 <div role="tabpanel" id="panel-profil" aria-labelledby="tab-profil" tabIndex={0}>
                     <div className="info-card">
@@ -291,7 +260,6 @@ const Account = () => {
                 </div>
             )}
 
-            {/* Onglet Adresses : blocs d'affichage + formulaire de modification */}
             {activeTab === "adresses" && (
                 <div role="tabpanel" id="panel-adresses" aria-labelledby="tab-adresses" tabIndex={0}>
                     <div className="info-cards-grid">
@@ -391,7 +359,6 @@ const Account = () => {
                 </div>
             )}
 
-            {/* Onglet Commandes : historique avec possibilité de recommander */}
             {activeTab === "commandes" && (
                 <div role="tabpanel" id="panel-commandes" aria-labelledby="tab-commandes" tabIndex={0} className="orders-list">
                     {orders.length === 0 ? (
@@ -409,7 +376,6 @@ const Account = () => {
                                     <span>Date : {formatDate(order.date_commande)}</span>
                                     <span>Total : {parseFloat(order.montant_paiement).toFixed(2)} €</span>
                                 </div>
-                                {/* Liste des articles de la commande */}
                                 {order.items && (
                                     <div className="order-items">
                                         {order.items.map((item, idx) => (
@@ -421,7 +387,6 @@ const Account = () => {
                                         ))}
                                     </div>
                                 )}
-                                {/* Bouton pour remettre la commande dans le panier */}
                                 {order.items && order.items.length > 0 && (
                                     <button
                                         className="btn-reorder"
@@ -436,7 +401,6 @@ const Account = () => {
                 </div>
             )}
 
-            {/* Onglet Mot de passe : ancien mdp + nouveau + confirmation */}
             {activeTab === "mdp" && (
                 <div role="tabpanel" id="panel-mdp" aria-labelledby="tab-mdp" tabIndex={0}>
                     <form onSubmit={handlePasswordSubmit} className="account-form">
@@ -457,7 +421,6 @@ const Account = () => {
                 </div>
             )}
 
-            {/* Boutons déconnexion et suppression de compte */}
             <div className="account-actions">
                 <button className="btn-logout" onClick={() => { logout(); navigate("/"); }}>
                     Se déconnecter

@@ -1,36 +1,24 @@
-// Login.jsx — Page de connexion client
-// J'utilise un formulaire classique avec email + mot de passe
-// Si la connexion réussit, je redirige le client vers la page d'où il venait
-// (par exemple le checkout s'il voulait passer commande)
-
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContex.jsx";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import toast from "react-hot-toast";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-import { Helmet } from "react-helmet-async";
 
 const Login = () => {
-    // Je récupère la fonction login depuis mon contexte d'authentification
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
-    // States pour les champs du formulaire et le chargement
     const [email, setEmail] = useState("");
     const [motDePasse, setMotDePasse] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
-    // Si l'utilisateur a été redirigé ici (ex: depuis le checkout), je récupère l'URL de retour
     const redirect = location.state?.redirect || "/";
 
-    // Soumission du formulaire de connexion
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
 
         try {
-            // Appel à l'API de connexion avec credentials: "include" pour les cookies JWT
             const response = await fetch(
                 `${import.meta.env.VITE_API_URL}/api/clients/login`,
                 {
@@ -46,13 +34,11 @@ const Login = () => {
 
             const data = await response.json();
 
-            // Si la réponse n'est pas OK, j'affiche l'erreur dans un toast
             if (!response.ok) {
                 toast.error(data.message || "Erreur de connexion");
                 return;
             }
 
-            // Connexion réussie : je mets à jour le contexte et je redirige
             toast.success("Connexion réussie");
             login(data.client);
             navigate(redirect);
@@ -66,11 +52,8 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            {/* Helmet : titre et description pour la page de connexion */}
-            <Helmet>
                 <title>Connexion | CafThé</title>
-                <meta name="description" content="Connectez-vous à votre compte CafThé pour accéder à vos commandes et votre espace personnel." />
-            </Helmet>
+                <meta name="description" content="Connectez-vous à votre compte CafThé pour suivre vos commandes et profiter d'offres exclusives." />
             <h1>Connexion</h1>
 
             <form onSubmit={handleSubmit} noValidate>
@@ -105,19 +88,16 @@ const Login = () => {
                     />
                 </div>
 
-                {/* Le bouton est désactivé pendant le chargement pour éviter les double-clics */}
                 <button type="submit" className="btn-primary" disabled={isLoading}>
                     {isLoading ? "Connexion..." : "Se connecter"}
                 </button>
 
-                {/* Notice RGPD art. 13 : informer du traitement des données */}
                 <p className="rgpd-notice">
                     Votre adresse e-mail est utilisée uniquement pour identifier votre compte.
                     Consultez notre <Link to="/politique-confidentialite">politique de confidentialité</Link>.
                 </p>
             </form>
 
-            {/* Lien vers la page d'inscription, je passe aussi l'URL de redirection */}
             <p className="form-link">
                 Pas encore de compte ? <Link to="/inscription" state={{ redirect }}>Créer un compte</Link>
             </p>

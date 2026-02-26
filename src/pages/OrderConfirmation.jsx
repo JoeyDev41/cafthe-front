@@ -1,20 +1,11 @@
-// OrderConfirmation.jsx — Page de confirmation après une commande réussie
-// Elle affiche le numéro de commande, le récapitulatif des articles et le total
-// Les données arrivent via location.state (passées par navigate depuis le checkout)
-// Si on arrive sur cette page sans données, j'affiche un message par défaut
-
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-import { Helmet } from "react-helmet-async";
 
 const OrderConfirmation = () => {
     const location = useLocation();
 
-    // Je récupère les données de la commande passées par le checkout via navigate()
     const { commande, items } = location.state || {};
 
-    // Si pas de données de commande (accès direct à l'URL par exemple)
     if (!commande) {
         return (
             <div className="confirmation-container">
@@ -27,12 +18,8 @@ const OrderConfirmation = () => {
 
     return (
         <div className="confirmation-container">
-            {/* Helmet : titre pour la page de confirmation */}
-            <Helmet>
                 <title>Commande confirmée | CafThé</title>
-                <meta name="description" content="Votre commande CafThé a été confirmée avec succès." />
-            </Helmet>
-            {/* Message de succès avec le numéro de commande */}
+                <meta name="description" content="Votre commande CafThé a bien été confirmée. Merci pour votre achat !" />
             <div className="confirmation-success">
                 <div className="confirmation-icon" aria-hidden="true">&#10003;</div>
                 <h1>Commande confirmée !</h1>
@@ -43,7 +30,6 @@ const OrderConfirmation = () => {
                 </p>
             </div>
 
-            {/* Récapitulatif des articles commandés */}
             <div className="confirmation-details">
                 <h3>Détails de votre commande</h3>
                 {items && items.map((item) => (
@@ -58,7 +44,6 @@ const OrderConfirmation = () => {
                 </div>
             </div>
 
-            {/* Liens pour voir ses commandes ou continuer les achats */}
             <div className="confirmation-actions">
                 <Link to="/compte" className="btn-secondary">Voir mes commandes</Link>
                 <Link to="/" className="btn-primary">Continuer mes achats</Link>

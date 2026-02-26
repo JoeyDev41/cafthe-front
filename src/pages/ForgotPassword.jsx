@@ -1,10 +1,5 @@
-// ForgotPassword.jsx — Page "Mot de passe oublié"
-// L'utilisateur saisit son email, l'API génère un token et (en prod) envoie un lien par mail
-// En dev, le lien s'affiche dans la console de l'API
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 
 const ForgotPassword = () => {
@@ -44,11 +39,8 @@ const ForgotPassword = () => {
 
     return (
         <div className="login-container">
-            <Helmet>
                 <title>Mot de passe oublié | CafThé</title>
                 <meta name="description" content="Réinitialisez votre mot de passe CafThé." />
-            </Helmet>
-
             <h1>Mot de passe oublié</h1>
 
             {sent ? (

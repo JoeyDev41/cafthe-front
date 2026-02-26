@@ -1,26 +1,23 @@
-// Composant générique pour les pages catégorie (Thés, Cafés, Accessoires)
-// Reçoit en props le titre, sous-titre et la catégorie à filtrer
-// Contient une sidebar avec filtre de prix et le composant ProductList
-
 import React, { useState } from "react";
 import ProductList from "./ProductList.jsx";
 
-const CategoryPage = ({ title, subtitle, category }) => {
+const CategoryPage = ({ title, subtitle, category, showTypeVenteFilter = true }) => {
     const [priceMin, setPriceMin] = useState("");
     const [priceMax, setPriceMax] = useState("");
     const [tri, setTri] = useState("");
     const [ordre, setOrdre] = useState("asc");
+    const [typeVente, setTypeVente] = useState("all");
 
     const handleReset = () => {
         setPriceMin("");
         setPriceMax("");
         setTri("");
         setOrdre("asc");
+        setTypeVente("all");
     };
 
     return (
         <div className="category-page">
-            {/* Sidebar avec filtres */}
             <aside className="category-sidebar">
                 <div className="sidebar-card">
                     <h3>Filtres</h3>
@@ -75,13 +72,35 @@ const CategoryPage = ({ title, subtitle, category }) => {
                         </div>
                     </div>
 
+                    {showTypeVenteFilter && (
+                        <div className="sidebar-section">
+                            <h4>Type de vente</h4>
+                            <div className="sidebar-type-vente">
+                                {[
+                                    { value: "all", label: "Tous" },
+                                    { value: "unité", label: "Unité" },
+                                    { value: "poids", label: "Vrac" },
+                                ].map((option) => (
+                                    <button
+                                        key={option.value}
+                                        type="button"
+                                        className={`sidebar-type-btn${typeVente === option.value ? " active" : ""}`}
+                                        onClick={() => setTypeVente(option.value)}
+                                        aria-pressed={typeVente === option.value}
+                                    >
+                                        {option.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     <button className="sidebar-reset" type="button" onClick={handleReset} aria-label="Réinitialiser les filtres">
                         Réinitialiser
                     </button>
                 </div>
             </aside>
 
-            {/* Contenu principal : titre + liste de produits filtrés */}
             <main className="category-main">
                 <div className="category-header">
                     <h1>{title}</h1>
@@ -94,6 +113,7 @@ const CategoryPage = ({ title, subtitle, category }) => {
                     forcedPrixMax={priceMax}
                     forcedTri={tri}
                     forcedOrdre={ordre}
+                    forcedTypeVente={typeVente}
                     showTitle={false}
                     showFilters={false}
                     showPagination={false}

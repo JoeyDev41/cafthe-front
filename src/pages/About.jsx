@@ -1,35 +1,23 @@
-// About.jsx — Page "À propos" de CafThé
-// Page statique qui présente l'histoire de la boutique, ses valeurs et son équipe
-// Pas d'appel API ici, c'est du contenu en dur
-
 import React from "react";
 import { Link } from "react-router-dom";
 import boutique from "../assets/boutique.webp";
 import logo from "../assets/monLogo.png";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-// On l'utilise pour changer le titre de l'onglet et la meta description sur chaque page
-import { Helmet } from "react-helmet-async";
 
 const About = () => {
     return (
         <div className="about-page">
-            {/* Helmet : titre et description pour la page À propos */}
-            <Helmet>
                 <title>À propos | CafThé</title>
-                <meta name="description" content="Découvrez CafThé, votre boutique parisienne spécialisée dans les thés et cafés premium. Sélection rigoureuse, commerce équitable et conseils personnalisés." />
-            </Helmet>
+                <meta name="description" content="Découvrez CafThé, votre boutique parisienne de thés et cafés d'exception depuis 2020." />
             <div className="about-container">
                 <header className="about-header">
                     <h1 className="about-title">À Propos de CAFTHÉ</h1>
                 </header>
 
-                {/* Section d'accroche avec icônes thé et café */}
                 <section className="about-hero-card">
                     <img src={logo} alt="" aria-hidden="true" className="about-hero-logo" />
                     <p className="about-quote">"Sélectionnés avec soin, dégustés avec plaisir — bienvenue chez CafThé."</p>
                 </section>
 
-                {/* Section Histoire */}
                 <section className="about-panel">
                     <div className="about-panel-title">Notre Histoire</div>
                     <div className="about-panel-body about-history">
@@ -56,7 +44,6 @@ const About = () => {
                     </div>
                 </section>
 
-                {/* Section Valeurs : 4 cartes avec icônes */}
                 <section className="about-panel">
                     <div className="about-panel-title">Nos Valeurs</div>
                     <div className="about-panel-body">
@@ -93,7 +80,6 @@ const About = () => {
                     </div>
                 </section>
 
-                {/* Section Équipe */}
                 <section className="about-panel">
                     <div className="about-panel-title">Notre Équipe</div>
                     <div className="about-panel-body">
@@ -132,7 +118,6 @@ const About = () => {
                     </div>
                 </section>
 
-                {/* Call to action vers la boutique */}
                 <section className="about-cta">
                     <h2>Envie de découvrir nos produits ?</h2>
                     <Link to="/produits" className="about-cta-btn">Découvrir la boutique</Link>

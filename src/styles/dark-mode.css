@@ -88,6 +88,12 @@
   background: var(--accent-brown);
 }
 
+[data-theme="dark"] .sidebar-type-btn.active {
+  background: var(--accent-dark-brown);
+  border-color: var(--accent-brown);
+  color: #000000;
+}
+
 [data-theme="dark"] .products-page .pagination-btn:hover:not(:disabled) {
   background: var(--accent-dark-brown);
   color: #000000;

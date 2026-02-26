@@ -1,21 +1,11 @@
-// CGV.jsx — Page des Conditions Générales de Vente
-// Page légale obligatoire pour un site e-commerce
-// Contenu statique, pas d'appel API
-// J'ai rédigé les articles selon les obligations légales françaises (Code de la consommation)
-
 import React from "react";
 import { Link } from "react-router-dom";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-import { Helmet } from "react-helmet-async";
 
 const CGV = () => {
     return (
         <div className="legal-page">
-            {/* Helmet : titre et description pour la page CGV */}
-            <Helmet>
                 <title>Conditions Générales de Vente | CafThé</title>
-                <meta name="description" content="Consultez les conditions générales de vente de CafThé : livraison, retours, garanties et modalités de paiement." />
-            </Helmet>
+                <meta name="description" content="Consultez les conditions générales de vente de la boutique CafThé." />
             <div className="legal-container">
                 <h1>Conditions Générales de Vente</h1>
                 <p className="legal-updated">Dernière mise à jour : février 2025</p>
@@ -39,7 +29,6 @@ const CGV = () => {
                         sur le site au jour de la consultation. Les photographies illustrant les produits
                         n'entrent pas dans le champ contractuel.
                     </p>
-                    {/* Les taux de TVA correspondent au cahier des charges */}
                     <p>Les prix sont indiqués en euros toutes taxes comprises (TTC) :</p>
                     <ul>
                         <li>TVA à 5,5 % pour les thés et cafés (produits alimentaires)</li>
@@ -58,7 +47,6 @@ const CGV = () => {
                         Un numéro de commande unique au format CMD-AAAAMMJJ-XXXX est attribué à chaque
                         commande et communiqué par e-mail.
                     </p>
-                    {/* Les statuts correspondent à ceux définis dans le cahier des charges */}
                     <p>Les statuts de commande sont les suivants :</p>
                     <ul>
                         <li><strong>En attente</strong> — commande enregistrée, en cours de validation</li>

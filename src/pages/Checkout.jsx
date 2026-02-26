@@ -1,16 +1,9 @@
-// Page de checkout (tunnel de commande) en 3 étapes :
-// 1. Livraison : choix du mode (domicile ou retrait) + transporteur + adresse
-// 2. Paiement : choix CB, PayPal ou paiement en magasin
-// 3. Récapitulatif : vérification avant confirmation
-
 import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "../context/CartContext.jsx";
 import { AuthContext } from "../context/AuthContex.jsx";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { createOrder, getProfile } from "../services/api.js";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-import { Helmet } from "react-helmet-async";
 
 const Checkout = () => {
     const { items, getTotal, clearCart } = useContext(CartContext);
@@ -29,8 +22,6 @@ const Checkout = () => {
     const [selectedCarrier, setSelectedCarrier] = useState("colissimo");
     const [isLoading, setIsLoading] = useState(false);
 
-    // Transporteurs disponibles avec leurs tarifs
-    // Colissimo gratuit à partir de 49€ (même règle que dans le panier)
     const carriers = [
         {
             id: "colissimo",
@@ -52,7 +43,6 @@ const Checkout = () => {
         },
     ];
 
-    // Calcul des frais de livraison selon le transporteur choisi
     const getCarrierPrice = () => {
         if (modeLivraison === "retrait") return 0;
         const carrier = carriers.find((c) => c.id === selectedCarrier);
@@ -61,7 +51,6 @@ const Checkout = () => {
 
     const fraisLivraison = getCarrierPrice();
 
-    // Redirection si non connecté ou panier vide
     useEffect(() => {
         if (!isAuthenticated) {
             navigate("/login", { state: { redirect: "/checkout" } });
@@ -74,7 +63,6 @@ const Checkout = () => {
         loadProfile();
     }, [isAuthenticated]);
 
-    // Pré-remplir l'adresse de livraison depuis le profil client
     const loadProfile = async () => {
         try {
             const data = await getProfile();
@@ -93,11 +81,9 @@ const Checkout = () => {
 
     const [paypalRedirect, setPaypalRedirect] = useState(false);
 
-    // Confirmation de commande
     const handleConfirmOrder = async () => {
         setIsLoading(true);
 
-        // Simulation de redirection PayPal (2 secondes d'attente)
         if (modePaiement === "paypal") {
             setPaypalRedirect(true);
             await new Promise((r) => setTimeout(r, 2000));
@@ -105,7 +91,6 @@ const Checkout = () => {
         }
 
         try {
-            // Préparation des articles pour l'API
             const orderItems = items.map((item) => ({
                 id_article: item.ID_Article,
                 quantite: item.quantite,
@@ -114,7 +99,6 @@ const Checkout = () => {
 
             const data = await createOrder(orderItems, modePaiement);
 
-            // Commande réussie : on vide le panier et on redirige vers la confirmation
             clearCart();
             navigate("/confirmation", {
                 state: {
@@ -131,21 +115,16 @@ const Checkout = () => {
 
     return (
         <div className="checkout-container">
-            {/* Helmet : titre pour la page de commande */}
-            <Helmet>
                 <title>Passer commande | CafThé</title>
-                <meta name="description" content="Finalisez votre commande CafThé : livraison, paiement et confirmation." />
-            </Helmet>
+                <meta name="description" content="Finalisez votre commande CafThé en toute sécurité." />
             <h1>Finaliser ma commande</h1>
 
-            {/* Indicateur d'étapes — aria-current="step" sur l'étape active (RGAA 9.1) */}
             <div className="checkout-steps" role="list" aria-label="Étapes de la commande">
                 <div className={`step ${step >= 1 ? "active" : ""}`} role="listitem" aria-current={step === 1 ? "step" : undefined}>1. Livraison</div>
                 <div className={`step ${step >= 2 ? "active" : ""}`} role="listitem" aria-current={step === 2 ? "step" : undefined}>2. Paiement</div>
                 <div className={`step ${step >= 3 ? "active" : ""}`} role="listitem" aria-current={step === 3 ? "step" : undefined}>3. Confirmation</div>
             </div>
 
-            {/* Étape 1 : Livraison */}
             {step === 1 && (
                 <div className="checkout-step-content">
                     <h3>Mode de livraison</h3>
@@ -178,7 +157,6 @@ const Checkout = () => {
                         </label>
                     </div>
 
-                    {/* Choix du transporteur (si livraison à domicile) */}
                     {modeLivraison === "livraison" && (
                         <div className="carrier-section">
                             <h3>Choisir le transporteur</h3>
@@ -208,7 +186,6 @@ const Checkout = () => {
                         </div>
                     )}
 
-                    {/* Formulaire adresse de livraison */}
                     {modeLivraison === "livraison" && (
                         <div className="address-form">
                             <h3>Adresse de livraison</h3>
@@ -245,7 +222,6 @@ const Checkout = () => {
                                     />
                                 </div>
                             </div>
-                            {/* Notice RGPD art. 13 : traitement de l'adresse de livraison */}
                             <p className="rgpd-notice">
                                 Votre adresse est utilisée uniquement pour la livraison de cette commande.
                                 En savoir plus : <Link to="/politique-confidentialite">politique de confidentialité</Link>.
@@ -259,7 +235,6 @@ const Checkout = () => {
                 </div>
             )}
 
-            {/* Étape 2 : Paiement */}
             {step === 2 && (
                 <div className="checkout-step-content">
                     <h3>Mode de paiement</h3>
@@ -286,7 +261,6 @@ const Checkout = () => {
                                 <span className="paypal-logo">Pay<span className="paypal-pal">Pal</span></span>
                             </span>
                         </label>
-                        {/* Paiement en magasin uniquement si retrait */}
                         {modeLivraison === "retrait" && (
                             <label className={`payment-option ${modePaiement === "magasin" ? "selected" : ""}`}>
                                 <input
@@ -308,7 +282,6 @@ const Checkout = () => {
                 </div>
             )}
 
-            {/* Étape 3 : Récapitulatif avant confirmation */}
             {step === 3 && (
                 <div className="checkout-step-content">
                     <h3>Récapitulatif de votre commande</h3>

@@ -1,12 +1,17 @@
-// Modale d'aperçu rapide d'un produit
-// S'affiche au clic sur "Aperçu rapide" dans la carte produit
-// Permet d'ajouter au panier sans quitter la page de listing
-// Inclut un mini-carrousel si le produit a plusieurs images
-
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext.jsx";
 import { PromotionContext } from "../context/PromotionContext.jsx";
+
+const POIDS_OPTIONS = [
+    { label: "10g", value: 10 },
+    { label: "20g", value: 20 },
+    { label: "50g", value: 50 },
+    { label: "100g", value: 100 },
+    { label: "250g", value: 250 },
+    { label: "500g", value: 500 },
+    { label: "1kg", value: 1000 },
+];
 
 const QuickViewModal = ({ produit, onClose }) => {
     const { addToCart } = useContext(CartContext);
@@ -15,10 +20,14 @@ const QuickViewModal = ({ produit, onClose }) => {
     const originalPrice = parseFloat(produit.prix_ttc);
     const finalPrice = getDiscountedPrice(produit.ID_Article, originalPrice);
     const [quantity, setQuantity] = useState(1);
+    const [poids, setPoids] = useState(100);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const closeButtonRef = useRef(null);
 
-    // Focus sur le bouton fermer à l'ouverture + fermeture par Escape (RGAA 7.3)
+    const isVrac = produit.type_vente === "poids";
+
+    const prixVrac = (originalPrice * poids / 1000).toFixed(2);
+
     useEffect(() => {
         closeButtonRef.current?.focus();
         const handleKeyDown = (e) => {
@@ -28,12 +37,10 @@ const QuickViewModal = ({ produit, onClose }) => {
         return () => document.removeEventListener("keydown", handleKeyDown);
     }, [onClose]);
 
-    // Je récupère toutes les images du produit (séparées par des virgules en BDD)
     const imagesList = produit.images
         ? produit.images.split(",").map((img) => `${import.meta.env.VITE_API_URL}/images/${img.trim()}`)
         : [`https://placehold.co/400x400?text=${encodeURIComponent(produit.nom_produit)}`];
 
-    // Navigation dans le carrousel
     const handlePrevImage = (e) => {
         e.stopPropagation();
         setCurrentImageIndex((prev) => (prev === 0 ? imagesList.length - 1 : prev - 1));
@@ -45,14 +52,23 @@ const QuickViewModal = ({ produit, onClose }) => {
     };
 
     const handleAdd = () => {
-        addToCart(produit, quantity);
+        if (isVrac) {
+            addToCart(
+                {
+                    ...produit,
+                    isVrac: true,
+                    poids,
+                    vracId: `${produit.ID_Article}_vrac_${poids}`,
+                },
+                1
+            );
+        } else {
+            addToCart(produit, quantity);
+        }
     };
 
     return (
-        // Clic sur l'overlay (fond sombre) ferme la modale
         <div className="quickview-overlay" onClick={onClose} role="presentation">
-            {/* stopPropagation empêche le clic sur la modale de la fermer */}
-            {/* role=dialog + aria-modal + aria-labelledby : RGAA 7.1 — composant ARIA requis */}
             <div
                 className="quickview-modal"
                 role="dialog"
@@ -63,7 +79,6 @@ const QuickViewModal = ({ produit, onClose }) => {
                 <button ref={closeButtonRef} className="quickview-close" onClick={onClose} aria-label="Fermer l'aperçu rapide">&times;</button>
 
                 <div className="quickview-content">
-                    {/* Zone image avec carrousel si plusieurs images */}
                     <div className="quickview-image">
                         <div className="quickview-gallery">
                             {imagesList.length > 1 && (
@@ -74,7 +89,6 @@ const QuickViewModal = ({ produit, onClose }) => {
                                 <button className="gallery-arrow gallery-arrow-right" onClick={handleNextImage} aria-label="Image suivante">&rsaquo;</button>
                             )}
                         </div>
-                        {/* Petits points indicateurs sous l'image */}
                         {imagesList.length > 1 && (
                             <div className="quickview-dots">
                                 {imagesList.map((_, index) => (
@@ -97,15 +111,23 @@ const QuickViewModal = ({ produit, onClose }) => {
                             <p className="quickview-desc">{produit.description}</p>
                         )}
 
-                        {/* Affichage du prix avec promo si applicable */}
                         <div className="quickview-price">
-                            {discount > 0 && (
-                                <span className="price-original">{originalPrice.toFixed(2)} &euro;</span>
+                            {isVrac ? (
+                                <>
+                                    <span className="vrac-price-modal">{prixVrac} &euro;</span>
+                                    <span className="vrac-price-kg-modal">{originalPrice.toFixed(2)} &euro;/kg</span>
+                                </>
+                            ) : (
+                                <>
+                                    {discount > 0 && (
+                                        <span className="price-original">{originalPrice.toFixed(2)} &euro;</span>
+                                    )}
+                                    <span className={discount > 0 ? "price-promo" : ""}>
+                                        {finalPrice.toFixed(2)} &euro;
+                                    </span>
+                                    {discount > 0 && <span className="promo-badge-inline">-{discount}%</span>}
+                                </>
                             )}
-                            <span className={discount > 0 ? "price-promo" : ""}>
-                                {finalPrice.toFixed(2)} &euro;
-                            </span>
-                            {discount > 0 && <span className="promo-badge-inline">-{discount}%</span>}
                         </div>
 
                         <div className="quickview-stock">
@@ -118,23 +140,38 @@ const QuickViewModal = ({ produit, onClose }) => {
 
                         {produit.stock > 0 && (
                             <div className="quickview-actions">
-                                <div className="quantity-selector">
-                                    <button
-                                        className="qty-btn"
-                                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                        aria-label="Diminuer la quantité"
+                                {isVrac ? (
+                                    <select
+                                        className="vrac-select"
+                                        value={poids}
+                                        onChange={(e) => setPoids(Number(e.target.value))}
+                                        aria-label={`Poids pour ${produit.nom_produit}`}
                                     >
-                                        -
-                                    </button>
-                                    <span className="qty-value">{quantity}</span>
-                                    <button
-                                        className="qty-btn"
-                                        onClick={() => setQuantity(Math.min(quantity + 1, produit.stock))}
-                                        aria-label="Augmenter la quantité"
-                                    >
-                                        +
-                                    </button>
-                                </div>
+                                        {POIDS_OPTIONS.map((opt) => (
+                                            <option key={opt.value} value={opt.value}>
+                                                {opt.label}
+                                            </option>
+                                        ))}
+                                    </select>
+                                ) : (
+                                    <div className="quantity-selector">
+                                        <button
+                                            className="qty-btn"
+                                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                            aria-label="Diminuer la quantité"
+                                        >
+                                            -
+                                        </button>
+                                        <span className="qty-value">{quantity}</span>
+                                        <button
+                                            className="qty-btn"
+                                            onClick={() => setQuantity(Math.min(quantity + 1, produit.stock))}
+                                            aria-label="Augmenter la quantité"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                )}
                                 <button className="btn-primary btn-quickview-add" onClick={handleAdd}>
                                     Ajouter au panier
                                 </button>

@@ -1,13 +1,8 @@
-// Barre de navigation principale
-// Contient : logo, liens catégories, barre de recherche, panier, connexion, menu burger mobile
-// J'utilise useContext pour accéder au nombre d'articles dans le panier et à l'état de connexion
-
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContex.jsx";
 import { CartContext } from "../context/CartContext.jsx";
 import MiniCart from "./MiniCart.jsx";
-// Bouton pour basculer entre thème clair et sombre
 import ThemeToggle from "./ThemeToggle.jsx";
 import logo from "../assets/monLogo.png";
 
@@ -20,7 +15,6 @@ const Navbar = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [menuOpen, setMenuOpen] = useState(false);
 
-    // Normalise la recherche : minuscules, sans accents, sans espaces inutiles
     const normalizeSearch = (value) =>
         value
             .toLowerCase()
@@ -28,7 +22,6 @@ const Navbar = () => {
             .replace(/[\u0300-\u036f]/g, "")
             .trim();
 
-    // Si l'utilisateur cherche une catégorie (ex: "thé"), on le redirige directement
     const getCategoryRoute = (normalizedQuery) => {
         const categoryMap = {
             the: "the",
@@ -75,13 +68,9 @@ const Navbar = () => {
                     <img src={logo} alt="CafThé - Retour à l'accueil" className="logo" />
                 </Link>
 
-                {/* Liens de navigation (catégories + recherche) */}
                 <div id="navbar-menu" className={`navbar-center ${menuOpen ? "open" : ""}`}>
                     <Link to="/produits" className="navbar-cat-link" onClick={() => setMenuOpen(false)}>
                         Produits
-                    </Link>
-                    <Link to="/vrac" className="navbar-cat-link" onClick={() => setMenuOpen(false)}>
-                        Vrac
                     </Link>
                     <Link to="/the" className="navbar-cat-link" onClick={() => setMenuOpen(false)}>
                         Thés
@@ -93,7 +82,6 @@ const Navbar = () => {
                         Accessoires
                     </Link>
 
-                    {/* Barre de recherche */}
                     <form onSubmit={handleSearch} className="navbar-search">
                         <input
                             type="text"
@@ -108,9 +96,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-right">
-                    {/* Bouton pour changer le thème (clair/sombre) */}
                     <ThemeToggle />
-                    {/* Bouton panier avec badge */}
                     <button
                         className="navbar-cart-btn"
                         onClick={() => setShowMiniCart(true)}
@@ -125,7 +111,6 @@ const Navbar = () => {
                         {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
                     </button>
 
-                    {/* Affichage conditionnel selon si connecté ou non */}
                     {isAuthenticated ? (
                         <>
                             <Link to="/compte" className="navbar-user-link" title="Mon compte">
@@ -141,7 +126,6 @@ const Navbar = () => {
                         </Link>
                     )}
 
-                    {/* Menu burger pour mobile */}
                     <button className="navbar-burger" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={menuOpen} aria-controls="navbar-menu">
                         <span></span>
                         <span></span>
@@ -150,7 +134,6 @@ const Navbar = () => {
                 </div>
             </nav>
 
-            {/* Mini panier (panneau latéral) */}
             <MiniCart isOpen={showMiniCart} onClose={() => setShowMiniCart(false)} />
         </>
     );

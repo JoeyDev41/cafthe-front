@@ -1,21 +1,12 @@
-// Page d'accueil du site CafThé
-// Composée de plusieurs sections : hero, catégories, produits phares, promotions, valeurs
-// Les promotions sont récupérées dynamiquement depuis l'API
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProductList from "./ProductList.jsx";
 import { getActivePromotions } from "../services/api.js";
 import heroImg from "../assets/hero.png";
-// Helmet : permet de modifier le <head> du HTML depuis un composant React
-// On l'utilise pour changer le titre de l'onglet et la meta description sur chaque page
-import { Helmet } from "react-helmet-async";
 
 const Home = () => {
-    // État pour stocker les promotions chargées depuis l'API
     const [promotions, setPromotions] = useState([]);
 
-    // Chargement des promotions au montage du composant
     useEffect(() => {
         const loadPromos = async () => {
             try {
@@ -30,13 +21,8 @@ const Home = () => {
 
     return (
         <div className="home">
-            {/* Helmet : modifie le titre de l'onglet et la meta description pour le SEO */}
-            {/* Chaque page a son propre <Helmet> avec un titre et une description uniques */}
-            <Helmet>
                 <title>CafThé - Thés & Cafés Premium | Boutique en ligne</title>
-                <meta name="description" content="CafThé, votre boutique en ligne de thés et cafés premium. Découvrez notre sélection de thés verts, noirs, blancs et cafés torréfiés artisanalement." />
-            </Helmet>
-            {/* Section Hero : bannière principale avec image et CTA */}
+                <meta name="description" content="CafThé, votre boutique en ligne de thés et cafés premium. Découvrez notre sélection artisanale." />
             <section className="hero">
                 <div className="hero-content">
                     <div className="hero-text">
@@ -60,7 +46,6 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Section catégories */}
             <section className="categories-section" id="categories">
                 <div className="section-header centered">
                     <h2 className="section-title">Nos Catégories</h2>
@@ -79,7 +64,7 @@ const Home = () => {
                         <h3>Cafés</h3>
                     </Link>
                     <Link to="/accessoires" className="category-card">
-                        <div className="category-frame"> 
+                        <div className="category-frame">
                             <img src="src\assets\accessoires.webp" alt="accessoires  " />
                             </div>
                         <h3>Accessoires</h3>
@@ -87,7 +72,6 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Produits phares : affiche les derniers produits ajoutés */}
             <section className="products-section home-products">
                 <div className="section-header">
                     <h2 className="section-title">Produits Phares</h2>
@@ -96,7 +80,6 @@ const Home = () => {
                 <ProductList showTitle={false} />
             </section>
 
-            {/* Promotions : affichées uniquement s'il y en a des actives en BDD */}
             {promotions.length > 0 && (
                 <section className="promotions-section">
                     <div className="section-header centered">
@@ -116,7 +99,6 @@ const Home = () => {
                 </section>
             )}
 
-            {/* Nos valeurs */}
             <section className="values-section">
                 <h2 className="section-title">Nos Valeurs</h2>
                 <div className="values-grid">

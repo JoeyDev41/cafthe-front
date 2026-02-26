@@ -240,6 +240,14 @@
   font-family: "Montserrat", sans-serif;
   background: var(--bg-input);
   color: var(--text-primary);
+  -moz-appearance: textfield;
+}
+
+/* Cacher les flèches natives du input number (Chrome/Safari/Edge) */
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .qty-value {
