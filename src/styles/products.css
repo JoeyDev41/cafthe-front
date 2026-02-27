@@ -533,11 +533,17 @@
   background: var(--bg-card);
   max-width: 270px;
   transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
 }
 
 .product-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px var(--shadow-strong);
+  box-shadow: 4px 4px 16px 5px rgb(155 155 155 / 15%);
+}
+
+.product-card:focus-visible {
+  outline: 2px solid var(--accent-brown);
+  outline-offset: 2px;
 }
 
 /* --- Zone image de la carte --- */
@@ -576,33 +582,30 @@
   to { transform: rotate(360deg); }
 }
 
-/* Bouton "Aperçu rapide" qui apparaît au survol */
-.btn-quickview {
+/* Overlay "Aperçu rapide" au survol de toute la carte */
+.product-card-image-zone::after {
+  content: "Aperçu rapide";
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   background: rgba(44, 24, 16, 0.8);
   color: var(--text-on-dark);
-  border: none;
   padding: 0.5rem;
   font-family: "Montserrat", sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.3px;
-  cursor: pointer;
+  text-align: center;
   opacity: 0;
   transform: translateY(100%);
   transition: all 0.25s;
+  pointer-events: none;
 }
 
-.product-card-image-zone:hover .btn-quickview {
+.product-card:hover .product-card-image-zone::after {
   opacity: 1;
   transform: translateY(0);
-}
-
-.btn-quickview:hover {
-  background: rgba(44, 24, 16, 0.95);
 }
 
 /* Badge "Nouveau" / "Promo" sur l'image */

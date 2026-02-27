@@ -49,7 +49,7 @@ const ForgotPassword = () => {
                     Pensez à vérifier vos spams.
                 </div>
             ) : (
-                <form onSubmit={handleSubmit} noValidate>
+                <form onSubmit={handleSubmit} noValidate aria-label="Réinitialisation du mot de passe">
                     <p className="forgot-intro">
                         Saisissez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
                     </p>

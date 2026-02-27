@@ -18,7 +18,7 @@ const CategoryPage = ({ title, subtitle, category, showTypeVenteFilter = true })
 
     return (
         <div className="category-page">
-            <aside className="category-sidebar">
+            <aside className="category-sidebar" aria-label="Filtres de produits">
                 <div className="sidebar-card">
                     <h3>Filtres</h3>
 
@@ -101,7 +101,7 @@ const CategoryPage = ({ title, subtitle, category, showTypeVenteFilter = true })
                 </div>
             </aside>
 
-            <main className="category-main">
+            <main className="category-main" aria-label="Liste des produits">
                 <div className="category-header">
                     <h1>{title}</h1>
                     <p>{subtitle}</p>

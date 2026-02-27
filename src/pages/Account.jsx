@@ -234,7 +234,7 @@ const Account = () => {
                     </div>
 
                     {editingProfile && (
-                        <form onSubmit={handleProfileSubmit} className="account-form">
+                        <form onSubmit={handleProfileSubmit} className="account-form" aria-label="Modifier mes informations">
                             <h3>Modifier mes informations</h3>
                             <div className="form-row">
                                 <div className="form-group">
@@ -321,7 +321,7 @@ const Account = () => {
                     </button>
 
                     {editingAdresses && (
-                        <form onSubmit={handleProfileSubmit} className="account-form">
+                        <form onSubmit={handleProfileSubmit} className="account-form" aria-label="Modifier mes adresses">
                             <h3>Adresse de facturation</h3>
                             <div className="form-group">
                                 <label htmlFor="fact-adresse">Adresse :</label>
@@ -403,7 +403,7 @@ const Account = () => {
 
             {activeTab === "mdp" && (
                 <div role="tabpanel" id="panel-mdp" aria-labelledby="tab-mdp" tabIndex={0}>
-                    <form onSubmit={handlePasswordSubmit} className="account-form">
+                    <form onSubmit={handlePasswordSubmit} className="account-form" aria-label="Modifier le mot de passe">
                         <div className="form-group">
                             <label htmlFor="ancien-mdp">Ancien mot de passe :</label>
                             <input id="ancien-mdp" name="ancien_mdp" type="password" autoComplete="current-password" value={formPassword.ancien_mdp} onChange={handlePasswordChange} required />

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PromotionContext } from "../context/PromotionContext.jsx";
 import QuickViewModal from "./QuickViewModal.jsx";
 
@@ -6,6 +7,7 @@ const ProductCard = ({ produit, viewMode = "grid" }) => {
     const { getDiscount, getDiscountedPrice } = useContext(PromotionContext);
     const [imageLoaded, setImageLoaded] = useState(false);
     const [showQuickView, setShowQuickView] = useState(false);
+    const navigate = useNavigate();
 
     const discount = getDiscount(produit.ID_Article);
     const originalPrice = parseFloat(produit.prix_ttc);
@@ -15,9 +17,21 @@ const ProductCard = ({ produit, viewMode = "grid" }) => {
         ? `${import.meta.env.VITE_API_URL}/images/${produit.images.split(",")[0].trim()}`
         : `https://placehold.co/300x300?text=${encodeURIComponent(produit.nom_produit)}`;
 
+    const handleCardClick = (e) => {
+        if (e.target.closest(".btn-voir")) return;
+        setShowQuickView(true);
+    };
+
     return (
         <>
-            <div className={`product-card${viewMode === "list" ? " product-card--list" : ""}`}>
+            <div
+                className={`product-card${viewMode === "list" ? " product-card--list" : ""}`}
+                onClick={handleCardClick}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setShowQuickView(true); }}
+                aria-label={`Aperçu de ${produit.nom_produit}`}
+            >
                 <div className="product-card-image-zone">
                     {!imageLoaded && <span className="product-card-spinner"></span>}
                     <img
@@ -27,12 +41,6 @@ const ProductCard = ({ produit, viewMode = "grid" }) => {
                         onLoad={() => setImageLoaded(true)}
                     />
                     {produit.nouveau && <span className="product-card-badge">NEW</span>}
-                    <button
-                        className="btn-quickview"
-                        onClick={() => setShowQuickView(true)}
-                    >
-                        Aperçu rapide
-                    </button>
                 </div>
 
                 <div className="product-card-body">
@@ -56,7 +64,11 @@ const ProductCard = ({ produit, viewMode = "grid" }) => {
                         <div className="product-card-actions">
                             <button
                                 className="btn-voir"
-                                onClick={() => setShowQuickView(true)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    navigate(`/produits/${produit.ID_Article}`);
+                                }}
+                                aria-label={`Voir les détails de ${produit.nom_produit}`}
                             >
                                 Voir
                             </button>

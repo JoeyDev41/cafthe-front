@@ -23,7 +23,7 @@ const Home = () => {
         <div className="home">
                 <title>CafThé - Thés & Cafés Premium | Boutique en ligne</title>
                 <meta name="description" content="CafThé, votre boutique en ligne de thés et cafés premium. Découvrez notre sélection artisanale." />
-            <section className="hero">
+            <section className="hero" aria-label="Présentation CafThé">
                 <div className="hero-content">
                     <div className="hero-text">
                         <span className="hero-badge">Nouvelle collection</span>
@@ -46,7 +46,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="categories-section" id="categories">
+            <section className="categories-section" id="categories" aria-label="Nos catégories">
                 <div className="section-header centered">
                     <h2 className="section-title">Nos Catégories</h2>
                 </div>
@@ -72,7 +72,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="products-section home-products">
+            <section className="products-section home-products" aria-label="Produits phares">
                 <div className="section-header">
                     <h2 className="section-title">Produits Phares</h2>
                     <Link to="/produits" className="section-link">Voir tout</Link>
@@ -81,7 +81,7 @@ const Home = () => {
             </section>
 
             {promotions.length > 0 && (
-                <section className="promotions-section">
+                <section className="promotions-section" aria-label="Promotions en cours">
                     <div className="section-header centered">
                         <h2 className="section-title">Promotions</h2>
                     </div>
@@ -99,21 +99,21 @@ const Home = () => {
                 </section>
             )}
 
-            <section className="values-section">
+            <section className="values-section" aria-label="Nos valeurs">
                 <h2 className="section-title">Nos Valeurs</h2>
                 <div className="values-grid">
                     <div className="value-card">
-                        <span className="value-icon">&#9749;</span>
+                        <span className="value-icon" aria-hidden="true">&#9749;</span>
                         <h4>Qualité Premium</h4>
                         <p>Sélection rigoureuse</p>
                     </div>
                     <div className="value-card">
-                        <span className="value-icon">&#129309;</span>
+                        <span className="value-icon" aria-hidden="true">&#129309;</span>
                         <h4>Commerce Équitable</h4>
                         <p>Producteurs respectés</p>
                     </div>
                     <div className="value-card">
-                        <span className="value-icon">&#128230;</span>
+                        <span className="value-icon" aria-hidden="true">&#128230;</span>
                         <h4>Livraison Rapide</h4>
                         <p>24-48h chrono</p>
                     </div>

@@ -155,7 +155,7 @@ const ProductList = ({
             {showTitle && <h1 className="section-title">{getCategoryTitle()}</h1>}
 
             {showFilters && (
-                <div className="filters-bar">
+                <div className="filters-bar" role="search" aria-label="Filtres de produits">
                     {!forcedCategory && (
                         <div className="filter-group">
                             <label htmlFor="filter-categorie">Catégorie :</label>
@@ -264,25 +264,27 @@ const ProductList = ({
                     </div>
 
                     {showPagination && totalPages > 1 && (
-                        <div className="pagination">
+                        <nav className="pagination" aria-label="Pagination des produits">
                             <button
                                 disabled={page <= 1}
                                 onClick={() => setPage(page - 1)}
                                 className="pagination-btn"
+                                aria-label="Page précédente"
                             >
                                 Précédent
                             </button>
-                            <span className="pagination-info">
+                            <span className="pagination-info" aria-live="polite">
                                 Page {page} / {totalPages}
                             </span>
                             <button
                                 disabled={page >= totalPages}
                                 onClick={() => setPage(page + 1)}
                                 className="pagination-btn"
+                                aria-label="Page suivante"
                             >
                                 Suivant
                             </button>
-                        </div>
+                        </nav>
                     )}
                 </>
             )}

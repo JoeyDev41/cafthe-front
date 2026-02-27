@@ -131,25 +131,27 @@ const Vrac = () => {
                 )}
 
                 {!isLoading && !error && totalPages > 1 && (
-                    <div className="pagination">
+                    <nav className="pagination" aria-label="Pagination des produits vrac">
                         <button
                             disabled={page <= 1}
                             onClick={() => setPage(page - 1)}
                             className="pagination-btn"
+                            aria-label="Page précédente"
                         >
                             Précédent
                         </button>
-                        <span className="pagination-info">
+                        <span className="pagination-info" aria-live="polite">
                             Page {page} / {totalPages}
                         </span>
                         <button
                             disabled={page >= totalPages}
                             onClick={() => setPage(page + 1)}
                             className="pagination-btn"
+                            aria-label="Page suivante"
                         >
                             Suivant
                         </button>
-                    </div>
+                    </nav>
                 )}
             </div>
         </div>

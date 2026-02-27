@@ -271,7 +271,8 @@
   border: 2px solid var(--border-accent);
   border-radius: 6px;
   text-align: center;
-  padding: 2rem 1.5rem;
+  padding: 0;
+  overflow: hidden;
   box-shadow: inset 0 0 0 1px var(--border-card);
 }
 
@@ -280,18 +281,10 @@
   box-shadow: inset 0 0 0 1px var(--border-card), 0 6px 18px var(--shadow-color);
 }
 
-/* Cadre décoratif dans les cartes catégories */
 .category-frame {
-  width: 120px;
-  height: 90px;
-  margin: 0 auto 1rem;
-  background: var(--bg-element);
-  border: 2px solid var(--border-strong);
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  color: var(--accent-brown);
-  letter-spacing: 0.5px;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
 }
 
 .category-frame img {
@@ -299,12 +292,18 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.home .category-card:hover .category-frame img {
+  transform: scale(1.05);
 }
 
 .home .category-card h3 {
   margin: 0;
+  padding: 1rem;
   color: var(--text-heading);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 
 /* === PRODUITS VEDETTES (section home) === */

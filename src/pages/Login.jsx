@@ -56,7 +56,7 @@ const Login = () => {
                 <meta name="description" content="Connectez-vous à votre compte CafThé pour suivre vos commandes et profiter d'offres exclusives." />
             <h1>Connexion</h1>
 
-            <form onSubmit={handleSubmit} noValidate>
+            <form onSubmit={handleSubmit} noValidate aria-label="Formulaire de connexion">
                 <div className="form-group">
                     <label htmlFor="email">Adresse e-mail</label>
                     <input
@@ -71,12 +71,7 @@ const Login = () => {
                 </div>
 
                 <div className="form-group">
-                    <div className="form-group-header">
-                        <label htmlFor="password">Mot de passe</label>
-                        <Link to="/mot-de-passe-oublie" className="forgot-password-link">
-                            Mot de passe oublié ?
-                        </Link>
-                    </div>
+                    <label htmlFor="password">Mot de passe</label>
                     <input
                         id="password"
                         type="password"
@@ -86,6 +81,9 @@ const Login = () => {
                         placeholder="Votre mot de passe"
                         onChange={(e) => setMotDePasse(e.target.value)}
                     />
+                    <Link to="/mot-de-passe-oublie" className="forgot-password-link">
+                        Mot de passe oublié ?
+                    </Link>
                 </div>
 
                 <button type="submit" className="btn-primary" disabled={isLoading}>

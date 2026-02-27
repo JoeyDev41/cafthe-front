@@ -50,7 +50,6 @@ const Navbar = () => {
         }
 
         window.scrollTo({ top: 0, behavior: "smooth" });
-        setSearchQuery("");
         setMenuOpen(false);
     };
 
@@ -70,13 +69,7 @@ const Navbar = () => {
 
                 <div id="navbar-menu" className={`navbar-center ${menuOpen ? "open" : ""}`}>
                     <Link to="/produits" className="navbar-cat-link" onClick={() => setMenuOpen(false)}>
-                        Produits
-                    </Link>
-                    <Link to="/the" className="navbar-cat-link" onClick={() => setMenuOpen(false)}>
-                        Thés
-                    </Link>
-                    <Link to="/cafe" className="navbar-cat-link" onClick={() => setMenuOpen(false)}>
-                        Cafés
+                        Nos Produits
                     </Link>
                     <Link to="/accessoires" className="navbar-cat-link" onClick={() => setMenuOpen(false)}>
                         Accessoires

@@ -114,10 +114,10 @@ html[data-theme="dark"] {
   --border-card: #2E2B2B;
   --border-separator: #222020;
 
-  /* --- Ombres plus fortes en dark mode --- */
-  --shadow-color: rgba(0, 0, 0, 0.3);
-  --shadow-medium: rgba(0, 0, 0, 0.35);
-  --shadow-strong: rgba(0, 0, 0, 0.4);
+  /* --- Ombres claires visibles en dark mode --- */
+  --shadow-color: rgba(255, 255, 255, 0.08);
+  --shadow-medium: rgba(255, 255, 255, 0.12);
+  --shadow-strong: rgba(255, 255, 255, 0.15);
 
   /* --- Accents : vert RGAA AA (≥4.5:1) sur fonds sombres ---
      #5CB85C → ~7.8:1 sur #1A1210 (AAA) / #4CAF50 → ~6.9:1 (AA+) */

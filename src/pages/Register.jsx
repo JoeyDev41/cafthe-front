@@ -79,7 +79,7 @@ const Register = () => {
 
             <p className="required-legend"><span className="required-star" aria-hidden="true">*</span> Champs obligatoires</p>
 
-            <form onSubmit={handleSubmit} noValidate>
+            <form onSubmit={handleSubmit} noValidate aria-label="Formulaire d'inscription">
                 <div className="form-row">
                     <div className="form-group">
                         <label htmlFor="prenom">Prénom <span className="required-star" aria-hidden="true">*</span></label>

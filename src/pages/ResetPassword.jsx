@@ -77,7 +77,7 @@ const ResetPassword = () => {
         <div className="login-container">
             <h1>Nouveau mot de passe</h1>
 
-            <form onSubmit={handleSubmit} noValidate>
+            <form onSubmit={handleSubmit} noValidate aria-label="Définir un nouveau mot de passe">
                 <div className="form-group">
                     <label htmlFor="nouveau-mdp">Nouveau mot de passe</label>
                     <input

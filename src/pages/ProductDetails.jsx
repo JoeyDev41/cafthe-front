@@ -136,6 +136,7 @@ const ProductDetails = () => {
                                     key={index}
                                     className={`gallery-thumb${index === currentImageIndex ? " active" : ""}`}
                                     onClick={() => setCurrentImageIndex(index)}
+                                    aria-label={`Voir l'image ${index + 1}`}
                                 >
                                     <img src={img} alt={`${produit.nom_produit} - miniature ${index + 1}`} />
                                 </button>

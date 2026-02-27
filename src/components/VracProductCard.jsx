@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { CartContext } from "../context/CartContext.jsx";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import QuickViewModal from "./QuickViewModal.jsx";
 
 const POIDS_OPTIONS = [
@@ -13,10 +13,10 @@ const POIDS_OPTIONS = [
 ];
 
 const VracProductCard = ({ produit }) => {
-    const { addToCart } = useContext(CartContext);
     const [poids, setPoids] = useState(100);
     const [imageLoaded, setImageLoaded] = useState(false);
     const [showQuickView, setShowQuickView] = useState(false);
+    const navigate = useNavigate();
 
     const imageUrl = produit.images
         ? `${import.meta.env.VITE_API_URL}/images/${produit.images}`
@@ -24,21 +24,21 @@ const VracProductCard = ({ produit }) => {
 
     const prixVrac = (produit.prix_ttc * poids / 1000).toFixed(2);
 
-    const handleAdd = () => {
-        addToCart(
-            {
-                ...produit,
-                isVrac: true,
-                poids,
-                vracId: `${produit.ID_Article}_vrac_${poids}`,
-            },
-            1
-        );
+    const handleCardClick = (e) => {
+        if (e.target.closest("select") || e.target.closest(".btn-voir")) return;
+        setShowQuickView(true);
     };
 
     return (
     <>
-        <div className="product-card">
+        <div
+            className="product-card"
+            onClick={handleCardClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setShowQuickView(true); }}
+            aria-label={`Aperçu de ${produit.nom_produit}`}
+        >
             <div className="product-card-image-zone">
                 {!imageLoaded && <span className="product-card-spinner"></span>}
                 <img
@@ -76,7 +76,14 @@ const VracProductCard = ({ produit }) => {
                     <span className="vrac-price-kg">
                         {parseFloat(produit.prix_ttc).toFixed(2)} &euro;/kg
                     </span>
-                    <button className="btn-voir" onClick={() => setShowQuickView(true)}>
+                    <button
+                        className="btn-voir"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/produits/${produit.ID_Article}`);
+                        }}
+                        aria-label={`Voir les détails de ${produit.nom_produit}`}
+                    >
                         Voir
                     </button>
                 </div>

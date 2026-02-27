@@ -41,28 +41,62 @@
 }
 
 /* --- Footer : déjà sombre en light, on assombrit encore plus --- */
-[data-theme="dark"] .footer {
-  border-top: 1px solid var(--border-warm);
+/* --- Footer dark mode --- */
+[data-theme="dark"] .footer-top-accent {
+  background: linear-gradient(90deg, transparent, var(--accent-brown), transparent);
 }
 
-/* --- Footer : textes en blanc, titres et hover en vert --- */
-[data-theme="dark"] .footer,
-[data-theme="dark"] .footer-section li,
-[data-theme="dark"] .footer-section a,
-[data-theme="dark"] .footer-bottom {
-  color: #ffffff;
+[data-theme="dark"] .footer-tagline {
+  color: var(--accent-brown);
+}
+
+[data-theme="dark"] .footer-description {
+  color: #b0a898;
+}
+
+[data-theme="dark"] .footer-contact-info a {
+  color: #c8bfb4;
+}
+
+[data-theme="dark"] .footer-contact-info a:hover {
+  color: var(--accent-brown);
 }
 
 [data-theme="dark"] .footer-section h4 {
   color: var(--accent-brown);
 }
 
+[data-theme="dark"] .footer-section h4::after {
+  background: var(--accent-brown);
+}
+
+[data-theme="dark"] .footer-section li,
+[data-theme="dark"] .footer-section a {
+  color: #b0a898;
+}
+
 [data-theme="dark"] .footer-section a:hover {
-  color: var(--accent-brown);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .footer-engagement-item {
+  color: #c8bfb4;
+}
+
+[data-theme="dark"] .footer-engagements {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .footer-divider {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .footer-bottom {
+  color: #8a8078;
 }
 
 [data-theme="dark"] .footer-rgaa {
-  color: #cccccc;
+  color: #6e645a;
 }
 
 /* --- Formulaire focus : ajustement ombre en dark mode --- */
