@@ -583,8 +583,8 @@
   overflow-y: auto;
   position: relative;
   animation: qv-slide-up 0.25s;
-  border: solid 3px brown;
-  box-shadow: 0 0 25px rgb(165, 116, 42)
+  border: solid 3px #a5742a;
+  box-shadow: 0 0 25px #a5742a
 
 }
 
