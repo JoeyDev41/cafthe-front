@@ -225,3 +225,18 @@
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-brown);
 }
+
+
+[data-theme="dark"] .quickview-modal {
+  background: var(--bg-panel);
+  border-radius: 10px;
+  max-width: 750px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: qv-slide-up 0.25s;
+  border: solid 3px white;
+  box-shadow: 0 0  20px  white
+
+}

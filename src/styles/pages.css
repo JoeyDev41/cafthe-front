@@ -495,7 +495,7 @@
 
 .footer-rgaa {
   margin-top: 0.3rem;
-  font-size: 0.72rem;
+  font-size: 1.0rem;
   color: #5e5448;
   font-style: italic;
 }
@@ -583,6 +583,9 @@
   overflow-y: auto;
   position: relative;
   animation: qv-slide-up 0.25s;
+  border: solid 3px brown;
+  box-shadow: 0 0 25px rgb(165, 116, 42)
+
 }
 
 @keyframes qv-slide-up {

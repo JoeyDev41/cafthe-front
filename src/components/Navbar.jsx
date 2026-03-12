@@ -31,7 +31,6 @@ const Navbar = () => {
             accessoire: "accessoires",
             accessoires: "accessoires",
         };
-
         return categoryMap[normalizedQuery] || "";
     };
 
@@ -75,6 +74,22 @@ const Navbar = () => {
                         Accessoires
                     </Link>
 
+                    {/* Compte / Connexion visible dans le menu burger en mobile */}
+                    {isAuthenticated ? (
+                        <>
+                            <Link to="/compte" className="navbar-cat-link" onClick={() => setMenuOpen(false)}>
+                                {user?.prenom || "Mon compte"}
+                            </Link>
+                            <button className="navbar-logout-button" onClick={() => { handleLogout(); setMenuOpen(false); }}>
+                                Déconnexion
+                            </button>
+                        </>
+                    ) : (
+                        <Link to="/login" className="navbar-cat-link" onClick={() => setMenuOpen(false)}>
+                            Se connecter
+                        </Link>
+                    )}
+
                     <form onSubmit={handleSearch} className="navbar-search">
                         <input
                             type="text"
@@ -104,22 +119,13 @@ const Navbar = () => {
                         {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
                     </button>
 
-                    {isAuthenticated ? (
-                        <>
-                            <Link to="/compte" className="navbar-user-link" title="Mon compte">
-                                {user?.prenom || "Mon compte"}
-                            </Link>
-                            <button className="navbar-logout-button" onClick={handleLogout}>
-                                Déconnexion
-                            </button>
-                        </>
-                    ) : (
-                        <Link to="/login" className="navbar-link">
-                            Se connecter
-                        </Link>
-                    )}
-
-                    <button className="navbar-burger" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={menuOpen} aria-controls="navbar-menu">
+                    <button
+                        className="navbar-burger"
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+                        aria-expanded={menuOpen}
+                        aria-controls="navbar-menu"
+                    >
                         <span></span>
                         <span></span>
                         <span></span>
