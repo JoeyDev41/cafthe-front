@@ -31,13 +31,14 @@ cp .env.example .env
 npm run dev
 ```
 
+application déployé avec hébergeur plesk sur `https://cafthefront.jferreira.dev-campus.fr/`
 L'application sera accessible sur `http://localhost:5173`.
 
 ### Variables d'environnement
 
 | Variable       | Description                      | Exemple                    |
 | -------------- | -------------------------------- | -------------------------- |
-| `VITE_API_URL` | URL de base de l'API back-end    | `http://localhost:3000`    |
+| `VITE_API_URL` | URL de base de l'API back-end    | `apicafthe.jferreira.dev-campus.fr`    |
 
 ## Scripts disponibles
 
@@ -50,29 +51,29 @@ L'application sera accessible sur `http://localhost:5173`.
 
 ## Exemples d'utilisation
 
-| URL                                              | Description                                  |
-| ------------------------------------------------ | -------------------------------------------- |
-| `http://localhost:5173/`                         | Page d'accueil                               |
-| `http://localhost:5173/the`                      | Catalogue des thes                           |
-| `http://localhost:5173/cafe`                     | Catalogue des cafes                          |
-| `http://localhost:5173/accessoires`              | Catalogue des accessoires                    |
-| `http://localhost:5173/produits`                 | Liste de tous les produits (filtres, tri, recherche) |
-| `http://localhost:5173/produits/:id`             | Fiche detail d'un produit                    |
-| `http://localhost:5173/vrac`                     | Produits vendus au poids (redirige vers produits) |
-| `http://localhost:5173/login`                    | Connexion client                             |
-| `http://localhost:5173/inscription`              | Inscription client                           |
-| `http://localhost:5173/compte`                   | Espace personnel (profil, commandes)         |
-| `http://localhost:5173/panier`                   | Panier d'achat                               |
-| `http://localhost:5173/checkout`                 | Tunnel de commande                           |
-| `http://localhost:5173/confirmation`             | Confirmation de commande                     |
-| `http://localhost:5173/a-propos`                 | Page a propos                                |
-| `http://localhost:5173/contact`                  | Page de contact                              |
-| `http://localhost:5173/mot-de-passe-oublie`      | Demande de reinitialisation du mot de passe  |
-| `http://localhost:5173/reinitialisation-mdp`     | Reinitialisation du mot de passe             |
-| `http://localhost:5173/cgv`                      | Conditions generales de vente                |
-| `http://localhost:5173/mentions-legales`         | Mentions legales                             |
-| `http://localhost:5173/politique-confidentialite`| Politique de confidentialite                 |
-| `http://localhost:5173/plan-du-site`             | Plan du site                                 |
+| URL                                                                     | Description                                          |
+| ----------------------------------------------------------------------- | ---------------------------------------------------- |
+| `https://cafthefront.jferreira.dev-campus.fr`                           | Page d'accueil                                       |
+| `http://https://cafthefront.jferreira.dev-campus.fr/the`                | Catalogue des thes                                   |
+| `https://cafthefront.jferreira.dev-campus.fr//cafe`                     | Catalogue des cafes                                  |
+| `https://cafthefront.jferreira.dev-campus.fr//accessoires`              | Catalogue des accessoires                            |
+| `https://cafthefront.jferreira.dev-campus.fr//produits`                 | Liste de tous les produits (filtres, tri, recherche) |
+| `https://cafthefront.jferreira.dev-campus.fr//produits/:id`             | Fiche detail d'un produit                            |
+| `https://cafthefront.jferreira.dev-campus.fr//vrac`                     | Produits vendus au poids (redirige vers produits)    |
+| `https://cafthefront.jferreira.dev-campus.fr//login`                    | Connexion client                                     |
+| `https://cafthefront.jferreira.dev-campus.fr//inscription`              | Inscription client                                   |
+| `https://cafthefront.jferreira.dev-campus.fr//compte`                   | Espace personnel (profil, commandes)                 |
+| `https://cafthefront.jferreira.dev-campus.fr//panier`                   | Panier d'achat                                       |
+| `https://cafthefront.jferreira.dev-campus.fr//checkout`                 | Tunnel de commande                                   |
+| `https://cafthefront.jferreira.dev-campus.fr//confirmation`             | Confirmation de commande                             |
+| `https://cafthefront.jferreira.dev-campus.fr//a-propos`                 | Page a propos                                        |
+| `https://cafthefront.jferreira.dev-campus.fr//contact`                  | Page de contact                                      |
+| `https://cafthefront.jferreira.dev-campus.fr//mot-de-passe-oublie`      | Demande de reinitialisation du mot de passe          |
+| `https://cafthefront.jferreira.dev-campus.fr//reinitialisation-mdp`     | Reinitialisation du mot de passe                     |
+| `https://cafthefront.jferreira.dev-campus.fr//cgv`                      | Conditions generales de vente                        |
+| `https://cafthefront.jferreira.dev-campus.fr//mentions-legales`         | Mentions legales                                     |
+| `https://cafthefront.jferreira.dev-campus.fr//politique-confidentialite`| Politique de confidentialite                         |
+| `https://cafthefront.jferreira.dev-campus.fr//plan-du-site`             | Plan du site                                         |
 
 ## Structure du projet
 
@@ -138,7 +139,7 @@ du dossier dist qu'il faut deployer sur l'hebergeur puis on ajoute l'url du fron
 ## Tests
 <!-- ATTENTION PAS ENCORE VU EN COURS -->
 <!-- Decrire comment lancer les tests -->
-
+apres création des test dans l'ide comme par exemple le register.test.jsx ou login.test.jsx on ouvre un terminal puis utilison "npx vitest" pour ma part 
 ```bash
 # Lancer les tests
 npm run test
